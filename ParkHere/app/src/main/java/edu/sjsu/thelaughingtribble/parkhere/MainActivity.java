@@ -17,4 +17,10 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, ParkingSpotList.class);
         this.startActivity(intent);
     }
+
+    public void registerParking(View v){
+        Intent intent = new Intent(this, CreateParkingSpotListing.class);
+        this.startActivity(intent);
+    }
+
 }
