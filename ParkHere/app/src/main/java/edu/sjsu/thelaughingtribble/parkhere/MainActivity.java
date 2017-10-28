@@ -5,7 +5,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
+
+    public static ArrayList<Integer> tempDB = new ArrayList<Integer>();
+    public static List<ParkingPostObject> tempObjectDB= new ArrayList<ParkingPostObject>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
