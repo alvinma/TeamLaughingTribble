@@ -4,28 +4,27 @@
     android:layout_height="match_parent"
     android:layout_margin="10dp">
 
-    <EditText
-        android:id="@+id/ownerName"
-        android:hint="Name"
+    <TextView
+        android:id="@+id/name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true" />
 
-    <EditText
-        android:id="@+id/spotLocation"
-        android:hint="Address"
+    <TextView
+        android:id="@+id/location"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/ownerName"
-        android:layout_centerHorizontal="true" />
+        android:layout_below="@+id/name"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"/>
 
-    <EditText
+    <TextView
         android:id="@+id/description"
-        android:hint="Description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/spotLocation"
-        android:layout_centerHorizontal="true" />
+        android:layout_below="@+id/location"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp" />
 
     <ImageView
         android:id="@+id/parkingImage"
@@ -34,16 +33,15 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/description"
         android:src="@drawable/parkingspot"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp" />
 
     <Button
-        android:id="@+id/submitButton"
-        android:text="Submit"
+        android:id="@+id/purchaseButton"
+        android:text="Purchase Spot"
         android:layout_alignParentBottom="true"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"/>
-
-
 
 </RelativeLayout>
