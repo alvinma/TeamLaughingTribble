@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "902892796986",
+    "firebase_url": "https://parkherefirebasebackend-94efb.firebaseio.com",
+    "project_id": "parkherefirebasebackend-94efb",
+    "storage_bucket": "parkherefirebasebackend-94efb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:902892796986:android:8b56e3a9e0b78a99",
+        "android_client_info": {
+          "package_name": "edu.sjsu.thelaughingtribble.parkhere"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "902892796986-ndfmp950348g40tscf7fus2dabadeeqc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCTbAaYtDIpoO9roEIP8gxlFN96nsyeemo"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
