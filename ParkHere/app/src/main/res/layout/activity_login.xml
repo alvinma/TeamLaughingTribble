@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="edu.sjsu.thelaughingtribble.parkhere.LoginActivity"
+    tools:context="edu.sjsu.thelaughingtribble.parkhere.Controllers.LoginActivity"
     android:layout_centerInParent="true">
 
     <ImageView
@@ -27,7 +27,7 @@
         android:padding="15dp"
         android:text="@string/google_login_text"
         android:textColor="@android:color/white"
-        android:textSize="22px"
+        android:textSize="18sp"
         android:textStyle="bold" />
 
 </RelativeLayout>

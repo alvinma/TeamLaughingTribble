@@ -4,51 +4,74 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="edu.sjsu.thelaughingtribble.parkhere.MainActivity">
+    tools:context="edu.sjsu.thelaughingtribble.parkhere.Controllers.MainActivity">
+    <!--
+       <TextView
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_marginTop="50dp"
+           android:layout_centerHorizontal="true"
+           android:textSize="40dp"
+           android:text="Park Here" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:layout_centerHorizontal="true"
-        android:textSize="40dp"
-        android:text="Park Here" />
+      <LinearLayout
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_centerHorizontal="true"
+           android:orientation="horizontal">
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:orientation="horizontal">
+           <Button
+               android:id="@+id/Parking_list"
+               android:layout_width="170dp"
+               android:layout_height="50dp"
+               android:layout_marginTop="300dp"
+               android:onClick="parkingList"
+               android:text="Available Parking" />
 
-        <Button
-            android:id="@+id/Parking_list"
-            android:layout_width="170dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="300dp"
-            android:onClick="parkingList"
-            android:text="Available Parking" />
-
-        <Button
-            android:id="@+id/Spot_Submission"
-            android:layout_width="170dp"
-            android:layout_height="50dp"
-            android:layout_toRightOf="@+id/Parking_list"
-            android:layout_marginTop="300dp"
-            android:onClick="registerParking"
-            android:layout_marginLeft="10dp"
-            android:text="Submit a Spot" />
-    </LinearLayout>
+         <Button
+               android:id="@+id/Spot_Submission"
+               android:layout_width="170dp"
+               android:layout_height="50dp"
+               android:layout_toRightOf="@+id/Parking_list"
+               android:layout_marginTop="300dp"
+               android:onClick="registerParking"
+               android:layout_marginLeft="10dp"
+               android:text="Submit a Spot" />
+       </LinearLayout> -->
 
     <RelativeLayout
+        android:id="@+id/navigation_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <include
+            layout="@layout/activity_navigation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+
+            />
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/floating_button_layout"
+        android:layout_alignTop="@id/navigation_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true">
 
         <android.support.design.widget.FloatingActionButton
-            app:fabSize="normal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:id="@+id/Spot_Submission"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginBottom="70dp"
+            android:layout_marginEnd="30dp"
+            android:src="@drawable/plus"
+            app:fabSize="normal" />
     </RelativeLayout>
+
+
 
 </RelativeLayout>

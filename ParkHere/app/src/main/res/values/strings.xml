@@ -2,4 +2,7 @@
     <string name="app_name">ParkHere</string>
     <string name="logo">logo</string>
     <string name="google_login_text">Login With Google</string>
+    <string name="home">Home</string>
+    <string name="notification">Notification</string>
+    <string name="profile">Profile</string>
 </resources>

@@ -4,4 +4,5 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="googleBackGround">#d83226</color>
+    <color name="menuText">#646464</color>
 </resources>
