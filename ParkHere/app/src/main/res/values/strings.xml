@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">ParkHere</string>
+    <string name="logo">logo</string>
+    <string name="google_login_text">Login With Google</string>
 </resources>
