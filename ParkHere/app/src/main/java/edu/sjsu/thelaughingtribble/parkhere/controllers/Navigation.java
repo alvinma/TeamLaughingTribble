@@ -1,4 +1,4 @@
-package edu.sjsu.thelaughingtribble.parkhere.Controllers;
+package edu.sjsu.thelaughingtribble.parkhere.controllers;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;

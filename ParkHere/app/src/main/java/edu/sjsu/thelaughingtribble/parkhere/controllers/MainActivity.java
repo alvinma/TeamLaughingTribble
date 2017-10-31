@@ -1,4 +1,4 @@
-package edu.sjsu.thelaughingtribble.parkhere.Controllers;
+package edu.sjsu.thelaughingtribble.parkhere.controllers;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -8,7 +8,6 @@ import android.view.View;
 import java.util.ArrayList;
 import java.util.List;
 
-import edu.sjsu.thelaughingtribble.parkhere.Controllers.Navigation;
 import edu.sjsu.thelaughingtribble.parkhere.CreateParkingSpotListing;
 import edu.sjsu.thelaughingtribble.parkhere.ParkingPostObject;
 import edu.sjsu.thelaughingtribble.parkhere.R;
@@ -26,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         menuUIComponents = new NavigationViewModel(this);
         mainActivityUiComponets = new MainActivityViewModel(this);
 

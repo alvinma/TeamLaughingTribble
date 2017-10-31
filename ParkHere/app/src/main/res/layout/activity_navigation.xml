@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    tools:context="edu.sjsu.thelaughingtribble.parkhere.Controllers.Navigation"
+    tools:context="edu.sjsu.thelaughingtribble.parkhere.controllers.Navigation"
     android:orientation="horizontal">
 
     <LinearLayout

@@ -8,7 +8,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import edu.sjsu.thelaughingtribble.parkhere.Controllers.MainActivity;
+import edu.sjsu.thelaughingtribble.parkhere.controllers.MainActivity;
 
 public class ViewObjectInfo extends AppCompatActivity{
 

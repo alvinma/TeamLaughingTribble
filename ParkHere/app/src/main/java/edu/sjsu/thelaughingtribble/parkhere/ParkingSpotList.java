@@ -11,7 +11,7 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
-import edu.sjsu.thelaughingtribble.parkhere.Controllers.MainActivity;
+import edu.sjsu.thelaughingtribble.parkhere.controllers.MainActivity;
 
 
 public class ParkingSpotList extends AppCompatActivity{

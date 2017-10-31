@@ -8,7 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import edu.sjsu.thelaughingtribble.parkhere.Controllers.MainActivity;
+import edu.sjsu.thelaughingtribble.parkhere.controllers.MainActivity;
 
 public class CreateParkingSpotListing extends AppCompatActivity{
 
