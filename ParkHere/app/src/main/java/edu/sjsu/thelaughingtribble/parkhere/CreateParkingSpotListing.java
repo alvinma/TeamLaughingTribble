@@ -19,6 +19,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import edu.sjsu.thelaughingtribble.parkhere.Utils.Utilities;
 import edu.sjsu.thelaughingtribble.parkhere.models.pojo.Owner;
 import edu.sjsu.thelaughingtribble.parkhere.models.pojo.Post;
 import edu.sjsu.thelaughingtribble.parkhere.models.pojo.Spot;
@@ -153,9 +154,9 @@ public class CreateParkingSpotListing extends BaseActivity{
         String spotNumber = "Default SpotNumber";
         String renting = "Default Renting";
         String nextAvaliable = "Default nextAvaliable";
-
+        String defaultTitle = "Default title";
         Spot spot = new Spot(location, type, description, price, permitRequired, spotNumber, renting, nextAvaliable);
-        Post post = new Post(spot, user);
+        Post post = new Post(defaultTitle, spot, user, Utilities.getTodayDate());
         Map<String, Object> postValues = post.toMap();
 
         Map<String, Object> childUpdates = new HashMap<>();
