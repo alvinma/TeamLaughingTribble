@@ -1,11 +1,13 @@
 package edu.sjsu.thelaughingtribble.parkhere.models.pojo;
 
 import android.graphics.Bitmap;
+import com.google.firebase.database.IgnoreExtraProperties;
 
 /**
  * Created by jennifernghinguyen on 10/31/17.
  */
 
+@IgnoreExtraProperties
 public class Spot extends Place{
     private String type;
     private String description;

@@ -1,11 +1,13 @@
 package edu.sjsu.thelaughingtribble.parkhere.models.pojo;
 
+import com.google.firebase.database.IgnoreExtraProperties;
+
 import java.util.ArrayList;
 
 /**
  * Created by jennifernghinguyen on 10/31/17.
  */
-
+@IgnoreExtraProperties
 public class User {
     private String userID;
     private String firstName;
@@ -13,6 +15,10 @@ public class User {
     private String email;
     private String cellphone;
     private ArrayList<Vehicle> vehicles;
+
+    public User(){
+        // Default constructor required for calls to DataSnapshot.getValue(User.class)
+    }
 
     public User(String userID, String firstName, String lastName, String email, String cellphone) {
         this.userID = userID;

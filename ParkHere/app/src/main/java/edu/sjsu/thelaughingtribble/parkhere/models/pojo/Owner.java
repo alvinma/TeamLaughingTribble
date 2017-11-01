@@ -1,13 +1,19 @@
 package edu.sjsu.thelaughingtribble.parkhere.models.pojo;
 
+import com.google.firebase.database.IgnoreExtraProperties;
+
 import java.util.ArrayList;
 
 /**
  * Created by jennifernghinguyen on 10/31/17.
  */
-
+@IgnoreExtraProperties
 public class Owner extends User{
     private ArrayList<Spot> spots;
+
+    public Owner(){
+        // Default constructor required for calls to DataSnapshot.getValue(Owner.class)
+    }
 
     public Owner(String userID, String firstName, String lastName, String email, String cellphone) {
         super(userID, firstName, lastName, email, cellphone);

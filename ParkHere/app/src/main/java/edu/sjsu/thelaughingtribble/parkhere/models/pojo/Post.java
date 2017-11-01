@@ -1,6 +1,10 @@
 package edu.sjsu.thelaughingtribble.parkhere.models.pojo;
 
+import com.google.firebase.database.Exclude;
+import com.google.firebase.database.IgnoreExtraProperties;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import edu.sjsu.thelaughingtribble.parkhere.Utils.Constant;
 
@@ -8,6 +12,8 @@ import edu.sjsu.thelaughingtribble.parkhere.Utils.Constant;
  * Created by jennifernghinguyen on 10/31/17.
  */
 
+
+@IgnoreExtraProperties
 public class Post {
 
     private Spot spot;
@@ -70,5 +76,16 @@ public class Post {
         }
 
         return totalGrade/ (double) size;
+    }
+
+    @Exclude
+    public Map<String, Object> toMap() {
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("spot", spot);
+        result.put("owner", owner);
+        result.put("totalGrade", totalGrade);
+        result.put("commentAndRatings", commentAndRatings);
+
+        return result;
     }
 }
