@@ -6,4 +6,12 @@
     <string name="notification">Notification</string>
     <string name="profile">Profile</string>
     <string name="action_location">location</string>
+
+    <!--place holder strings-->
+
+    <string name="ph_title">title</string>
+    <string name="ph_owner">title</string>
+    <string name="ph_date_posted">date posted</string>
+    <string name="ph_price">$price</string>
+    <string name="ph_desciption">description</string>
 </resources>

@@ -27,6 +27,7 @@ public class Spot extends Place{
         this.spotNumber = spotNumber;
         this.renting = renting;
         this.nextAvailable = nextAvailable;
+        this.photo = null;
     }
 
     public Spot(String address, String type, String description, double price, boolean permitRequired, String spotNumber, Bitmap photo, String renting, String nextAvailable) {

@@ -14,20 +14,42 @@ public class Post {
     private Owner owner;
     private ArrayList<CommentAndRating> commentAndRatings;
     private double totalGrade;
+    private String datePosted;
+    private String title;
 
     //new post
-    public Post(Spot spot, Owner owner) {
+    public Post(String title, Spot spot, Owner owner, String datePosted) {
+        this.title = title;
         this.spot = spot;
         this.owner = owner;
+        this.datePosted = datePosted;
         commentAndRatings = new ArrayList<>();
         totalGrade = Constant.DEFAULT_RATING_GRADE;
     }
 
-    public Post(Spot spot, Owner owner, ArrayList<CommentAndRating> commentAndRatings) {
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public Post(String title, Spot spot, Owner owner, String datePosted, ArrayList<CommentAndRating> commentAndRatings) {
+        this.title = title;
         this.spot = spot;
         this.owner = owner;
+        this.datePosted = datePosted;
         this.commentAndRatings = commentAndRatings;
         this.totalGrade = getAveragetotalGrade(this.commentAndRatings);
+    }
+
+    public String getDatePosted() {
+        return datePosted;
+    }
+
+    public void setDatePosted(String datePosted) {
+        this.datePosted = datePosted;
     }
 
     public Spot getSpot() {
