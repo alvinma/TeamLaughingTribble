@@ -6,9 +6,11 @@
     <string name="notification">Notification</string>
     <string name="profile">Profile</string>
     <string name="action_location">location</string>
-
+    <string name="hint_email">email</string>
+    <string name="hint_password">password</string>
+    <string name="sign_in">Sign In</string>
+    <string name="sign_up">Sign Up</string>
     <!--place holder strings-->
-
     <string name="ph_title">title</string>
     <string name="ph_owner">title</string>
     <string name="ph_date_posted">date posted</string>
