@@ -10,4 +10,10 @@
     <string name="hint_password">password</string>
     <string name="sign_in">Sign In</string>
     <string name="sign_up">Sign Up</string>
+    <!--place holder strings-->
+    <string name="ph_title">title</string>
+    <string name="ph_owner">title</string>
+    <string name="ph_date_posted">date posted</string>
+    <string name="ph_price">$price</string>
+    <string name="ph_desciption">description</string>
 </resources>

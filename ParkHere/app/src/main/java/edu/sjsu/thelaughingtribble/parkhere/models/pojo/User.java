@@ -110,4 +110,8 @@ public class User {
     public void setCellphone(String cellphone) {
         this.cellphone = cellphone;
     }
+
+    public String getFullName(){
+        return this.firstName + " " + this.lastName;
+    }
 }
