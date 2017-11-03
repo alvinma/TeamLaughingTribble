@@ -1,13 +1,12 @@
 package edu.sjsu.thelaughingtribble.parkhere.controllers;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +25,7 @@ import edu.sjsu.thelaughingtribble.parkhere.models.viewModels.NavigationViewMode
 public class MainActivity extends AppCompatActivity {
 
     public static ArrayList<Integer> tempDB = new ArrayList<Integer>();
-    public static List<ParkingPostObject> tempObjectDB= new ArrayList<ParkingPostObject>();
+    public static List<ParkingPostObject> tempObjectDB = new ArrayList<ParkingPostObject>();
     private NavigationViewModel menuUIComponents;
     private MainActivityViewModel mainActivityUiComponets;
 
@@ -43,13 +42,13 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().hide();
         setContentView(R.layout.activity_main);
 
-        posts.add(new Post("montly parking near SJSU 1", new Spot("100 senter rd", "montly", "park in the driveway", 50, false, "1" , "no", "12-1-2017"), new Owner("1","John", "Doe", "john@gmail.com"), Utilities.getTodayDate()));
-        posts.add(new Post("montly parking near SJSU 2", new Spot("100 senter rd", "montly", "park in the driveway", 50, false, "1" , "no", "12-1-2017"), new Owner("1","John", "Doe", "john@gmail.com"), Utilities.getTodayDate()));
-        posts.add(new Post("montly parking near SJSU 3", new Spot("100 senter rd", "montly", "park in the driveway", 50, false, "1" , "no", "12-1-2017"), new Owner("1","John", "Doe", "john@gmail.com"), Utilities.getTodayDate()));
-        posts.add(new Post("montly parking near SJSU 4", new Spot("100 senter rd", "montly", "park in the driveway", 50, false, "1" , "no", "12-1-2017"), new Owner("1","John", "Doe", "john@gmail.com"), Utilities.getTodayDate()));
-        posts.add(new Post("montly parking near SJSU 5", new Spot("100 senter rd", "montly", "park in the driveway", 50, false, "1" , "no", "12-1-2017"), new Owner("1","John", "Doe", "john@gmail.com"), Utilities.getTodayDate()));
-        posts.add(new Post("montly parking near SJSU 6", new Spot("100 senter rd", "montly", "park in the driveway", 50, false, "1" , "no", "12-1-2017"), new Owner("1","John", "Doe", "john@gmail.com"), Utilities.getTodayDate()));
-        posts.add(new Post("montly parking near SJSU 7", new Spot("100 senter rd", "montly", "park in the driveway", 50, false, "1" , "no", "12-1-2017"), new Owner("1","John", "Doe", "john@gmail.com"), Utilities.getTodayDate()));
+        posts.add(new Post("montly parking near SJSU 1", new Spot("100 senter rd", "montly", "park in the driveway", 50, false, "1", "no", "12-1-2017"), new Owner("1", "John", "Doe", "john@gmail.com"), Utilities.getTodayDate()));
+        posts.add(new Post("montly parking near SJSU 2", new Spot("100 senter rd", "montly", "park in the driveway", 50, false, "1", "no", "12-1-2017"), new Owner("1", "John", "Doe", "john@gmail.com"), Utilities.getTodayDate()));
+        posts.add(new Post("montly parking near SJSU 3", new Spot("100 senter rd", "montly", "park in the driveway", 50, false, "1", "no", "12-1-2017"), new Owner("1", "John", "Doe", "john@gmail.com"), Utilities.getTodayDate()));
+        posts.add(new Post("montly parking near SJSU 4", new Spot("100 senter rd", "montly", "park in the driveway", 50, false, "1", "no", "12-1-2017"), new Owner("1", "John", "Doe", "john@gmail.com"), Utilities.getTodayDate()));
+        posts.add(new Post("montly parking near SJSU 5", new Spot("100 senter rd", "montly", "park in the driveway", 50, false, "1", "no", "12-1-2017"), new Owner("1", "John", "Doe", "john@gmail.com"), Utilities.getTodayDate()));
+        posts.add(new Post("montly parking near SJSU 6", new Spot("100 senter rd", "montly", "park in the driveway", 50, false, "1", "no", "12-1-2017"), new Owner("1", "John", "Doe", "john@gmail.com"), Utilities.getTodayDate()));
+        posts.add(new Post("montly parking near SJSU 7", new Spot("100 senter rd", "montly", "park in the driveway", 50, false, "1", "no", "12-1-2017"), new Owner("1", "John", "Doe", "john@gmail.com"), Utilities.getTodayDate()));
 
         menuUIComponents = new NavigationViewModel(this);
         mainActivityUiComponets = new MainActivityViewModel(this);
@@ -63,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
         mLayoutManager = new LinearLayoutManager(this);
         mainActivityUiComponets.getHomePostList().setLayoutManager(mLayoutManager);
 
-       mAdapter = new HomePostListAdapter(posts);
+        mAdapter = new HomePostListAdapter(posts);
         mainActivityUiComponets.getHomePostList().setAdapter(mAdapter);
 
 
@@ -74,9 +73,19 @@ public class MainActivity extends AppCompatActivity {
         this.startActivity(intent);
     }*/
 
-    public void registerParking(){
+    public void registerParking() {
         Intent intent = new Intent(this, CreateParkingSpotListing.class);
         this.startActivity(intent);
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                this.finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
 }

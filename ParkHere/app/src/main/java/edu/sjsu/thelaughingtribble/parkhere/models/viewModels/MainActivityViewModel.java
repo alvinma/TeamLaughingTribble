@@ -18,7 +18,7 @@ import edu.sjsu.thelaughingtribble.parkhere.models.pojo.Post;
 /*
 layout: activity_main.xml
  */
-public class MainActivityViewModel {
+public class MainActivityViewModel extends ActivityCommonViewModel {
 
   private FloatingActionButton spotSubmission;
   private RecyclerView homePostList;
@@ -26,6 +26,7 @@ public class MainActivityViewModel {
 
 
   public MainActivityViewModel(Context context){
+    super(context);
     this.spotSubmission = (FloatingActionButton) ((Activity) context).findViewById(R.id.Spot_Submission);
     this.homePostList = (RecyclerView) ((Activity) context).findViewById(R.id.home_post_list);
   }

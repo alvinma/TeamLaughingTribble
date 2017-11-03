@@ -10,6 +10,12 @@
     <string name="hint_password">password</string>
     <string name="sign_in">Sign In</string>
     <string name="sign_up">Sign Up</string>
+    <!--inn profile layout-->
+    <string name="myplaces">My Places</string>
+    <string name="myprofile">My Profiles</string>
+    <string name="myvehicles">My Vehicles</string>
+    <string name="myrentingspots">My Renting Spots</string>
+
     <!--place holder strings-->
     <string name="ph_title">title</string>
     <string name="ph_owner">title</string>
