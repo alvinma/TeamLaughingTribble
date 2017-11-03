@@ -11,8 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity
-            android:name=".controllers.MainActivity" />
+        <activity android:name=".controllers.MainActivity" />
         <activity android:name=".ParkingSpotList" />
         <activity android:name=".CreateParkingSpotListing" />
         <activity android:name=".ViewObjectInfo" />
@@ -24,6 +23,12 @@
             </intent-filter>
         </activity>
         <activity android:name=".controllers.Navigation" />
+        <activity android:name=".controllers.ProfileActivity" />
+        <activity android:name=".controllers.NotificationActivity" />
+        <activity android:name=".controllers.MyProfileActivity" />
+        <activity android:name=".controllers.MyVehiclesActivity" />
+        <activity android:name=".controllers.MyPlacesActivity" />
+        <activity android:name=".controllers.MyRentingSpotsActivity"></activity>
     </application>
 
 </manifest>
