@@ -14,6 +14,7 @@ import java.util.List;
 import edu.sjsu.thelaughingtribble.parkhere.CreateParkingSpotListing;
 import edu.sjsu.thelaughingtribble.parkhere.ParkingPostObject;
 import edu.sjsu.thelaughingtribble.parkhere.R;
+import edu.sjsu.thelaughingtribble.parkhere.Utils.GoogleMaps;
 import edu.sjsu.thelaughingtribble.parkhere.Utils.Utilities;
 import edu.sjsu.thelaughingtribble.parkhere.adapters.homePostList.HomePostListAdapter;
 import edu.sjsu.thelaughingtribble.parkhere.models.pojo.Owner;
@@ -66,6 +67,8 @@ public class MainActivity extends AppCompatActivity {
         mainActivityUiComponets.getHomePostList().setAdapter(mAdapter);
 
 
+
+
     }
 
     /*public void parkingList(View v){
@@ -87,5 +90,9 @@ public class MainActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+    public void searchMapView(){
+        Intent intent = new Intent(this, GoogleMaps.class);
+        this.startActivity(intent);
     }
 }

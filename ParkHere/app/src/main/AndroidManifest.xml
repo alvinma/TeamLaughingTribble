@@ -29,6 +29,9 @@
         <activity android:name=".controllers.MyVehiclesActivity" />
         <activity android:name=".controllers.MyPlacesActivity" />
         <activity android:name=".controllers.MyRentingSpotsActivity"></activity>
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyAGXlOk9q9UDaGoGh7_YcHQ-iG4a8_Kkns"/>
     </application>
 
 </manifest>
