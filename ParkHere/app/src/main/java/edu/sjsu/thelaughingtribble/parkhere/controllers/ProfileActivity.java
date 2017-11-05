@@ -6,15 +6,18 @@ import android.util.Log;
 import android.view.MenuItem;
 
 import edu.sjsu.thelaughingtribble.parkhere.R;
+import edu.sjsu.thelaughingtribble.parkhere.models.viewModels.NavigationViewModel;
 import edu.sjsu.thelaughingtribble.parkhere.models.viewModels.ProfileActivityViewModel;
 
 public class ProfileActivity extends AppCompatActivity {
     private ProfileActivityViewModel profileActivityUIComponents;
+    private NavigationViewModel menuUIComponents;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
         profileActivityUIComponents = new ProfileActivityViewModel(this);
+        menuUIComponents = new NavigationViewModel(this);
 
         if(profileActivityUIComponents.getActionBar()!=null){
             profileActivityUIComponents.getActionBar().setTitle("Profile");

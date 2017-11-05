@@ -3,6 +3,8 @@
     package="edu.sjsu.thelaughingtribble.parkhere">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 
     <application
         android:allowBackup="true"
@@ -28,7 +30,8 @@
         <activity android:name=".controllers.MyProfileActivity" />
         <activity android:name=".controllers.MyVehiclesActivity" />
         <activity android:name=".controllers.MyPlacesActivity" />
-        <activity android:name=".controllers.MyRentingSpotsActivity"></activity>
+        <activity android:name=".controllers.MyRentingSpotsActivity" />
+        <activity android:name=".controllers.AddAVehicle"></activity>
     </application>
 
 </manifest>

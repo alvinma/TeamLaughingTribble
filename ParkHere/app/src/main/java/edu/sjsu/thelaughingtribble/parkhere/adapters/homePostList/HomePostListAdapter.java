@@ -6,6 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.bumptech.glide.Glide;
+
 import java.util.ArrayList;
 
 import edu.sjsu.thelaughingtribble.parkhere.R;
@@ -39,10 +41,14 @@ public class HomePostListAdapter extends RecyclerView.Adapter<homePostListItemVi
         homePostListUI.getDatePosted().setText(currentPost.getDatePosted());
         homePostListUI.getPostTitle().setText(currentPost.getTitle());
         homePostListUI.getPostOwner().setText(currentPost.getOwner().getFullName());
-        homePostListUI.getPostImage().setImageBitmap(currentPost.getSpot().getPhoto());
         homePostListUI.getPostPrice().setText(String.valueOf(currentPost.getSpot().getPrice()));
         homePostListUI.getPostDescription().setText(currentPost.getSpot().getDescription());
 
+        if(currentPost.getSpot().getPhoto()!=null){
+            Glide.with(homePostListUI.getContext()).load(currentPost.getSpot().getPhoto()).into(homePostListUI.getPostImage());
+        }else {
+            homePostListUI.getPostImage().setImageResource(R.drawable.not_available);
+        }
     }
 
     @Override
