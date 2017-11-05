@@ -1,15 +1,23 @@
 package edu.sjsu.thelaughingtribble.parkhere.models.pojo;
 
+import com.google.firebase.database.Exclude;
+import com.google.firebase.database.IgnoreExtraProperties;
+
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Created by jennifernghinguyen on 10/31/17.
  */
-
+@IgnoreExtraProperties
 public class Renting {
     private Spot spot;
     private Renter renter;
     private Owner owner;
     private String startDate;
     private String endDate;
+
+    public Renting(){}
 
     public Renting(Spot spot, Renter renter, Owner owner, String startDate, String endDate) {
         this.spot = spot;
@@ -57,5 +65,17 @@ public class Renting {
 
     public void setEndDate(String endDate) {
         this.endDate = endDate;
+    }
+
+    @Exclude
+    public Map<String, Object> toMap() {
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("spot", spot);
+        result.put("renter", renter);
+        result.put("owner", owner);
+        result.put("startDate", startDate);
+        result.put("endDate", endDate);
+
+        return result;
     }
 }

@@ -17,15 +17,19 @@ public class Spot extends Place{
     private String type;
     private String description;
     private double price;
-    private boolean permitRequired = false;
+    private String permitRequired = "false";
     private String spotNumber;
     private Bitmap photo;
     private String renting;
     private String nextAvailable;
 
+    //Sample Photos:
+    //"https://previews.123rf.com/images/mack2happy/mack2happy1106/mack2happy110600045/9809346-parking-lot-Stock-Photo.jpg"
+    //"https://static.pexels.com/photos/2996/parking-parking-lot-underground-garage.jpg"
+
     public Spot(){}
 
-    public Spot(String address, String type, String description, double price, boolean permitRequired, String spotNumber, String renting, String nextAvailable) {
+    public Spot(String address, String type, String description, double price, String permitRequired, String spotNumber, String renting, String nextAvailable) {
         super(address);
         this.type = type;
         this.description = description;
@@ -37,7 +41,7 @@ public class Spot extends Place{
         this.photo = null;
     }
 
-    public Spot(String address, String type, String description, double price, boolean permitRequired, String spotNumber, Bitmap photo, String renting, String nextAvailable) {
+    public Spot(String address, String type, String description, double price, String permitRequired, String spotNumber, Bitmap photo, String renting, String nextAvailable) {
         super(address);
         this.type = type;
         this.description = description;
@@ -73,11 +77,11 @@ public class Spot extends Place{
         this.price = price;
     }
 
-    public boolean isPermitRequired() {
+    public String isPermitRequired() {
         return permitRequired;
     }
 
-    public void setPermitRequired(boolean permitRequired) {
+    public void setPermitRequired(String permitRequired) {
         this.permitRequired = permitRequired;
     }
 

@@ -47,8 +47,9 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
 
-    private DatabaseReference mDatabase;
-    private FirebaseDatabase mReference;
+
+    private FirebaseDatabase mDatabase;
+    private DatabaseReference mReference;
 
     private static final String TAG = "MAINACTIVITY|___|";
 
@@ -60,11 +61,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();
         setContentView(R.layout.activity_main);
+        mDatabase = FirebaseDatabase.getInstance();
 
-
-        getParkingList();
-
-        posts.add(new Post("montly parking near SJSU 1", new Spot("100 senter rd", "montly", "park in the driveway", 50, false, "1", "no", "12-1-2017"), new Owner("1", "John", "Doe", "john@gmail.com"), Utilities.getTodayDate()));
+        posts.add(new Post("montly parking near SJSU 1", new Spot("100 senter rd", "montly", "park in the driveway", 50, "false", "1", "no", "12-1-2017"), new Owner("1", "John", "Doe", "john@gmail.com"), Utilities.getTodayDate()));
 //        posts.add(new Post("montly parking near SJSU 2", new Spot("100 senter rd", "montly", "park in the driveway", 50, false, "1", "no", "12-1-2017"), new Owner("1", "John", "Doe", "john@gmail.com"), Utilities.getTodayDate()));
 //        posts.add(new Post("montly parking near SJSU 3", new Spot("100 senter rd", "montly", "park in the driveway", 50, false, "1", "no", "12-1-2017"), new Owner("1", "John", "Doe", "john@gmail.com"), Utilities.getTodayDate()));
 //        posts.add(new Post("montly parking near SJSU 4", new Spot("100 senter rd", "montly", "park in the driveway", 50, false, "1", "no", "12-1-2017"), new Owner("1", "John", "Doe", "john@gmail.com"), Utilities.getTodayDate()));
@@ -86,68 +85,29 @@ public class MainActivity extends AppCompatActivity {
 
         mAdapter = new HomePostListAdapter(posts);
         mainActivityUiComponets.getHomePostList().setAdapter(mAdapter);
+    }
 
-
+    @Override
+    protected void onStart(){
+        super.onStart();
+        getParkingList();
     }
 
     private void getParkingList(){
+        mReference = mDatabase.getReference("post");
 
-        //Query query = mDatabase.getRef().orderByChild('users').limitToFirst(5);
-
-// Get a reference to our posts
-        final FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference ref = database.getReference("post");
-        System.out.println("DB REFERENCE #### #### ### : " + ref.toString());
- 
-
-// Attach a listener to read the data at our posts reference
-//        ref.addValueEventListener(new ValueEventListener() {
-        ref.addListenerForSingleValueEvent(new ValueEventListener() {
-        @Override
-        public void onDataChange(DataSnapshot dataSnapshot) {
-
-            try {
-                System.out.println("------- ------ ---- GETTING POST from DB");
-                System.out.println("DB info: vvvvvv");
-                System.out.println("child_count: " + dataSnapshot.getChildrenCount());
-                //System.out.println("snapshot.toString: " + dataSnapshot.toString());
-                //System.out.println("snapshot.toString: " + dataSnapshot.getChildren());
-
-                System.out.println("Looping through children vvvvv");
+        // Attach a listener to read the data at our posts reference
+        mReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot item : dataSnapshot.getChildren()) {
                     Post post = item.getValue(Post.class);
-//                    System.out.println("Item: " + item.toString());
-//                    System.out.println("POST: " + post.toString());
-//                    System.out.println("POST_title: " + post.getTitle());
-//
-//                    //Owner owner_post = post.getValue(Post.class);
-//
-//                    Owner owner = post.getOwner();
-//                    System.out.println("Owner ID: " + owner.getUserID());
-//                    System.out.println("Full Name: " + owner.getFullName());
-//                    System.out.println("email: " + owner.getEmail());
-//
-//                    Spot spot = post.getSpot();
-//                    System.out.println("Spot: " + spot.toString());
-//                    System.out.println("Spot_Address: " + spot.getAddress());
-//
-//
-//                    System.out.println("TotalGrade: " + String.valueOf(post.getTotalGrade()));
-//                    System.out.println("DatePosted: " + post.getDatePosted());
-//                    System.out.println("------- ------ ---- END of post ^^^^^");
                     posts.add(post);
                 }
-                System.out.println("DONE loping children ^^^^");
-            }catch(DatabaseException db_ex){
-                System.out.println("ERROR :::::: Database Exception: " + db_ex.getMessage());
-                System.out.println("ERROR :::::: Database Exception: " + db_ex.toString());
-            }
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                System.out.println(" ********** ****** ***** *** **** FAIL reading DB");
-                System.out.println("The read failed: " + databaseError.getCode());
                 Log.d(TAG, "postTransaction:onComplete:" + databaseError);
             }
         });
