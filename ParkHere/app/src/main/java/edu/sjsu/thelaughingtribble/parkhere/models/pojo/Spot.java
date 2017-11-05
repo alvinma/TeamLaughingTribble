@@ -19,7 +19,8 @@ public class Spot extends Place{
     private double price;
     private String permitRequired = "false";
     private String spotNumber;
-    private Bitmap photo;
+
+    private String photo;
     private String renting;
     private String nextAvailable;
 
@@ -41,7 +42,7 @@ public class Spot extends Place{
         this.photo = null;
     }
 
-    public Spot(String address, String type, String description, double price, String permitRequired, String spotNumber, Bitmap photo, String renting, String nextAvailable) {
+    public Spot(String address, String type, String description, double price, String permitRequired, String spotNumber, String renting, String nextAvailable, String photo) {
         super(address);
         this.type = type;
         this.description = description;
@@ -93,11 +94,11 @@ public class Spot extends Place{
         this.spotNumber = spotNumber;
     }
 
-    public Bitmap getPhoto() {
+    public String getPhoto() {
         return photo;
     }
 
-    public void setPhoto(Bitmap photo) {
+    public void setPhoto(String photo) {
         this.photo = photo;
     }
 

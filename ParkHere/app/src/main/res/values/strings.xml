@@ -10,16 +10,36 @@
     <string name="hint_password">password</string>
     <string name="sign_in">Sign In</string>
     <string name="sign_up">Sign Up</string>
+    <string name="cancel">CANCEL</string>
     <!--inn profile layout-->
     <string name="myplaces">My Places</string>
     <string name="myprofile">My Profiles</string>
     <string name="myvehicles">My Vehicles</string>
     <string name="myrentingspots">My Renting Spots</string>
 
+    <string name="email">Email: </string>
+    <string name="full_name">Full name: </string>
+    <string name="phone">phone: </string>
+
+    <string name="vin">VIN: </string>
+    <string name="color">Color: </string>
+    <string name="plate">Plate #: </string>
+
+    <string name="upload">UPLOAD</string>
+    <string name="brand">Brand: </string>
+    <string name="make">Make: </string>
+    <string name="year">year: </string>
+
     <!--place holder strings-->
     <string name="ph_title">title</string>
     <string name="ph_owner">title</string>
     <string name="ph_date_posted">date posted</string>
     <string name="ph_price">$price</string>
-    <string name="ph_desciption">description</string>
+    <string name="ph_description">description</string>
+
+    <!--vehicles place holder strings-->
+    <string name="ph_vehicle_name">Toyota Corolla 2015</string>
+    <string name="ph_vin">WAUFFAFM3CA000000</string>
+    <string name="ph_color">Black</string>
+    <string name="ph_plate_number">1273ZG</string>
 </resources>

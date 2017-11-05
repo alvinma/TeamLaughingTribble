@@ -2,6 +2,7 @@ package edu.sjsu.thelaughingtribble.parkhere.models.viewModels;
 
 import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
 import android.widget.Toast;
 
 import static android.R.attr.data;
@@ -17,10 +18,11 @@ import static android.R.attr.data;
 public class ActivityCommonViewModel {
     private android.support.v7.app.ActionBar actionBar; //action bar for activity
     private Context context;
-
+    private LinearLayoutManager layoutManager;
     public ActivityCommonViewModel(Context context) {
         this.context = context;
         actionBar = ((AppCompatActivity) context).getSupportActionBar();
+        this.layoutManager = new LinearLayoutManager(context);
     }
 
     public android.support.v7.app.ActionBar getActionBar() {
@@ -29,6 +31,14 @@ public class ActivityCommonViewModel {
 
     public void setActionBar(android.support.v7.app.ActionBar actionBar) {
         this.actionBar = actionBar;
+    }
+
+    public LinearLayoutManager getLayoutManager() {
+        return layoutManager;
+    }
+
+    public void setLayoutManager(LinearLayoutManager layoutManager) {
+        this.layoutManager = layoutManager;
     }
 
     public Context getContext() {
