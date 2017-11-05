@@ -1,15 +1,24 @@
 package edu.sjsu.thelaughingtribble.parkhere.models.pojo;
 
+import com.google.firebase.database.Exclude;
+import com.google.firebase.database.IgnoreExtraProperties;
+
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Created by jennifernghinguyen on 10/31/17.
  */
 
+@IgnoreExtraProperties
 public class CommentAndRating {
     private Spot spot;
     private double grade;
     private String renter;
     private String comment;
     private String date;
+
+    public CommentAndRating(){}
 
     public CommentAndRating(Spot spot, double grade, String renter, String comment, String date) {
         this.spot = spot;
@@ -57,5 +66,17 @@ public class CommentAndRating {
 
     public void setDate(String date) {
         this.date = date;
+    }
+
+    @Exclude
+    public Map<String, Object> toMap() {
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("spot", spot);
+        result.put("grade", grade);
+        result.put("renter", renter);
+        result.put("comment", comment);
+        result.put("date", date);
+
+        return result;
     }
 }

@@ -1,7 +1,12 @@
 package edu.sjsu.thelaughingtribble.parkhere.models.pojo;
 
 import android.graphics.Bitmap;
+
+import com.google.firebase.database.Exclude;
 import com.google.firebase.database.IgnoreExtraProperties;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by jennifernghinguyen on 10/31/17.
@@ -15,10 +20,10 @@ public class Spot extends Place{
     private boolean permitRequired = false;
     private String spotNumber;
     private Bitmap photo;
-
     private String renting;
-
     private String nextAvailable;
+
+    public Spot(){}
 
     public Spot(String address, String type, String description, double price, boolean permitRequired, String spotNumber, String renting, String nextAvailable) {
         super(address);
@@ -106,5 +111,20 @@ public class Spot extends Place{
 
     public void setNextAvailable(String nextAvailable) {
         this.nextAvailable = nextAvailable;
+    }
+
+    @Exclude
+    public Map<String, Object> toMap() {
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("type", type);
+        result.put("description", description);
+        result.put("price", price);
+        result.put("permitRequired", permitRequired);
+        result.put("spotNumber", spotNumber);
+        result.put("photo", photo);
+        result.put("renting", renting);
+        result.put("nextAvailable", nextAvailable);
+
+        return result;
     }
 }

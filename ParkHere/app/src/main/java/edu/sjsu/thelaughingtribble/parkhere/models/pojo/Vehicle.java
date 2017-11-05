@@ -2,10 +2,17 @@ package edu.sjsu.thelaughingtribble.parkhere.models.pojo;
 
 import android.graphics.Bitmap;
 
+import com.google.firebase.database.Exclude;
+import com.google.firebase.database.IgnoreExtraProperties;
+
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Created by jennifernghinguyen on 10/31/17.
  */
 
+@IgnoreExtraProperties
 public class Vehicle {
     private String vin;
     private String brand;
@@ -13,6 +20,8 @@ public class Vehicle {
     private String year;
     private Bitmap photo;
     private String plateNumber;
+
+    public Vehicle(){}
 
     public Vehicle(String vin, String brand, String make, String year, String plateNumber){
         this.vin = vin;
@@ -78,5 +87,18 @@ public class Vehicle {
 
     public void setPhoto(Bitmap photo) {
         this.photo = photo;
+    }
+
+    @Exclude
+    public Map<String, Object> toMap() {
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("vin", vin);
+        result.put("brand", brand);
+        result.put("make", make);
+        result.put("year", year);
+        result.put("photo", photo);
+        result.put("plateNumber", plateNumber);
+
+        return result;
     }
 }
