@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import com.google.firebase.database.Exclude;
 import com.google.firebase.database.IgnoreExtraProperties;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -13,7 +14,7 @@ import java.util.Map;
  */
 
 @IgnoreExtraProperties
-public class Vehicle {
+public class Vehicle implements Serializable {
     private String vin;
     private String brand;
     private String make;

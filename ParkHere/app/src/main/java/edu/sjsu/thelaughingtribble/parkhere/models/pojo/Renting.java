@@ -3,6 +3,7 @@ package edu.sjsu.thelaughingtribble.parkhere.models.pojo;
 import com.google.firebase.database.Exclude;
 import com.google.firebase.database.IgnoreExtraProperties;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -10,7 +11,7 @@ import java.util.Map;
  * Created by jennifernghinguyen on 10/31/17.
  */
 @IgnoreExtraProperties
-public class Renting {
+public class Renting implements Serializable {
     private Spot spot;
     private Renter renter;
     private Owner owner;

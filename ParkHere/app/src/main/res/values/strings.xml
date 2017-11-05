@@ -11,6 +11,7 @@
     <string name="sign_in">Sign In</string>
     <string name="sign_up">Sign Up</string>
     <string name="cancel">CANCEL</string>
+
     <!--inn profile layout-->
     <string name="myplaces">My Places</string>
     <string name="myprofile">My Profiles</string>
@@ -30,6 +31,14 @@
     <string name="make">Make: </string>
     <string name="year">year: </string>
 
+    <string name="type">Type: </string>
+    <string name="description">Description: </string>
+    <string name="price">Price: </string>
+    <string name="permitRequired">Permit Required</string>
+    <string name="spotNumber">Spot Number: </string>
+    <string name="renting">Available: </string>
+    <string name="nextAvailable">Next Available: </string>
+
     <!--place holder strings-->
     <string name="ph_title">title</string>
     <string name="ph_owner">title</string>
@@ -42,4 +51,5 @@
     <string name="ph_vin">WAUFFAFM3CA000000</string>
     <string name="ph_color">Black</string>
     <string name="ph_plate_number">1273ZG</string>
+    <string name="ph_address">1 Washington Sq, San Jose, CA 95112</string>
 </resources>

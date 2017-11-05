@@ -7,6 +7,7 @@ import java.util.Date;
 
 public final class Constant {
     public static int DEFAULT_RATING_GRADE = 5;
+    public static String INTENT_EXTRA_PLACE = "place";
 
 
 }

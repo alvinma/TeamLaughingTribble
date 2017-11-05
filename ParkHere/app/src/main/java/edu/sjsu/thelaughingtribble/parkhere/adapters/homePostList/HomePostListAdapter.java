@@ -24,7 +24,7 @@ public class HomePostListAdapter extends RecyclerView.Adapter<homePostListItemVi
 
     public HomePostListAdapter(ArrayList<Post> posts){
         this.posts = posts;
-        Log.i("Adapter: ", posts.get(0).getTitle());
+
     }
 
     @Override

@@ -63,11 +63,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         mDatabase = FirebaseDatabase.getInstance();
 
-
-        posts.add(new Post("montly parking near SJSU 1", new Spot("100 senter rd", "montly", "park in the driveway", 50, "false", "1", "12-1-2017", "http://parkeasier.com/wp-content/uploads/2014/12/Homepage_Find_a_Spot_section2.jpg"), new Owner("1", "John", "Doe", "john@gmail.com"), Utilities.getTodayDate()));
-
-
-
         menuUIComponents = new NavigationViewModel(this);
         mainActivityUiComponets = new MainActivityViewModel(this);
 

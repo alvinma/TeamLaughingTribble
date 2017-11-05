@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import com.google.firebase.database.Exclude;
 import com.google.firebase.database.IgnoreExtraProperties;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -13,13 +14,12 @@ import java.util.Map;
  */
 
 @IgnoreExtraProperties
-public class Spot extends Place{
+public class Spot extends Place implements Serializable {
     private String type;
     private String description;
     private double price;
     private String permitRequired = "false";
     private String spotNumber;
-
     private String photo;
     private String renting;
     private String nextAvailable;
@@ -82,7 +82,7 @@ public class Spot extends Place{
         return permitRequired;
     }
 
-    public void setPermitRequired(String permitRequired) {
+    public void setPermit(String permitRequired) {
         this.permitRequired = permitRequired;
     }
 
@@ -116,6 +116,10 @@ public class Spot extends Place{
 
     public void setNextAvailable(String nextAvailable) {
         this.nextAvailable = nextAvailable;
+    }
+
+    public String getPermit() {
+        return permitRequired;
     }
 
     @Exclude
