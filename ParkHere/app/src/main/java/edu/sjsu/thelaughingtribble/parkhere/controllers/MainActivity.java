@@ -97,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
         mReference = mDatabase.getReference("post");
 
         // Attach a listener to read the data at our posts reference
-        mReference.addListenerForSingleValueEvent(new ValueEventListener() {
+        mReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot item : dataSnapshot.getChildren()) {
