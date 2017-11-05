@@ -5,8 +5,23 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseException;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.MutableData;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.Transaction;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,6 +48,11 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView.LayoutManager mLayoutManager;
 
 
+    private FirebaseDatabase mDatabase;
+    private DatabaseReference mReference;
+
+    private static final String TAG = "MAINACTIVITY|___|";
+
     //post list
     ArrayList<Post> posts = new ArrayList<>();
 
@@ -41,14 +61,15 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();
         setContentView(R.layout.activity_main);
+        mDatabase = FirebaseDatabase.getInstance();
 
-        posts.add(new Post("montly parking near SJSU 1", new Spot("100 senter rd", "montly", "park in the driveway", 50, false, "1", "no", "12-1-2017"), new Owner("1", "John", "Doe", "john@gmail.com"), Utilities.getTodayDate()));
-        posts.add(new Post("montly parking near SJSU 2", new Spot("100 senter rd", "montly", "park in the driveway", 50, false, "1", "no", "12-1-2017"), new Owner("1", "John", "Doe", "john@gmail.com"), Utilities.getTodayDate()));
-        posts.add(new Post("montly parking near SJSU 3", new Spot("100 senter rd", "montly", "park in the driveway", 50, false, "1", "no", "12-1-2017"), new Owner("1", "John", "Doe", "john@gmail.com"), Utilities.getTodayDate()));
-        posts.add(new Post("montly parking near SJSU 4", new Spot("100 senter rd", "montly", "park in the driveway", 50, false, "1", "no", "12-1-2017"), new Owner("1", "John", "Doe", "john@gmail.com"), Utilities.getTodayDate()));
-        posts.add(new Post("montly parking near SJSU 5", new Spot("100 senter rd", "montly", "park in the driveway", 50, false, "1", "no", "12-1-2017"), new Owner("1", "John", "Doe", "john@gmail.com"), Utilities.getTodayDate()));
-        posts.add(new Post("montly parking near SJSU 6", new Spot("100 senter rd", "montly", "park in the driveway", 50, false, "1", "no", "12-1-2017"), new Owner("1", "John", "Doe", "john@gmail.com"), Utilities.getTodayDate()));
-        posts.add(new Post("montly parking near SJSU 7", new Spot("100 senter rd", "montly", "park in the driveway", 50, false, "1", "no", "12-1-2017"), new Owner("1", "John", "Doe", "john@gmail.com"), Utilities.getTodayDate()));
+        posts.add(new Post("montly parking near SJSU 1", new Spot("100 senter rd", "montly", "park in the driveway", 50, "false", "1", "no", "12-1-2017"), new Owner("1", "John", "Doe", "john@gmail.com"), Utilities.getTodayDate()));
+//        posts.add(new Post("montly parking near SJSU 2", new Spot("100 senter rd", "montly", "park in the driveway", 50, false, "1", "no", "12-1-2017"), new Owner("1", "John", "Doe", "john@gmail.com"), Utilities.getTodayDate()));
+//        posts.add(new Post("montly parking near SJSU 3", new Spot("100 senter rd", "montly", "park in the driveway", 50, false, "1", "no", "12-1-2017"), new Owner("1", "John", "Doe", "john@gmail.com"), Utilities.getTodayDate()));
+//        posts.add(new Post("montly parking near SJSU 4", new Spot("100 senter rd", "montly", "park in the driveway", 50, false, "1", "no", "12-1-2017"), new Owner("1", "John", "Doe", "john@gmail.com"), Utilities.getTodayDate()));
+//        posts.add(new Post("montly parking near SJSU 5", new Spot("100 senter rd", "montly", "park in the driveway", 50, false, "1", "no", "12-1-2017"), new Owner("1", "John", "Doe", "john@gmail.com"), Utilities.getTodayDate()));
+//        posts.add(new Post("montly parking near SJSU 6", new Spot("100 senter rd", "montly", "park in the driveway", 50, false, "1", "no", "12-1-2017"), new Owner("1", "John", "Doe", "john@gmail.com"), Utilities.getTodayDate()));
+//        posts.add(new Post("montly parking near SJSU 7", new Spot("100 senter rd", "montly", "park in the driveway", 50, false, "1", "no", "12-1-2017"), new Owner("1", "John", "Doe", "john@gmail.com"), Utilities.getTodayDate()));
 
         menuUIComponents = new NavigationViewModel(this);
         mainActivityUiComponets = new MainActivityViewModel(this);
@@ -64,8 +85,32 @@ public class MainActivity extends AppCompatActivity {
 
         mAdapter = new HomePostListAdapter(posts);
         mainActivityUiComponets.getHomePostList().setAdapter(mAdapter);
+    }
 
+    @Override
+    protected void onStart(){
+        super.onStart();
+        getParkingList();
+    }
 
+    private void getParkingList(){
+        mReference = mDatabase.getReference("post");
+
+        // Attach a listener to read the data at our posts reference
+        mReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot item : dataSnapshot.getChildren()) {
+                    Post post = item.getValue(Post.class);
+                    posts.add(post);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.d(TAG, "postTransaction:onComplete:" + databaseError);
+            }
+        });
     }
 
     /*public void parkingList(View v){

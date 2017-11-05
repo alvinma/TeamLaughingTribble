@@ -23,6 +23,8 @@ public class Post {
     private String datePosted;
     private String title;
 
+    public Post(){}
+
     //new post
     public Post(String title, Spot spot, Owner owner, String datePosted) {
         this.title = title;
@@ -107,6 +109,8 @@ public class Post {
         result.put("owner", owner);
         result.put("totalGrade", totalGrade);
         result.put("commentAndRatings", commentAndRatings);
+        result.put("datePosted", datePosted);
+        result.put("title", title);
 
         return result;
     }

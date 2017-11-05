@@ -148,13 +148,13 @@ public class CreateParkingSpotListing extends BaseActivity{
         // /posts/$postid simultaneously
         String key = mDatabase.child("posts").push().getKey();
         //Post post = new Post(userId, username, title, body);
-        String type = "Default Type";
+        String type = "SUV";
         double price = 10.99;
-        boolean permitRequired = false;
-        String spotNumber = "Default SpotNumber";
-        String renting = "Default Renting";
-        String nextAvaliable = "Default nextAvaliable";
-        String defaultTitle = "Default title";
+        String permitRequired = "false";
+        String spotNumber = "1";
+        String renting = "Yes";
+        String nextAvaliable = "11-02-17";
+        String defaultTitle = "SUV Parking";
         Spot spot = new Spot(location, type, description, price, permitRequired, spotNumber, renting, nextAvaliable);
         Post post = new Post(defaultTitle, spot, user, Utilities.getTodayDate());
         Map<String, Object> postValues = post.toMap();

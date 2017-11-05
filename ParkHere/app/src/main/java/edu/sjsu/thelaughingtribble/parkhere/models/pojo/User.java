@@ -1,8 +1,11 @@
 package edu.sjsu.thelaughingtribble.parkhere.models.pojo;
 
+import com.google.firebase.database.Exclude;
 import com.google.firebase.database.IgnoreExtraProperties;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by jennifernghinguyen on 10/31/17.
@@ -113,5 +116,18 @@ public class User {
 
     public String getFullName(){
         return this.firstName + " " + this.lastName;
+    }
+
+    @Exclude
+    public Map<String, Object> toMap() {
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("userID", userID);
+        result.put("firstName", firstName);
+        result.put("lastName", lastName);
+        result.put("email", email);
+        result.put("cellphone", cellphone);
+        result.put("vehicles", vehicles);
+
+        return result;
     }
 }
