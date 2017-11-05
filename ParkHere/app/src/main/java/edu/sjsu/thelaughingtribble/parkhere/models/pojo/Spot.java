@@ -44,6 +44,9 @@ public class Spot extends Place{
         this.nextAvailable = nextAvailable;
     }
 
+    // Default Constructor
+    public Spot() {}
+
     public String getType() {
         return type;
     }

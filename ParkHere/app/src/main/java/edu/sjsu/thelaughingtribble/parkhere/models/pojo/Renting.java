@@ -19,6 +19,9 @@ public class Renting {
         this.endDate = endDate;
     }
 
+    // Default Constructor
+    public Renting() {}
+
     public Spot getSpot() {
         return spot;
     }

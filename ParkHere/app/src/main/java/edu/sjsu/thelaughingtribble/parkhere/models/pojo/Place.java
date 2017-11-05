@@ -7,6 +7,9 @@ package edu.sjsu.thelaughingtribble.parkhere.models.pojo;
 public class Place {
     private String address;
 
+    // Default Constructor
+    public Place() {}
+
     public Place(String address) {
         this.address = address;
     }

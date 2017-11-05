@@ -11,6 +11,9 @@ public class CommentAndRating {
     private String comment;
     private String date;
 
+    // Default Constructor
+    public CommentAndRating(){}
+
     public CommentAndRating(Spot spot, double grade, String renter, String comment, String date) {
         this.spot = spot;
         this.grade = grade;

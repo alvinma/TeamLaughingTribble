@@ -15,13 +15,15 @@ import edu.sjsu.thelaughingtribble.parkhere.Utils.Constant;
 
 @IgnoreExtraProperties
 public class Post {
-
     private Spot spot;
     private Owner owner;
     private ArrayList<CommentAndRating> commentAndRatings;
     private double totalGrade;
     private String datePosted;
     private String title;
+
+    // Default Constructor
+    public Post() {};
 
     //new post
     public Post(String title, Spot spot, Owner owner, String datePosted) {

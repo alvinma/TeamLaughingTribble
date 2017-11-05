@@ -14,6 +14,9 @@ public class Vehicle {
     private Bitmap photo;
     private String plateNumber;
 
+    // Default Constructor
+    public Vehicle() {}
+
     public Vehicle(String vin, String brand, String make, String year, String plateNumber){
         this.vin = vin;
         this.brand = brand;

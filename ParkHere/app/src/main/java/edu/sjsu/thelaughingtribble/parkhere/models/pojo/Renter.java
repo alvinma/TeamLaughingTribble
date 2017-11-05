@@ -10,6 +10,9 @@ public class Renter extends User {
 
     private ArrayList<Spot> spots;
 
+    // Default Constructor
+    public Renter() {}
+
     public Renter(String userID, String firstName, String lastName, String email, String cellphone) {
         super(userID, firstName, lastName, email, cellphone);
         spots = new ArrayList<>();
