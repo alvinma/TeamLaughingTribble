@@ -16,7 +16,7 @@ public class AddAVehicle extends AppCompatActivity {
         if(addAVehicleUIComponents == null){
             addAVehicleUIComponents = new AddAVehicleViewModel(this);
         }
-
+        addAVehicleUIComponents.getActionBar().setTitle("Add a Vehicle");
         addAVehicleUIComponents.getCancelTextView().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -31,7 +31,8 @@
         <activity android:name=".controllers.MyVehiclesActivity" />
         <activity android:name=".controllers.MyPlacesActivity" />
         <activity android:name=".controllers.MyRentingSpotsActivity" />
-        <activity android:name=".controllers.AddAVehicle"></activity>
+        <activity android:name=".controllers.AddAVehicle" />
+        <activity android:name=".controllers.MySpotsActivity"></activity>
     </application>
 
 </manifest>

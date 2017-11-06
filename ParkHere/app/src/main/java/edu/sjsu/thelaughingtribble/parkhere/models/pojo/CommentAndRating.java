@@ -3,6 +3,7 @@ package edu.sjsu.thelaughingtribble.parkhere.models.pojo;
 import com.google.firebase.database.Exclude;
 import com.google.firebase.database.IgnoreExtraProperties;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -11,7 +12,7 @@ import java.util.Map;
  */
 
 @IgnoreExtraProperties
-public class CommentAndRating {
+public class CommentAndRating implements Serializable{
     private Spot spot;
     private double grade;
     private String renter;

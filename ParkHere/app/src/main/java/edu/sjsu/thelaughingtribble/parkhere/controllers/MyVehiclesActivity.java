@@ -19,7 +19,6 @@ import edu.sjsu.thelaughingtribble.parkhere.models.viewModels.MyVehiclesActivity
 public class MyVehiclesActivity extends AppCompatActivity {
     MyVehiclesActivityViewModel myVehiclesActivityUIComponents;
     private RecyclerView.Adapter adapter;
-    private RecyclerView.LayoutManager layoutManager;
     private ArrayList<Vehicle> vehicles = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +34,7 @@ public class MyVehiclesActivity extends AppCompatActivity {
             myVehiclesActivityUIComponents.getActionBar().setDisplayHomeAsUpEnabled(true);
         }
 
-       // layoutManager = new LinearLayoutManager(this);
+
         myVehiclesActivityUIComponents.getVehicleList().setLayoutManager(myVehiclesActivityUIComponents.getLayoutManager());
 
         adapter = new VehicleListAdapter(vehicles);
