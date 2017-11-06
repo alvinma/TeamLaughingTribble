@@ -32,12 +32,14 @@ public class MySpotsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_spots);
+
         place = (Place) getIntent().getSerializableExtra(Constant.INTENT_EXTRA_PLACE);
 
         spots.add(new Spot(place.getAddress(), "monthly", "park on driveway on the left", 50, "no", "2", "no", Utilities.getTodayDate()));
         if(mySpotsActivityUIComponents==null){
             mySpotsActivityUIComponents = new MySpotsViewModel(this);
         }
+        mySpotsActivityUIComponents.getActionBar().setTitle("My Spots");
         mySpotsActivityUIComponents.getSpotList().setLayoutManager(mySpotsActivityUIComponents.getLayoutManager());
 
         adapter = new SpotListAdapter(spots);

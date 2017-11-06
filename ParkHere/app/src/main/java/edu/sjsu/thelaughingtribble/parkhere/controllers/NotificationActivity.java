@@ -17,6 +17,7 @@ public class NotificationActivity extends AppCompatActivity {
         setContentView(R.layout.activity_notification);
         notificationActivityUIComponents = new NotificationActivityViewModel(this);
         notificationActivityUIComponents.setToast("Not available");
+        notificationActivityUIComponents.getActionBar().setTitle("Notification");
         menuUIComponents = new NavigationViewModel(this);
     }
 
