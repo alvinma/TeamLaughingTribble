@@ -3,7 +3,7 @@ CS 160 Team Project
 By: Alvin Ma, Byron Wang, Jennifer Nghi Nguyen, Marco Sandoval
 
 Client (Android)
-
+	Github: https://github.com/alvinma/TeamLaughingTribble
 To run the application, we used the Android IDE version 2.3.3 to program the application and the emulator of the IDE to emulate a simulation of the application. We chose to use version 2.3.3 instead of version 3.0 because we were unsure of how stable 3.0 is and we did not want to take on any unnecessary bugs that would come with the new large update. Within Android IDE, we were given the option to install SDK tools to help give us options of more features to put in our application. 
 
 The SDKs we chose to install for the purpose of our application were:  
@@ -12,27 +12,34 @@ Android SDK Tools v. 26.1.1
 Google Play services v. 46
 Intel x86 Emulator Accelerator (HAXM installer) v. 6.2.1
 
-   After the installations, import the ParkHere application into Android Studio. This will allow the IDE to compile and run the project for you when you hit the “run app” drop down selection under the “run” tab. This will prompt an application window, allowing you to choose a phone type to emulate the application on.
+After the installations, import the ParkHere application into Android Studio. This will allow the IDE to compile and run the project for you when you hit the “run app” drop down selection under the “run” tab. This will prompt an application window, allowing you to choose a phone type to emulate the application on.
 
-   With the application running, you can start using the application on the emulation window. In our current version of the application, the user will enter with the login page. Once passed the login page, the user will be directed to a list of parking places currently available in San Jose. From here, the user will be able to either submit a parking spot or select a parking spot to book. 
+In the app, you need sign up using a gmail account to get started.
+
+With the application running, you can start using the application on the emulation window. In our current version of the application, the user will enter with the login page. Once passed the login page, the user will be directed to a list of parking places currently available in San Jose. From here, the user will be able to either submit a parking spot or select a parking spot to book. 
+
 <br/>
 <a href="https://postimages.org/" target="_blank"><img src="https://s26.postimg.org/mnlsd9bo9/Screen_Shot_2017-11-05_at_4.05.01_PM.png" alt="Screen_Shot_2017-11-05_at_4.05.01_PM"/></a><br/><br/>
 <a href="https://postimages.org/" target="_blank"><img src="https://s26.postimg.org/yo78dzj2x/Screen_Shot_2017-11-05_at_4.05.13_PM.png" alt="Screen_Shot_2017-11-05_at_4.05.13_PM"/></a><br/><br/>
 
 2. Backend
 
-To use the ParkHere Android Application, you do not need any setup. We used the Google Cloud Platform + Firebase to handle the backbone of our infrastructure. Doing so allowed us to handle Realtime Database queries from the Android Application while having 24/7 server uptime. 
+To use the ParkHere Android Application, you do not need to set up a backend service. We used the Google Cloud Platform + Firebase to handle the backbone of our infrastructure. Doing so allowed us to focus on building the Android application rather than focusing on server set up & maintenance and creating an API to handle requests from the clients. Since Firebase handles client-server communication and queries on the Database, our backend is primarily the environment with the Realtime Database.
 
-The Google Cloud platform allows us to handle commonly used services such as: User Authentication, NoSQL Database, Notifications, Cloud File Storage, and Cloud Testing.
+The Firebase Android API provides queries CRUD operations on the Realtime Database from the Android Application. The Google Cloud platform allows us to extend commonly used services such as: User Authentication, NoSQL Database, Notifications, Cloud File Storage, and Cloud Testing. 
 
-To view the backend/database live, you can log into the FireBase console with our team gmail account.
-
-<b>username: laughingtribble@gmail.com 
-<br/> pass: laughingtribbleteam</b>
-
+To view the backend/database live:
+Log into https://parkherefirebasebackend-94efb.firebaseio.com/
+You can log into the FireBase console with our team gmail account.
+username: laughingtribble@gmail.com
+pass: laughingtribbleteam
+The view should be the root of the database.
+Click on any node to expand it and view the information it contains.
+Done.
 
 To set up FireBase on an Android Application you must:
 Set up a Gmail account.
 Log into https://console.firebase.google.com/
-Follow the onscreen instructions
-
+Follow the onscreen instructions:
+Link to the instructions: https://firebase.google.com/docs/android/setup
+Done.
