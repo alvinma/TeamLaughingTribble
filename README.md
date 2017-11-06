@@ -12,12 +12,13 @@ Android SDK Tools v. 26.1.1
 Google Play services v. 46
 Intel x86 Emulator Accelerator (HAXM installer) v. 6.2.1
 
-	After the installations, import the ParkHere application into Android Studio. This will allow the IDE to compile and run the project for you when you hit the “run app” drop down selection under the “run” tab. This will prompt an application window, allowing you to choose a phone type to emulate the application on.
+   After the installations, import the ParkHere application into Android Studio. This will allow the IDE to compile and run the project for you when you hit the “run app” drop down selection under the “run” tab. This will prompt an application window, allowing you to choose a phone type to emulate the application on.
 
-	With the application running, you can start using the application on the emulation window. In our current version of the application, the user will enter with the login page. Once passed the login page, the user will be directed to a list of parking places currently available in San Jose. From here, the user will be able to either submit a parking spot or select a parking spot to book. 
+   With the application running, you can start using the application on the emulation window. In our current version of the application, the user will enter with the login page. Once passed the login page, the user will be directed to a list of parking places currently available in San Jose. From here, the user will be able to either submit a parking spot or select a parking spot to book. 
+<br/>
+<a href="https://postimages.org/" target="_blank"><img src="https://s26.postimg.org/mnlsd9bo9/Screen_Shot_2017-11-05_at_4.05.01_PM.png" alt="Screen_Shot_2017-11-05_at_4.05.01_PM"/></a><br/><br/>
+<a href="https://postimages.org/" target="_blank"><img src="https://s26.postimg.org/yo78dzj2x/Screen_Shot_2017-11-05_at_4.05.13_PM.png" alt="Screen_Shot_2017-11-05_at_4.05.13_PM"/></a><br/><br/>
 
-
-
 2. Backend
 
 To use the ParkHere Android Application, you do not need any setup. We used the Google Cloud Platform + Firebase to handle the backbone of our infrastructure. Doing so allowed us to handle Realtime Database queries from the Android Application while having 24/7 server uptime. 
