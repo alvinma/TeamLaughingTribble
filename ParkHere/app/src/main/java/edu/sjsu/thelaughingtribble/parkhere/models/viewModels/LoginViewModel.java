@@ -13,15 +13,15 @@ import edu.sjsu.thelaughingtribble.parkhere.R;
 
 public  class LoginViewModel extends ActivityCommonViewModel {
 
-    private Button googleLoginButton;
+    //private Button googleLoginButton;
 
     public LoginViewModel(Context context){
         super(context);
-        this.googleLoginButton = (Button) ((Activity) context).findViewById(R.id.google_login_button);;
+        //this.googleLoginButton = (Button) ((Activity) context).findViewById(R.id.google_login_button);;
     }
 
-    public Button getGoogleLoginButton(){
+    /*public Button getGoogleLoginButton(){
         return this.googleLoginButton;
-    }
+    }*/
 
 }
