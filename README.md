@@ -27,8 +27,8 @@ The Google Cloud platform allows us to handle commonly used services such as: Us
 
 To view the backend/database live, you can log into the FireBase console with our team gmail account.
 
-username: laughingtribble@gmail.com
-pass: laughingtribbleteam
+<b>username: laughingtribble@gmail.com 
+<br/> pass: laughingtribbleteam</b>
 
 
 To set up FireBase on an Android Application you must:
