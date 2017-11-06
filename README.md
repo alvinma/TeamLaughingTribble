@@ -43,3 +43,19 @@ Log into https://console.firebase.google.com/
 Follow the onscreen instructions:
 Link to the instructions: https://firebase.google.com/docs/android/setup
 Done.
+
+You will need following installation
+Node.js: brew install node <br/>
+Firebase CLI: npm install -f firebase-tools <br/>
+
+After finising the installation, go to the project folder and login with firebase account (laughingtribble@gmail.com)
+in terminal: firebase login
+
+To deploy: firebase deploy. 
+
+...
+Project Console: https://console.firebase.google.com/project/parkherefirebasebackend-94efb/overview
+Function URL (getAllPosts): https://us-central1-parkherefirebasebackend-94efb.cloudfunctions.net/getAllPosts
+Function URL (getAllPlaces): https://us-central1-parkherefirebasebackend-94efb.cloudfunctions.net/getAllPlaces
+Above is all the fuctions we have so far in this project
+
