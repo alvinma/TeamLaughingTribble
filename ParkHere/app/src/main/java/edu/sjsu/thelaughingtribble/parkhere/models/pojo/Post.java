@@ -2,6 +2,8 @@ package edu.sjsu.thelaughingtribble.parkhere.models.pojo;
 
 import com.google.firebase.database.Exclude;
 import com.google.firebase.database.IgnoreExtraProperties;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -14,7 +16,8 @@ import edu.sjsu.thelaughingtribble.parkhere.Utils.Constant;
 
 
 @IgnoreExtraProperties
-public class Post {
+public class Post implements Serializable {
+
     private Spot spot;
     private Owner owner;
     private ArrayList<CommentAndRating> commentAndRatings;
@@ -24,6 +27,7 @@ public class Post {
 
     // Default Constructor
     public Post() {};
+
 
     //new post
     public Post(String title, Spot spot, Owner owner, String datePosted) {
@@ -109,6 +113,8 @@ public class Post {
         result.put("owner", owner);
         result.put("totalGrade", totalGrade);
         result.put("commentAndRatings", commentAndRatings);
+        result.put("datePosted", datePosted);
+        result.put("title", title);
 
         return result;
     }

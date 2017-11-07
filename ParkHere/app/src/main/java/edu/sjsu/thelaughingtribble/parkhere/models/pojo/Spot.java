@@ -1,26 +1,37 @@
 package edu.sjsu.thelaughingtribble.parkhere.models.pojo;
 
 import android.graphics.Bitmap;
+
+import com.google.firebase.database.Exclude;
 import com.google.firebase.database.IgnoreExtraProperties;
+
+import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by jennifernghinguyen on 10/31/17.
  */
 
 @IgnoreExtraProperties
-public class Spot extends Place{
+public class Spot extends Place implements Serializable {
     private String type;
     private String description;
     private double price;
-    private boolean permitRequired = false;
+    private String permitRequired = "false";
     private String spotNumber;
-    private Bitmap photo;
-
+    private String photo;
     private String renting;
-
     private String nextAvailable;
 
-    public Spot(String address, String type, String description, double price, boolean permitRequired, String spotNumber, String renting, String nextAvailable) {
+    //Sample Photos:
+    //"https://previews.123rf.com/images/mack2happy/mack2happy1106/mack2happy110600045/9809346-parking-lot-Stock-Photo.jpg"
+    //"https://static.pexels.com/photos/2996/parking-parking-lot-underground-garage.jpg"
+
+    // Default Constructor
+    public Spot(){}
+
+    public Spot(String address, String type, String description, double price, String permitRequired, String spotNumber, String renting, String nextAvailable) {
         super(address);
         this.type = type;
         this.description = description;
@@ -32,7 +43,7 @@ public class Spot extends Place{
         this.photo = null;
     }
 
-    public Spot(String address, String type, String description, double price, boolean permitRequired, String spotNumber, Bitmap photo, String renting, String nextAvailable) {
+    public Spot(String address, String type, String description, double price, String permitRequired, String spotNumber, String renting, String nextAvailable, String photo) {
         super(address);
         this.type = type;
         this.description = description;
@@ -43,9 +54,6 @@ public class Spot extends Place{
         this.renting = renting;
         this.nextAvailable = nextAvailable;
     }
-
-    // Default Constructor
-    public Spot() {}
 
     public String getType() {
         return type;
@@ -71,11 +79,7 @@ public class Spot extends Place{
         this.price = price;
     }
 
-    public boolean getPermitRequired() {
-        return permitRequired;
-    }
-
-    public void setPermitRequired(boolean permitRequired) {
+    public void setPermitRequired(String permitRequired) {
         this.permitRequired = permitRequired;
     }
 
@@ -87,11 +91,11 @@ public class Spot extends Place{
         this.spotNumber = spotNumber;
     }
 
-    public Bitmap getPhoto() {
+    public String getPhoto() {
         return photo;
     }
 
-    public void setPhoto(Bitmap photo) {
+    public void setPhoto(String photo) {
         this.photo = photo;
     }
 
@@ -109,5 +113,24 @@ public class Spot extends Place{
 
     public void setNextAvailable(String nextAvailable) {
         this.nextAvailable = nextAvailable;
+    }
+
+    public String getPermitRequired() {
+        return permitRequired;
+    }
+
+    @Exclude
+    public Map<String, Object> toMap() {
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("type", type);
+        result.put("description", description);
+        result.put("price", price);
+        result.put("permitRequired", permitRequired);
+        result.put("spotNumber", spotNumber);
+        result.put("photo", photo);
+        result.put("renting", renting);
+        result.put("nextAvailable", nextAvailable);
+
+        return result;
     }
 }

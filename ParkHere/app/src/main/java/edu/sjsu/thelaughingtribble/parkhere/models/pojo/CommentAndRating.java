@@ -1,10 +1,18 @@
 package edu.sjsu.thelaughingtribble.parkhere.models.pojo;
 
+import com.google.firebase.database.Exclude;
+import com.google.firebase.database.IgnoreExtraProperties;
+
+import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Created by jennifernghinguyen on 10/31/17.
  */
 
-public class CommentAndRating {
+@IgnoreExtraProperties
+public class CommentAndRating implements Serializable{
     private Spot spot;
     private double grade;
     private String renter;
@@ -60,5 +68,17 @@ public class CommentAndRating {
 
     public void setDate(String date) {
         this.date = date;
+    }
+
+    @Exclude
+    public Map<String, Object> toMap() {
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("spot", spot);
+        result.put("grade", grade);
+        result.put("renter", renter);
+        result.put("comment", comment);
+        result.put("date", date);
+
+        return result;
     }
 }

@@ -13,19 +13,24 @@ import edu.sjsu.thelaughingtribble.parkhere.R;
  */
 
 public class homePostListItemViewHolder extends RecyclerView.ViewHolder {
-    private Context context;
+
     private TextView postTitle;
     private ImageView postImage;
     private TextView postOwner;
     private TextView datePosted;
     private TextView postPrice;
     private TextView postDescription;
+    private Context context;
+
+
 
     /*
-    view is the inflated xml layout
-     */
+
+        view is the inflated xml layout
+         */
     public homePostListItemViewHolder(View homePostListItem) {
         super(homePostListItem);
+        this.context= homePostListItem.getContext();
         this.postTitle = (TextView) homePostListItem.findViewById(R.id.post_title);
         this.postImage = (ImageView) homePostListItem.findViewById(R.id.post_image);
         this.postOwner = (TextView) homePostListItem.findViewById(R.id.post_owner);
@@ -34,6 +39,7 @@ public class homePostListItemViewHolder extends RecyclerView.ViewHolder {
         this.postDescription = (TextView) homePostListItem.findViewById(R.id.post_description);
     }
 
+
     public Context getContext() {
         return context;
     }
@@ -41,7 +47,6 @@ public class homePostListItemViewHolder extends RecyclerView.ViewHolder {
     public void setContext(Context context) {
         this.context = context;
     }
-
     public TextView getPostTitle() {
         return postTitle;
     }

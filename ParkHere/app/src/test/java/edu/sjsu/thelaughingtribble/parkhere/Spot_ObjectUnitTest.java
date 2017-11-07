@@ -43,25 +43,25 @@ public class Spot_ObjectUnitTest {
     // price
     @Test
     public void setPrice_ValidationTesting() throws Exception {
-        final Spot grade = new Spot();
+        final Spot price = new Spot();
 
-        grade.setPrice(1.0);
+        price.setPrice(1.0);
 
-        final Field field = grade.getClass().getDeclaredField("price");
+        final Field field = price.getClass().getDeclaredField("price");
         field.setAccessible(true);
-        assertEquals("Field did not match", field.get(grade), 1.0);
+        assertEquals("Field did not match", field.get(price), 1.0);
     }
 
     // permitRequired
     @Test
     public void setPermitRequired_ValidationTesting() throws Exception {
-        final Spot grade = new Spot();
+        final Spot permitRequired = new Spot();
 
-        grade.setPermitRequired(true);
+        permitRequired.setPermitRequired("true");
 
-        final Field field = grade.getClass().getDeclaredField("permitRequired");
+        final Field field = permitRequired.getClass().getDeclaredField("permitRequired");
         field.setAccessible(true);
-        assertEquals("Field did not match", field.get(grade), 1.0);
+        assertEquals("Field did not match", field.get(permitRequired), "true");
     }
     // spotNumber
     @Test
@@ -106,12 +106,12 @@ public class Spot_ObjectUnitTest {
     // price
     @Test
     public void getPrice_ValidationTesting() throws Exception {
-        final Spot grade = new Spot();
-        final Field field = grade.getClass().getDeclaredField("price");
+        final Spot price = new Spot();
+        final Field field = price.getClass().getDeclaredField("price");
         field.setAccessible(true);
-        field.set(grade, 4.5);
+        field.set(price, 4.5);
 
-        final double result = grade.getPrice();
+        final double result = price.getPrice();
 
         assertEquals("Field was not retrieved correctly and logic needs to be checked", result, 4.5);
     }
@@ -119,14 +119,14 @@ public class Spot_ObjectUnitTest {
     // permitRequired
     @Test
     public void getPermitRequired_ValidationTesting() throws Exception {
-        final Spot grade = new Spot();
-        final Field field = grade.getClass().getDeclaredField("permitRequired");
+        final Spot permitRequired = new Spot();
+        final Field field = permitRequired.getClass().getDeclaredField("permitRequired");
         field.setAccessible(true);
-        field.set(grade, true);
+        field.set(permitRequired, "true");
 
-        final boolean result = grade.getPermitRequired();
+        final String result = permitRequired.getPermitRequired();
 
-        assertEquals("Field was not retrieved correcly and logic needs to be checked", result, true);
+        assertEquals("Field was not retrieved correctly and logic needs to be checked", result, "true");
     }
 
     // spotNumber

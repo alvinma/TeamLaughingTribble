@@ -1,15 +1,25 @@
 package edu.sjsu.thelaughingtribble.parkhere.models.pojo;
 
+import com.google.firebase.database.Exclude;
+import com.google.firebase.database.IgnoreExtraProperties;
+
+import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Created by jennifernghinguyen on 10/31/17.
  */
-
-public class Renting {
+@IgnoreExtraProperties
+public class Renting implements Serializable {
     private Spot spot;
     private Renter renter;
     private Owner owner;
     private String startDate;
     private String endDate;
+
+    // Default Constructor
+    public Renting(){}
 
     public Renting(Spot spot, Renter renter, Owner owner, String startDate, String endDate) {
         this.spot = spot;
@@ -18,9 +28,6 @@ public class Renting {
         this.startDate = startDate;
         this.endDate = endDate;
     }
-
-    // Default Constructor
-    public Renting() {}
 
     public Spot getSpot() {
         return spot;
@@ -60,5 +67,17 @@ public class Renting {
 
     public void setEndDate(String endDate) {
         this.endDate = endDate;
+    }
+
+    @Exclude
+    public Map<String, Object> toMap() {
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("spot", spot);
+        result.put("renter", renter);
+        result.put("owner", owner);
+        result.put("startDate", startDate);
+        result.put("endDate", endDate);
+
+        return result;
     }
 }

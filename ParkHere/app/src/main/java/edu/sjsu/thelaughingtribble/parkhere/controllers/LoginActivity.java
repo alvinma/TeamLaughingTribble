@@ -58,19 +58,19 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
         mSignUpButton.setOnClickListener(this);
 
         loginUiComponents = new LoginViewModel(this);
-        loginUiComponents.getGoogleLoginButton().setOnClickListener(new View.OnClickListener() {
+        /*loginUiComponents.getGoogleLoginButton().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 login();
             }
-        });
+        });*/
     }
 
-    public void login(){
+   /* public void login(){
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
-    }
+    }*/
 
     @Override
     public void onStart() {

@@ -24,21 +24,6 @@
             android:contentDescription="@string/logo"
             android:src="@drawable/logodarkspot" />
 
-        <Button
-            android:id="@+id/google_login_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/logo"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:layout_marginTop="20dp"
-            android:background="@color/googleBackGround"
-            android:padding="15dp"
-            android:text="@string/google_login_text"
-            android:textColor="@android:color/white"
-            android:textSize="18sp"
-            android:textStyle="bold" />
-
         <LinearLayout
             android:id="@+id/layout_email_password"
             android:layout_width="wrap_content"
