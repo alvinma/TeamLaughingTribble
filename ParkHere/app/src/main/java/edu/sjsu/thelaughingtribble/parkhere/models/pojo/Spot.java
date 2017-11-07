@@ -71,7 +71,7 @@ public class Spot extends Place{
         this.price = price;
     }
 
-    public boolean isPermitRequired() {
+    public boolean getPermitRequired() {
         return permitRequired;
     }
 
