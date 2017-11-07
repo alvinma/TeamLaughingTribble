@@ -19,25 +19,25 @@ public class Spot_ObjectUnitTest {
     // type
     @Test
     public void setType_ValidationTesting() throws Exception {
-        final Spot parkingOwnerName = new Spot();
+        final Spot type = new Spot();
 
-        parkingOwnerName.setType("Bob");
+        type.setType("Bob");
 
-        final Field field = parkingOwnerName.getClass().getDeclaredField("type");
+        final Field field = type.getClass().getDeclaredField("type");
         field.setAccessible(true);
-        assertEquals("Field did not match", field.get(parkingOwnerName), "Bob");
+        assertEquals("Field did not match", field.get(type), "Bob");
     }
 
     // description
     @Test
     public void setDescription_ValidationTesting() throws Exception {
-        final Spot parkingAddress = new Spot();
+        final Spot description = new Spot();
 
-        parkingAddress.setDescription("555 something street");
+        description.setDescription("555 something street");
 
-        final Field field = parkingAddress.getClass().getDeclaredField("description");
+        final Field field = description.getClass().getDeclaredField("description");
         field.setAccessible(true);
-        assertEquals("Field did not match", field.get(parkingAddress), "555 something street");
+        assertEquals("Field did not match", field.get(description), "555 something street");
     }
 
     // price
@@ -66,13 +66,13 @@ public class Spot_ObjectUnitTest {
     // spotNumber
     @Test
     public void setSpotNumber_ValidationTesting() throws Exception {
-        final Spot parkingOwnerName = new Spot();
+        final Spot spotNumber = new Spot();
 
-        parkingOwnerName.setSpotNumber("Bob");
+        spotNumber.setSpotNumber("Bob");
 
-        final Field field = parkingOwnerName.getClass().getDeclaredField("spotNumber");
+        final Field field = spotNumber.getClass().getDeclaredField("spotNumber");
         field.setAccessible(true);
-        assertEquals("Field did not match", field.get(parkingOwnerName), "Bob");
+        assertEquals("Field did not match", field.get(spotNumber), "Bob");
     }
 
     // GETTER TESTS
@@ -80,12 +80,12 @@ public class Spot_ObjectUnitTest {
     // type
     @Test
     public void getType_ValidationTesting() throws Exception {
-        final Spot parkingOwnerName = new Spot();
-        final Field field = parkingOwnerName.getClass().getDeclaredField("type");
+        final Spot type = new Spot();
+        final Field field = type.getClass().getDeclaredField("type");
         field.setAccessible(true);
-        field.set(parkingOwnerName, "Bob");
+        field.set(type, "Bob");
 
-        final String result = parkingOwnerName.getType();
+        final String result = type.getType();
 
         assertEquals("Field was not retrieved correctly and logic needs to be checked", result, "Bob");
     }
@@ -93,12 +93,12 @@ public class Spot_ObjectUnitTest {
     // description
     @Test
     public void getDescription_ValidationTesting() throws Exception {
-        final Spot parkingAddress = new Spot();
-        final Field field = parkingAddress.getClass().getDeclaredField("description");
+        final Spot description = new Spot();
+        final Field field = description.getClass().getDeclaredField("description");
         field.setAccessible(true);
-        field.set(parkingAddress, "555 something street");
+        field.set(description, "555 something street");
 
-        final String result = parkingAddress.getDescription();
+        final String result = description.getDescription();
 
         assertEquals("Field did not match", result, "555 something street");
     }
@@ -129,15 +129,15 @@ public class Spot_ObjectUnitTest {
         assertEquals("Field was not retrieved correctly and logic needs to be checked", result, "true");
     }
 
-    // spotNumber
+    // description
     @Test
     public void getSpotNumber_ValidationTesting() throws Exception {
-        final Spot parkingAddress = new Spot();
-        final Field field = parkingAddress.getClass().getDeclaredField("spotNumber");
+        final Spot spotNumber = new Spot();
+        final Field field = spotNumber.getClass().getDeclaredField("spotNumber");
         field.setAccessible(true);
-        field.set(parkingAddress, "555 something street");
+        field.set(spotNumber, "555 something street");
 
-        final String result = parkingAddress.getSpotNumber();
+        final String result = spotNumber.getSpotNumber();
 
         assertEquals("Field did not match", result, "555 something street");
     }

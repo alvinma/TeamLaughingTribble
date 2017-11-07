@@ -35,37 +35,37 @@ public class CommentAndRating_ObjectUnitTest {
     // renter
     @Test
     public void setRenter_ValidationTesting() throws Exception {
-        final CommentAndRating parkingOwnerName = new CommentAndRating();
+        final CommentAndRating renter = new CommentAndRating();
 
-        parkingOwnerName.setRenter("Bob");
+        renter.setRenter("Bob");
 
-        final Field field = parkingOwnerName.getClass().getDeclaredField("renter");
+        final Field field = renter.getClass().getDeclaredField("renter");
         field.setAccessible(true);
-        assertEquals("Field did not match", field.get(parkingOwnerName), "Bob");
+        assertEquals("Field did not match", field.get(renter), "Bob");
     }
 
     // comment
     @Test
     public void setComment_ValidationTesting() throws Exception {
-        final CommentAndRating parkingAddress = new CommentAndRating();
+        final CommentAndRating comment = new CommentAndRating();
 
-        parkingAddress.setComment("555 something street");
+        comment.setComment("555 something street");
 
-        final Field field = parkingAddress.getClass().getDeclaredField("comment");
+        final Field field = comment.getClass().getDeclaredField("comment");
         field.setAccessible(true);
-        assertEquals("Field did not match", field.get(parkingAddress), "555 something street");
+        assertEquals("Field did not match", field.get(comment), "555 something street");
     }
 
     // date
     @Test
     public void setDate_ValidationTesting() throws Exception {
-        final CommentAndRating parkingDescription = new CommentAndRating();
+        final CommentAndRating date = new CommentAndRating();
 
-        parkingDescription.setDate("my description goes here");
+        date.setDate("my description goes here");
 
-        final Field field = parkingDescription.getClass().getDeclaredField("date");
+        final Field field = date.getClass().getDeclaredField("date");
         field.setAccessible(true);
-        assertEquals("Field did not match", field.get(parkingDescription), "my description goes here");
+        assertEquals("Field did not match", field.get(date), "my description goes here");
     }
 
     // GETTER TEST
@@ -86,12 +86,12 @@ public class CommentAndRating_ObjectUnitTest {
     // renter
     @Test
     public void getRenter_ValidationTesting() throws Exception {
-        final CommentAndRating parkingOwnerName = new CommentAndRating();
-        final Field field = parkingOwnerName.getClass().getDeclaredField("renter");
+        final CommentAndRating renter = new CommentAndRating();
+        final Field field = renter.getClass().getDeclaredField("renter");
         field.setAccessible(true);
-        field.set(parkingOwnerName, "Bob");
+        field.set(renter, "Bob");
 
-        final String result = parkingOwnerName.getRenter();
+        final String result = renter.getRenter();
 
         assertEquals("Field was not retrieved correctly and logic needs to be checked", result, "Bob");
     }
@@ -99,27 +99,27 @@ public class CommentAndRating_ObjectUnitTest {
     // comment
     @Test
     public void getComment_ValidationTesting() throws Exception {
-        final CommentAndRating parkingAddress = new CommentAndRating();
-        final Field field = parkingAddress.getClass().getDeclaredField("comment");
+        final CommentAndRating comment = new CommentAndRating();
+        final Field field = comment.getClass().getDeclaredField("comment");
         field.setAccessible(true);
-        field.set(parkingAddress, "555 something street");
+        field.set(comment, "my comment is this");
 
-        final String result = parkingAddress.getComment();
+        final String result = comment.getComment();
 
-        assertEquals("Field did not match", result, "555 something street");
+        assertEquals("Field did not match", result, "my comment is this");
     }
 
     // date
     @Test
     public void getDate_ValidationTesting() throws Exception {
-        final CommentAndRating parkingDescription = new CommentAndRating();
-        final Field field = parkingDescription.getClass().getDeclaredField("date");
+        final CommentAndRating date = new CommentAndRating();
+        final Field field = date.getClass().getDeclaredField("date");
         field.setAccessible(true);
-        field.set(parkingDescription, "my description goes here");
+        field.set(date, "April 25, 1800");
 
-        final String result = parkingDescription.getDate();
+        final String result = date.getDate();
 
-        assertEquals("Field did not match", result, "my description goes here");
+        assertEquals("Field did not match", result, "April 25, 1800");
     }
     
 }

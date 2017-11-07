@@ -25,7 +25,7 @@ public class Post_ObjectUnitTest {
 
         final Field field = totalGrade.getClass().getDeclaredField("totalGrade");
         field.setAccessible(true);
-        assertEquals("Field did not match", field.get(totalGrade), 1);
+        assertEquals("Field did not match", field.get(totalGrade), 5.0);
     }
 
     // datePosted
@@ -33,11 +33,11 @@ public class Post_ObjectUnitTest {
     public void setDatePosted_ValidationTesting() throws Exception {
         final Post datePosted = new Post();
 
-        datePosted.setDatePosted("Bob");
+        datePosted.setDatePosted("April 5, 2017");
 
         final Field field = datePosted.getClass().getDeclaredField("datePosted");
         field.setAccessible(true);
-        assertEquals("Field did not match", field.get(datePosted), "Bob");
+        assertEquals("Field did not match", field.get(datePosted), "April 5, 2017");
     }
 
     // title
@@ -45,11 +45,11 @@ public class Post_ObjectUnitTest {
     public void setTitle_ValidationTesting() throws Exception {
         final Post title = new Post();
 
-        title.setTitle("555 something street");
+        title.setTitle("my parking spot");
 
         final Field field = title.getClass().getDeclaredField("title");
         field.setAccessible(true);
-        assertEquals("Field did not match", field.get(title), "555 something street");
+        assertEquals("Field did not match", field.get(title), "my parking spot");
     }
 
 
@@ -74,11 +74,11 @@ public class Post_ObjectUnitTest {
         final Post datePosted = new Post();
         final Field field = datePosted.getClass().getDeclaredField("datePosted");
         field.setAccessible(true);
-        field.set(datePosted, "Bob");
+        field.set(datePosted, "April 5, 2017");
 
         final String result = datePosted.getDatePosted();
 
-        assertEquals("Field was not retrieved correctly and logic needs to be checked", result, "Bob");
+        assertEquals("Field was not retrieved correctly and logic needs to be checked", result, "April 5, 2017");
     }
 
     // title
@@ -87,11 +87,11 @@ public class Post_ObjectUnitTest {
         final Post title = new Post();
         final Field field = title.getClass().getDeclaredField("title");
         field.setAccessible(true);
-        field.set(title, "555 something street");
+        field.set(title, "title");
 
         final String result = title.getTitle();
 
-        assertEquals("Field did not match", result, "555 something street");
+        assertEquals("Field did not match", result, "title");
     }
 
 }

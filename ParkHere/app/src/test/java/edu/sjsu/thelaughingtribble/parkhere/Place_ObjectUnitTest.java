@@ -19,13 +19,13 @@ public class Place_ObjectUnitTest {
     // address
     @Test
     public void setAddress_ValidationTesting() throws Exception {
-        final Place parkingAddress = new Place();
+        final Place address = new Place();
 
-        parkingAddress.setAddress("555 something street");
+        address.setAddress("555 something street");
 
-        final Field field = parkingAddress.getClass().getDeclaredField("address");
+        final Field field = address.getClass().getDeclaredField("address");
         field.setAccessible(true);
-        assertEquals("Field did not match", field.get(parkingAddress), "555 something street");
+        assertEquals("Field did not match", field.get(address), "555 something street");
     }
 
     // GETTER TEST
@@ -33,12 +33,12 @@ public class Place_ObjectUnitTest {
     // address
     @Test
     public void getAddress_ValidationTesting() throws Exception {
-        final Place parkingAddress = new Place();
-        final Field field = parkingAddress.getClass().getDeclaredField("address");
+        final Place address = new Place();
+        final Field field = address.getClass().getDeclaredField("address");
         field.setAccessible(true);
-        field.set(parkingAddress, "555 something street");
+        field.set(address, "555 something street");
 
-        final String result = parkingAddress.getAddress();
+        final String result = address.getAddress();
 
         assertEquals("Field was not retrieved correctly and logic needs to be checked", result, "555 something street");
     }

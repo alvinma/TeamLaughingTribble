@@ -21,11 +21,11 @@ public class User_ObjectUnitTest {
     public void setUserID_ValidationTesting() throws Exception {
         final User userID = new User();
 
-        userID.setUserID("Bob");
+        userID.setUserID("999");
 
         final Field field = userID.getClass().getDeclaredField("userID");
         field.setAccessible(true);
-        assertEquals("Field did not match", field.get(userID), "Bob");
+        assertEquals("Field did not match", field.get(userID), "999");
     }
 
     // firstName
@@ -33,11 +33,11 @@ public class User_ObjectUnitTest {
     public void setFirstName_ValidationTesting() throws Exception {
         final User firstName = new User();
 
-        firstName.setFirstName("555 something street");
+        firstName.setFirstName("Bob");
 
         final Field field = firstName.getClass().getDeclaredField("firstName");
         field.setAccessible(true);
-        assertEquals("Field did not match", field.get(firstName), "555 something street");
+        assertEquals("Field did not match", field.get(firstName), "Bob");
     }
 
     // lastName
@@ -45,11 +45,11 @@ public class User_ObjectUnitTest {
     public void setLastName_ValidationTesting() throws Exception {
         final User lastName = new User();
 
-        lastName.setLastName("555 something street");
+        lastName.setLastName("Jackson");
 
         final Field field = lastName.getClass().getDeclaredField("lastName");
         field.setAccessible(true);
-        assertEquals("Field did not match", field.get(lastName), "555 something street");
+        assertEquals("Field did not match", field.get(lastName), "Jackson");
     }
 
     // email
@@ -57,11 +57,11 @@ public class User_ObjectUnitTest {
     public void setEmail_ValidationTesting() throws Exception {
         final User email = new User();
 
-        email.setEmail("555 something street");
+        email.setEmail("park@here.com");
 
         final Field field = email.getClass().getDeclaredField("email");
         field.setAccessible(true);
-        assertEquals("Field did not match", field.get(email), "555 something street");
+        assertEquals("Field did not match", field.get(email), "park@here.com");
     }
 
     // cellphone
@@ -69,11 +69,11 @@ public class User_ObjectUnitTest {
     public void setCellphone_ValidationTesting() throws Exception {
         final User cellphone = new User();
 
-        cellphone.setCellphone("555 something street");
+        cellphone.setCellphone("555-555-9999");
 
         final Field field = cellphone.getClass().getDeclaredField("cellphone");
         field.setAccessible(true);
-        assertEquals("Field did not match", field.get(cellphone), "555 something street");
+        assertEquals("Field did not match", field.get(cellphone), "555-555-9999");
     }
 
     // GETTER TESTS
@@ -84,11 +84,11 @@ public class User_ObjectUnitTest {
         final User userID = new User();
         final Field field = userID.getClass().getDeclaredField("uesrID");
         field.setAccessible(true);
-        field.set(userID, "Bob");
+        field.set(userID, "9");
 
         final String result = userID.getUserID();
 
-        assertEquals("Field was not retrieved correctly and logic needs to be checked", result, "Bob");
+        assertEquals("Field was not retrieved correctly and logic needs to be checked", result, "9");
     }
 
     // firstName
@@ -97,11 +97,11 @@ public class User_ObjectUnitTest {
         final User firstName = new User();
         final Field field = firstName.getClass().getDeclaredField("firstName");
         field.setAccessible(true);
-        field.set(firstName, "555 something street");
+        field.set(firstName, "Hello");
 
         final String result = firstName.getFirstName();
 
-        assertEquals("Field did not match", result, "555 something street");
+        assertEquals("Field did not match", result, "Hello");
     }
 
     // lastName
@@ -110,11 +110,11 @@ public class User_ObjectUnitTest {
         final User lastName = new User();
         final Field field = lastName.getClass().getDeclaredField("lastName");
         field.setAccessible(true);
-        field.set(lastName, "555 something street");
+        field.set(lastName, "World");
 
         final String result = lastName.getLastName();
 
-        assertEquals("Field did not match", result, "555 something street");
+        assertEquals("Field did not match", result, "World");
     }
 
     // email
@@ -123,11 +123,11 @@ public class User_ObjectUnitTest {
         final User email = new User();
         final Field field = email.getClass().getDeclaredField("email");
         field.setAccessible(true);
-        field.set(email, "555 something street");
+        field.set(email, "e@mail.com");
 
         final String result = email.getEmail();
 
-        assertEquals("Field did not match", result, "555 something street");
+        assertEquals("Field did not match", result, "e@mail.com");
     }
 
     // cellphone
@@ -136,11 +136,11 @@ public class User_ObjectUnitTest {
         final User cellphone = new User();
         final Field field = cellphone.getClass().getDeclaredField("cellphone");
         field.setAccessible(true);
-        field.set(cellphone, "555 something street");
+        field.set(cellphone, "555-555-9999");
 
         final String result = cellphone.getCellphone();
 
-        assertEquals("Field did not match", result, "555 something street");
+        assertEquals("Field did not match", result, "555-555-9999");
     }
 
 }

@@ -21,11 +21,11 @@ public class Renting_ObjectUnitTest {
     public void setStartDate_ValidationTesting() throws Exception {
         final Renting startDate = new Renting();
 
-        startDate.setStartDate("555 something street");
+        startDate.setStartDate("April 5, 2017");
 
-        final Field field = startDate.getClass().getDeclaredField("AddressLocation");
+        final Field field = startDate.getClass().getDeclaredField("startDate");
         field.setAccessible(true);
-        assertEquals("Field did not match", field.get(startDate), "555 something street");
+        assertEquals("Field did not match", field.get(startDate), "April 5, 2017");
     }
 
     // endDate
@@ -33,11 +33,11 @@ public class Renting_ObjectUnitTest {
     public void setEndDate_ValidationTesting() throws Exception {
         final Renting endDate = new Renting();
 
-        endDate.setEndDate("my description goes here");
+        endDate.setEndDate("April 6, 2017");
 
-        final Field field = endDate.getClass().getDeclaredField("Description");
+        final Field field = endDate.getClass().getDeclaredField("endDate");
         field.setAccessible(true);
-        assertEquals("Field did not match", field.get(endDate), "my description goes here");
+        assertEquals("Field did not match", field.get(endDate), "April 6, 2017");
     }
 
     // GETTER TEST
@@ -46,26 +46,26 @@ public class Renting_ObjectUnitTest {
     @Test
     public void getStartDate_ValidationTesting() throws Exception {
         final Renting startDate = new Renting();
-        final Field field = startDate.getClass().getDeclaredField("AddressLocation");
+        final Field field = startDate.getClass().getDeclaredField("startDate");
         field.setAccessible(true);
-        field.set(startDate, "555 something street");
+        field.set(startDate, "April 7, 2017");
 
         final String result = startDate.getStartDate();
 
-        assertEquals("Field did not match", result, "555 something street");
+        assertEquals("Field did not match", result, "April 7, 2017");
     }
 
     // endDate
     @Test
     public void getEndDate_ValidationTesting() throws Exception {
         final Renting endDate = new Renting();
-        final Field field = endDate.getClass().getDeclaredField("Description");
+        final Field field = endDate.getClass().getDeclaredField("endDate");
         field.setAccessible(true);
-        field.set(endDate, "my description goes here");
+        field.set(endDate, "July 5, 2017");
 
         final String result = endDate.getEndDate();
 
-        assertEquals("Field did not match", result, "my description goes here");
+        assertEquals("Field did not match", result, "July 5, 2017");
     }
 
 }
