@@ -20,6 +20,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import edu.sjsu.thelaughingtribble.parkhere.R;
+import edu.sjsu.thelaughingtribble.parkhere.Utils.Utilities;
 import edu.sjsu.thelaughingtribble.parkhere.models.pojo.User;
 import edu.sjsu.thelaughingtribble.parkhere.models.viewModels.LoginViewModel;
 
@@ -101,6 +102,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
 
                         if (task.isSuccessful()) {
                             onAuthSuccess(task.getResult().getUser());
+                            Toast.makeText(LoginActivity.this, "Sign In success",
+                                    Toast.LENGTH_SHORT).show();
                         } else {
                             Toast.makeText(LoginActivity.this, "Sign In Failed",
                                     Toast.LENGTH_SHORT).show();
@@ -109,6 +112,15 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
                 });
     }
 
+    public static FirebaseAuth signOut(FirebaseAuth mAuth){
+        if(mAuth!= null && mAuth.getCurrentUser()!=null){
+            mAuth.signOut();
+            mAuth=null;
+        }
+
+        return mAuth;
+
+    }
     private void signUp() {
         Log.d(TAG, "signUp");
         if (!validateForm()) {
@@ -137,7 +149,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
     }
 
     private void onAuthSuccess(FirebaseUser user) {
-        String username = usernameFromEmail(user.getEmail());
+        String username = Utilities.usernameFromEmail(user.getEmail());
 
         // Write new user
         writeNewUser(user.getUid(), username, user.getEmail());
@@ -147,13 +159,13 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
         finish();
     }
 
-    private String usernameFromEmail(String email) {
+    /*private String usernameFromEmail(String email) {
         if (email.contains("@")) {
             return email.split("@")[0];
         } else {
             return email;
         }
-    }
+    }*/
 
     private boolean validateForm() {
         boolean result = true;

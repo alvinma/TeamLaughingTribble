@@ -1,9 +1,13 @@
 package edu.sjsu.thelaughingtribble.parkhere.controllers;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+
+import com.google.firebase.auth.FirebaseAuth;
 
 import edu.sjsu.thelaughingtribble.parkhere.R;
 import edu.sjsu.thelaughingtribble.parkhere.models.viewModels.NavigationViewModel;
@@ -23,6 +27,15 @@ public class ProfileActivity extends AppCompatActivity {
             profileActivityUIComponents.getActionBar().setTitle("Profile");
             profileActivityUIComponents.getActionBar().setDisplayHomeAsUpEnabled(true);
         }
+
+        profileActivityUIComponents.getLogoutLayout().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                LoginActivity.signOut(FirebaseAuth.getInstance());
+                Intent intent = new Intent(profileActivityUIComponents.getContext(), LoginActivity.class);
+                startActivity(intent);
+            }
+        });
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -34,4 +47,6 @@ public class ProfileActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
+
+
 }
