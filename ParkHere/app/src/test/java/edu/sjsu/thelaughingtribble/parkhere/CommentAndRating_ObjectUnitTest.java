@@ -25,11 +25,11 @@ public class CommentAndRating_ObjectUnitTest {
     public void setGrade_ValidationTesting() throws Exception {
         final CommentAndRating grade = new CommentAndRating();
 
-        grade.setGrade(1);
+        grade.setGrade(1.0);
 
-        final Field field = grade.getClass().getDeclaredField("ObjectID");
+        final Field field = grade.getClass().getDeclaredField("grade");
         field.setAccessible(true);
-        assertEquals("Field did not match", field.get(grade), 1);
+        assertEquals("Field did not match", field.get(grade), 1.0);
     }
 
     // renter
@@ -39,7 +39,7 @@ public class CommentAndRating_ObjectUnitTest {
 
         parkingOwnerName.setRenter("Bob");
 
-        final Field field = parkingOwnerName.getClass().getDeclaredField("OwnerName");
+        final Field field = parkingOwnerName.getClass().getDeclaredField("renter");
         field.setAccessible(true);
         assertEquals("Field did not match", field.get(parkingOwnerName), "Bob");
     }
@@ -51,7 +51,7 @@ public class CommentAndRating_ObjectUnitTest {
 
         parkingAddress.setComment("555 something street");
 
-        final Field field = parkingAddress.getClass().getDeclaredField("AddressLocation");
+        final Field field = parkingAddress.getClass().getDeclaredField("comment");
         field.setAccessible(true);
         assertEquals("Field did not match", field.get(parkingAddress), "555 something street");
     }
@@ -63,18 +63,18 @@ public class CommentAndRating_ObjectUnitTest {
 
         parkingDescription.setDate("my description goes here");
 
-        final Field field = parkingDescription.getClass().getDeclaredField("Description");
+        final Field field = parkingDescription.getClass().getDeclaredField("date");
         field.setAccessible(true);
         assertEquals("Field did not match", field.get(parkingDescription), "my description goes here");
     }
 
-    // grade
+    // GETTER TEST
 
-    // Object ID
+    // grade
     @Test
     public void getGrade_ValidationTesting() throws Exception {
         final CommentAndRating grade = new CommentAndRating();
-        final Field field = grade.getClass().getDeclaredField("ObjectID");
+        final Field field = grade.getClass().getDeclaredField("grade");
         field.setAccessible(true);
         field.set(grade, 4.5);
 
@@ -87,7 +87,7 @@ public class CommentAndRating_ObjectUnitTest {
     @Test
     public void getRenter_ValidationTesting() throws Exception {
         final CommentAndRating parkingOwnerName = new CommentAndRating();
-        final Field field = parkingOwnerName.getClass().getDeclaredField("OwnerName");
+        final Field field = parkingOwnerName.getClass().getDeclaredField("renter");
         field.setAccessible(true);
         field.set(parkingOwnerName, "Bob");
 
@@ -100,7 +100,7 @@ public class CommentAndRating_ObjectUnitTest {
     @Test
     public void getComment_ValidationTesting() throws Exception {
         final CommentAndRating parkingAddress = new CommentAndRating();
-        final Field field = parkingAddress.getClass().getDeclaredField("AddressLocation");
+        final Field field = parkingAddress.getClass().getDeclaredField("comment");
         field.setAccessible(true);
         field.set(parkingAddress, "555 something street");
 
@@ -113,7 +113,7 @@ public class CommentAndRating_ObjectUnitTest {
     @Test
     public void getDate_ValidationTesting() throws Exception {
         final CommentAndRating parkingDescription = new CommentAndRating();
-        final Field field = parkingDescription.getClass().getDeclaredField("Description");
+        final Field field = parkingDescription.getClass().getDeclaredField("date");
         field.setAccessible(true);
         field.set(parkingDescription, "my description goes here");
 
