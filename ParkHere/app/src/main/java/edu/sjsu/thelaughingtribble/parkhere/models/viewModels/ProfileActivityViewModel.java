@@ -23,6 +23,7 @@ public class ProfileActivityViewModel extends ActivityCommonViewModel {
     private LinearLayout myVehicleLayout;
     private LinearLayout myPlacesLayout;
     private LinearLayout myRentingSpotsLayout;
+    private LinearLayout logoutLayout;
 
     public ProfileActivityViewModel(Context context) {
         super(context);
@@ -30,6 +31,7 @@ public class ProfileActivityViewModel extends ActivityCommonViewModel {
         this.myVehicleLayout = (LinearLayout)  ((Activity) context).findViewById(R.id.myvehicle_layout);
         this.myPlacesLayout = (LinearLayout)  ((Activity) context).findViewById(R.id.myplaces_layout);
         this.myRentingSpotsLayout = (LinearLayout)  ((Activity) context).findViewById(R.id.myrentingspots_layout);
+        this.logoutLayout = (LinearLayout)  ((Activity) context).findViewById(R.id.logout_layout);
         setMyVehiclesIntent();
         setMyPlacesIntent();
         setMyprofileIntent();
@@ -66,6 +68,14 @@ public class ProfileActivityViewModel extends ActivityCommonViewModel {
 
     public void setMyRentingSpotsLayout(LinearLayout myRentingSpotsLayout) {
         this.myRentingSpotsLayout = myRentingSpotsLayout;
+    }
+
+    public LinearLayout getLogoutLayout() {
+        return logoutLayout;
+    }
+
+    public void setLogoutLayout(LinearLayout logoutLayout) {
+        this.logoutLayout = logoutLayout;
     }
 
     private void setMyprofileIntent(){
@@ -107,4 +117,6 @@ public class ProfileActivityViewModel extends ActivityCommonViewModel {
             }
         });
     }
+
+
 }
