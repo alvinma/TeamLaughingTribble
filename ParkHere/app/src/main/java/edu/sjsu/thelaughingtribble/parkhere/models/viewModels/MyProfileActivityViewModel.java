@@ -3,6 +3,7 @@ package edu.sjsu.thelaughingtribble.parkhere.models.viewModels;
 import android.app.Activity;
 import android.content.Context;
 import android.support.design.widget.FloatingActionButton;
+import android.text.TextUtils;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -10,6 +11,7 @@ import com.bumptech.glide.Glide;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import edu.sjsu.thelaughingtribble.parkhere.R;
+import edu.sjsu.thelaughingtribble.parkhere.Utils.Constant;
 
 /**
  * Created by jennifernghinguyen on 11/2/17.
@@ -104,5 +106,20 @@ public class MyProfileActivityViewModel extends ActivityCommonViewModel {
     public void setAvartaUrl(String url){
         Glide.with(getContext()).load(url).into(getAvarta());
 
+    }
+
+    public boolean isEmptyFields(EditText editText){
+        boolean status = false;
+
+        if(TextUtils.isEmpty(editText.getText().toString())){
+            editText.setError(Constant.REQUIRE_TEXT);
+            status = true;
+        }
+
+        return status;
+    }
+
+    public void setError(EditText editText, String error){
+        editText.setError(error);
     }
 }

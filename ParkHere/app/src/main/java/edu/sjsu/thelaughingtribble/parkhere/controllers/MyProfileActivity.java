@@ -1,12 +1,15 @@
 package edu.sjsu.thelaughingtribble.parkhere.controllers;
 
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
+import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
 
 import edu.sjsu.thelaughingtribble.parkhere.R;
+import edu.sjsu.thelaughingtribble.parkhere.Utils.Constant;
+import edu.sjsu.thelaughingtribble.parkhere.Utils.Utilities;
 import edu.sjsu.thelaughingtribble.parkhere.models.viewModels.MyProfileActivityViewModel;
 
 public class MyProfileActivity extends AppCompatActivity {
@@ -25,19 +28,9 @@ public class MyProfileActivity extends AppCompatActivity {
             myProfileActivityUIComponents.getActionBar().setDisplayHomeAsUpEnabled(true);
         }
 
-        myProfileActivityUIComponents.getEditButton().setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                editMode(true);
-            }
-        });
+        editAction(myProfileActivityUIComponents.getEditButton());
 
-        myProfileActivityUIComponents.getDoneButton().setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                editMode(false);
-            }
-        });
+        doneAction(myProfileActivityUIComponents.getDoneButton());
 
     }
 
@@ -72,6 +65,43 @@ public class MyProfileActivity extends AppCompatActivity {
             myProfileActivityUIComponents.getEditButton().setVisibility(View.VISIBLE);
             myProfileActivityUIComponents.getDoneButton().setVisibility(View.GONE);
         }
+    }
+
+    private void doneAction(FloatingActionButton done) {
+        done.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                String fullName = myProfileActivityUIComponents.getFullNameEdit().getText().toString().trim();
+                String phone = myProfileActivityUIComponents.getPhoneEdit().getText().toString().trim();
+
+                if (myProfileActivityUIComponents.isEmptyFields(myProfileActivityUIComponents.getFullNameEdit())) {
+                    myProfileActivityUIComponents.setError(myProfileActivityUIComponents.getFullNameEdit(), Constant.REQUIRE_TEXT);
+                }
+
+
+                if (!Utilities.phoneMatcher(phone)) {
+                    myProfileActivityUIComponents.setError(myProfileActivityUIComponents.getPhoneEdit(), Constant.PHONE_FORMAT_TEXT);
+                }
+
+
+                if (!(TextUtils.isEmpty(fullName))  && Utilities.phoneMatcher(phone)) {
+                    editMode(false);
+                }
+
+
+            }
+        });
+    }
+
+
+    private void editAction(FloatingActionButton edit) {
+        edit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                editMode(true);
+            }
+        });
     }
 
 }

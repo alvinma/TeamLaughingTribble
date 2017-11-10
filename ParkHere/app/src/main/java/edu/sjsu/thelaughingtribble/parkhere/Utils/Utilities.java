@@ -2,6 +2,8 @@ package edu.sjsu.thelaughingtribble.parkhere.Utils;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Created by jennifernghinguyen on 10/31/17.
@@ -21,5 +23,15 @@ public final class Utilities {
         } else {
             return email;
         }
+    }
+
+    public static boolean phoneMatcher(String phoneNumber){
+        boolean status = false;
+        Pattern pattern = Pattern.compile("\\d{3}-\\d{3}-\\d{4}");
+        Matcher matcher = pattern.matcher(phoneNumber);
+        if (matcher.matches()) {
+           status = true;
+        }
+        return status;
     }
 }

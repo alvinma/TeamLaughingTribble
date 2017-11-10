@@ -19,6 +19,7 @@ import org.junit.runner.RunWith;
 import edu.sjsu.thelaughingtribble.parkhere.controllers.MainActivity;
 import edu.sjsu.thelaughingtribble.parkhere.controllers.MyPlacesActivity;
 import edu.sjsu.thelaughingtribble.parkhere.controllers.MyProfileActivity;
+import edu.sjsu.thelaughingtribble.parkhere.controllers.MySpotsActivity;
 import edu.sjsu.thelaughingtribble.parkhere.controllers.MyVehiclesActivity;
 import edu.sjsu.thelaughingtribble.parkhere.controllers.Navigation;
 import edu.sjsu.thelaughingtribble.parkhere.controllers.NotificationActivity;
@@ -104,7 +105,7 @@ public class IntentTest {
         onView(withId(R.id.myplaces_layout)).perform(click());
         onView(withId(R.id.address_text)).perform(click());
         SystemClock.sleep(1000);
-        intended(hasComponent(MyPlacesActivity.class.getName()));
+        intended(hasComponent(MySpotsActivity.class.getName()));
 
     }
 

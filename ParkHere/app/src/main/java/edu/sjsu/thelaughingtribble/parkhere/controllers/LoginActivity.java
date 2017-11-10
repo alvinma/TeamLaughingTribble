@@ -20,6 +20,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import edu.sjsu.thelaughingtribble.parkhere.R;
+import edu.sjsu.thelaughingtribble.parkhere.Utils.Constant;
 import edu.sjsu.thelaughingtribble.parkhere.Utils.Utilities;
 import edu.sjsu.thelaughingtribble.parkhere.models.pojo.User;
 import edu.sjsu.thelaughingtribble.parkhere.models.viewModels.LoginViewModel;
@@ -170,14 +171,14 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
     private boolean validateForm() {
         boolean result = true;
         if (TextUtils.isEmpty(mEmailField.getText().toString())) {
-            mEmailField.setError("Required");
+            mEmailField.setError(Constant.REQUIRE_TEXT);
             result = false;
         } else {
             mEmailField.setError(null);
         }
 
         if (TextUtils.isEmpty(mPasswordField.getText().toString())) {
-            mPasswordField.setError("Required");
+            mPasswordField.setError(Constant.REQUIRE_TEXT);
             result = false;
         } else {
             mPasswordField.setError(null);
