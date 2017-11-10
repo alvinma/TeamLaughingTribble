@@ -61,11 +61,11 @@ public class CommentAndRating_ObjectUnitTest {
     public void setDate_ValidationTesting() throws Exception {
         final CommentAndRating date = new CommentAndRating();
 
-        date.setDate("my description goes here");
+        date.setDate("April 25, 1800");
 
         final Field field = date.getClass().getDeclaredField("date");
         field.setAccessible(true);
-        assertEquals("Field did not match", field.get(date), "my description goes here");
+        assertEquals("Field did not match", field.get(date), "April 25, 1800");
     }
 
     // GETTER TEST

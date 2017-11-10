@@ -82,7 +82,7 @@ public class User_ObjectUnitTest {
     @Test
     public void getUserID_ValidationTesting() throws Exception {
         final User userID = new User();
-        final Field field = userID.getClass().getDeclaredField("uesrID");
+        final Field field = userID.getClass().getDeclaredField("userID");
         field.setAccessible(true);
         field.set(userID, "9");
 
