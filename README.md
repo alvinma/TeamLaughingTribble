@@ -2,7 +2,15 @@
 CS 160 Team Project
 By: Alvin Ma, Byron Wang, Jennifer Nghi Nguyen, Marco Sandoval
 
-Client (Android)
+<b>Note: Update README assignment 4: in assignment 4 all the tests are carried out in Client (Android) project; backend project remains untouched. <br/></b>
+
+1. Client (Android) <br />
+2. Backend <br />
+3. Testing<br />
+
+
+<br />
+1. Client (Android)
 	Github: https://github.com/alvinma/TeamLaughingTribble
 To run the application, we used the Android IDE version 2.3.3 to program the application and the emulator of the IDE to emulate a simulation of the application. We chose to use version 2.3.3 instead of version 3.0 because we were unsure of how stable 3.0 is and we did not want to take on any unnecessary bugs that would come with the new large update. Within Android IDE, we were given the option to install SDK tools to help give us options of more features to put in our application. 
 
@@ -58,4 +66,25 @@ Project Console: https://console.firebase.google.com/project/parkherefirebasebac
 Function URL (getAllPosts): https://us-central1-parkherefirebasebackend-94efb.cloudfunctions.net/getAllPosts
 Function URL (getAllPlaces): https://us-central1-parkherefirebasebackend-94efb.cloudfunctions.net/getAllPlaces
 Above is all the fuctions we have so far in this project
+
+3. Testing - Android repo <br />
+White-box unit tests<br />
+All whitebox tests locate in the package: /app/src/test/java/edu/sjsu/thelaughingtribble/parkhere (test)<br />
+
+Run the tests: <br />
+Simply right-click on the test class and select Run <testclass> with coverage<br />
+Or, each sub tests can be run individually by select a test in a class, right-click and select run <test method> with coverage<br /><br />
+Black-box instrument test<br />
+All blackbox instrumentation tests locate in the package: app/src/androidTest/java/edu/sjsu/thelaughingtribble/parkhere (androidTest)<br /><br />
+
+Run the tests: <br />
+Simply right-click on the test class and select Run <testclass> <br />
+Or, each sub tests can be run individually by select a test in a class, right-click and select run <test method> 
+Select a simulator to run the test<br /><br />
+
+Get overall code coverage using Jacoco plugin<br />
+We can get overall code coverage using jacoco plugin (this plugin will test all instrumentation test all at once)
+In Android Studio terminal:  ./gradlew createDebugCoverageReport<br />
+After the process finish, the html report “index.html” can be found at this path: TeamLaughingTribble/ParkHere/app/build/reports/coverage/debug<br />
+
 
