@@ -135,11 +135,11 @@ public class Spot_ObjectUnitTest {
         final Spot spotNumber = new Spot();
         final Field field = spotNumber.getClass().getDeclaredField("spotNumber");
         field.setAccessible(true);
-        field.set(spotNumber, "555 something street");
+        field.set(spotNumber, "555");
 
         final String result = spotNumber.getSpotNumber();
 
-        assertEquals("Field did not match", result, "555 something street");
+        assertEquals("Field did not match", result, "555");
     }
 
 }
