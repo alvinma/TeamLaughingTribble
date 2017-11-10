@@ -9,6 +9,7 @@ By: Alvin Ma, Byron Wang, Jennifer Nghi Nguyen, Marco Sandoval
 3. Testing<br />
 
 
+<br />
 1. Client (Android)
 	Github: https://github.com/alvinma/TeamLaughingTribble
 To run the application, we used the Android IDE version 2.3.3 to program the application and the emulator of the IDE to emulate a simulation of the application. We chose to use version 2.3.3 instead of version 3.0 because we were unsure of how stable 3.0 is and we did not want to take on any unnecessary bugs that would come with the new large update. Within Android IDE, we were given the option to install SDK tools to help give us options of more features to put in our application. 
