@@ -29,7 +29,7 @@ import java.util.List;
 import edu.sjsu.thelaughingtribble.parkhere.CreateParkingSpotListing;
 import edu.sjsu.thelaughingtribble.parkhere.ParkingPostObject;
 import edu.sjsu.thelaughingtribble.parkhere.R;
-import edu.sjsu.thelaughingtribble.parkhere.Utils.GoogleMaps;
+
 import edu.sjsu.thelaughingtribble.parkhere.Utils.Utilities;
 import edu.sjsu.thelaughingtribble.parkhere.adapters.homePostList.HomePostListAdapter;
 import edu.sjsu.thelaughingtribble.parkhere.models.pojo.Owner;
@@ -80,12 +80,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onStart(){
+    protected void onStart() {
         super.onStart();
         getParkingList();
     }
 
-    private void getParkingList(){
+    private void getParkingList() {
         mReference = mDatabase.getReference("post");
 
         // Attach a listener to read the data at our posts reference
@@ -124,9 +124,5 @@ public class MainActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
-    }
-    public void searchMapView(){
-        Intent intent = new Intent(this, GoogleMaps.class);
-        this.startActivity(intent);
     }
 }
