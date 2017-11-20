@@ -37,6 +37,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
     private EditText mPasswordField;
     private Button mSignInButton;
     private Button mSignUpButton;
+    private User mUser;
 
     LoginViewModel loginUiComponents;
 
@@ -156,7 +157,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
         writeNewUser(user.getUid(), username, user.getEmail());
 
         // Go to MainActivity
-        startActivity(new Intent(LoginActivity.this, MainActivity.class));
+        MainActivity.startIntent(this, mUser);
+
         finish();
     }
 
@@ -189,9 +191,11 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
 
     // [START basic_write]
     private void writeNewUser(String userId, String name, String email) {
-        User user = new User(name, email);
+         mUser = new User(userId, name, email);
 
-        mDatabase.child("users").child(userId).setValue(user);
+        Log.i("Login", mUser.getUid() + " " + mUser.getEmail());
+
+        mDatabase.child("users").child(userId).setValue(mUser);
     }
     // [END basic_write]
 

@@ -23,6 +23,7 @@ public class Spot extends Place implements Serializable {
     private String photo;
     private String renting;
     private String nextAvailable;
+    private String firebaseKey;
 
     //Sample Photos:
     //"https://previews.123rf.com/images/mack2happy/mack2happy1106/mack2happy110600045/9809346-parking-lot-Stock-Photo.jpg"
@@ -31,7 +32,7 @@ public class Spot extends Place implements Serializable {
     // Default Constructor
     public Spot(){}
 
-    public Spot(String address, String type, String description, double price, String permitRequired, String spotNumber, String renting, String nextAvailable) {
+    public Spot(String address, String type, String description, double price, String permitRequired, String spotNumber, String renting, String nextAvailable, String firebaseKey) {
         super(address);
         this.type = type;
         this.description = description;
@@ -41,10 +42,12 @@ public class Spot extends Place implements Serializable {
         this.renting = renting;
         this.nextAvailable = nextAvailable;
         this.photo = null;
+        this.firebaseKey = firebaseKey;
     }
 
-    public Spot(String address, String type, String description, double price, String permitRequired, String spotNumber, String renting, String nextAvailable, String photo) {
+    public Spot(String address, String type, String description, double price, String permitRequired, String spotNumber, String renting, String nextAvailable, String firebaseKey, String photo) {
         super(address);
+        this.firebaseKey = firebaseKey;
         this.type = type;
         this.description = description;
         this.price = price;
@@ -53,6 +56,16 @@ public class Spot extends Place implements Serializable {
         this.photo = photo;
         this.renting = renting;
         this.nextAvailable = nextAvailable;
+    }
+
+    @Override
+    public String getFirebaseKey() {
+        return firebaseKey;
+    }
+
+    @Override
+    public void setFirebaseKey(String firebaseKey) {
+        this.firebaseKey = firebaseKey;
     }
 
     public String getType() {

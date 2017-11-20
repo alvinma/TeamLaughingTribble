@@ -3,6 +3,7 @@ package edu.sjsu.thelaughingtribble.parkhere.models.viewModels;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 
@@ -30,9 +31,7 @@ public class NavigationViewModel extends ActivityCommonViewModel  {
         this.homeLayout = (LinearLayout) ((Activity) context).findViewById(R.id.home_layout);
         this.notificationLayout = (LinearLayout) ((Activity) context).findViewById(R.id.notification_layout);
         this.profileLayout = (LinearLayout) ((Activity) context).findViewById(R.id.profile_layout);
-        setHomeIntent();
-        setNotificationIntent();
-        setProfileIntent();
+
     }
 
     public LinearLayout getHomeLayout() {
@@ -47,32 +46,45 @@ public class NavigationViewModel extends ActivityCommonViewModel  {
         return this.profileLayout;
     }
 
-    private void setHomeIntent() {
+    public void setHomeIntent() {
         this.homeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(), MainActivity.class);
-                getContext().startActivity(intent);
+                if(getUser()!=null) {
+                    MainActivity.startIntent(getContext(), getUser());
+                }else {
+                    Log.i("setHomeIntent", "user null");
+                }
             }
         });
+
     }
 
-    private void setNotificationIntent() {
+    public void setNotificationIntent() {
         this.notificationLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(), NotificationActivity.class);
-                getContext().startActivity(intent);
+                /*Intent intent = new Intent(getContext(), NotificationActivity.class);
+                getContext().startActivity(intent);*/
+                if(getUser()!=null) {
+                    NotificationActivity.startIntent(getContext(), getUser());
+                }else {
+                    Log.i("setNotificationIntent", "user null");
+                }
+
             }
         });
     }
 
-    private void setProfileIntent() {
+    public void setProfileIntent() {
         this.profileLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(), ProfileActivity.class);
-                getContext().startActivity(intent);
+                if(getUser()!=null) {
+                    ProfileActivity.startIntent(getContext(), getUser());
+                }else {
+                    Log.i("setProfileIntent", "user null");
+                }
             }
         });
     }

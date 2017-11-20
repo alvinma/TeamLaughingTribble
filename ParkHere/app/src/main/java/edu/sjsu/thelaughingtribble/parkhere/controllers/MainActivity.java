@@ -1,26 +1,18 @@
 package edu.sjsu.thelaughingtribble.parkhere.controllers;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.firebase.ui.database.FirebaseRecyclerAdapter;
-import com.firebase.ui.database.FirebaseRecyclerOptions;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseException;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.MutableData;
-import com.google.firebase.database.Query;
-import com.google.firebase.database.Transaction;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -29,12 +21,10 @@ import java.util.List;
 import edu.sjsu.thelaughingtribble.parkhere.CreateParkingSpotListing;
 import edu.sjsu.thelaughingtribble.parkhere.ParkingPostObject;
 import edu.sjsu.thelaughingtribble.parkhere.R;
-
-import edu.sjsu.thelaughingtribble.parkhere.Utils.Utilities;
+import edu.sjsu.thelaughingtribble.parkhere.Utils.Constant;
 import edu.sjsu.thelaughingtribble.parkhere.adapters.homePostList.HomePostListAdapter;
-import edu.sjsu.thelaughingtribble.parkhere.models.pojo.Owner;
 import edu.sjsu.thelaughingtribble.parkhere.models.pojo.Post;
-import edu.sjsu.thelaughingtribble.parkhere.models.pojo.Spot;
+import edu.sjsu.thelaughingtribble.parkhere.models.pojo.User;
 import edu.sjsu.thelaughingtribble.parkhere.models.viewModels.MainActivityViewModel;
 import edu.sjsu.thelaughingtribble.parkhere.models.viewModels.NavigationViewModel;
 
@@ -53,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
     private DatabaseReference mReference;
 
     private static final String TAG = "MAINACTIVITY|___|";
-
+    private User user;
     //post list
     ArrayList<Post> posts = new ArrayList<>();
 
@@ -62,11 +52,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();
         setContentView(R.layout.activity_main);
-        mDatabase = FirebaseDatabase.getInstance();
 
-        menuUIComponents = new NavigationViewModel(this);
-        mainActivityUiComponets = new MainActivityViewModel(this);
 
+        init();
+        initList();
         mainActivityUiComponets.getSpotSubmission().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -74,9 +63,27 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
+    }
+
+    private void initList() {
         mainActivityUiComponets.getHomePostList().setLayoutManager(mainActivityUiComponets.getLayoutManager());
         mAdapter = new HomePostListAdapter(posts);
         mainActivityUiComponets.getHomePostList().setAdapter(mAdapter);
+
+    }
+
+    private void init() {
+        mDatabase = FirebaseDatabase.getInstance();
+        user = (User) getIntent().getSerializableExtra(Constant.INTENT_EXTRA_USER);
+        Log.i("Main", user.getUid() + " " + user.getEmail());
+        menuUIComponents = new NavigationViewModel(this);
+        mainActivityUiComponets = new MainActivityViewModel(this);
+        menuUIComponents.setUser(user);
+        Log.i("Main menuUIComponents", menuUIComponents.getUser().getUid() + " " + menuUIComponents.getUser().getEmail());
+        menuUIComponents.setHomeIntent();
+        menuUIComponents.setNotificationIntent();
+        menuUIComponents.setProfileIntent();
     }
 
     @Override
@@ -124,5 +131,12 @@ public class MainActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    public static void startIntent(Context context, User user) {
+        Intent intent = new Intent(context, MainActivity.class);
+        Log.i("Main Intent", user.getUid() + " " + user.getEmail());
+        intent.putExtra(Constant.INTENT_EXTRA_USER, user);
+        context.startActivity(intent);
     }
 }

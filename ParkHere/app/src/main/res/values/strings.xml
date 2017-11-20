@@ -32,6 +32,9 @@
     <string name="make">Make: </string>
     <string name="year">year: </string>
 
+    <string name="address">Address: </string>
+    <string name="SpotNum">Spot #: </string>
+
     <string name="type">Type: </string>
     <string name="description">Description: </string>
     <string name="price">Price: </string>
@@ -53,4 +56,18 @@
     <string name="ph_color">Black</string>
     <string name="ph_plate_number">1273ZG</string>
     <string name="ph_address">1 Washington Sq, San Jose, CA 95112</string>
+
+
+    <string-array name="spot_type_array">
+        <item>Hourly</item>
+        <item>Daily</item>
+        <item>Semester</item>
+        <item>Monthly</item>
+    </string-array>
+
+    <string-array name="permit_array">
+        <item>Yes</item>
+        <item>No</item>
+    </string-array>
+
 </resources>
