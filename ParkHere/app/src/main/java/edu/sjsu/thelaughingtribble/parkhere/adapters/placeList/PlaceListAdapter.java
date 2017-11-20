@@ -13,6 +13,7 @@ import edu.sjsu.thelaughingtribble.parkhere.R;
 import edu.sjsu.thelaughingtribble.parkhere.adapters.vehicleList.VehicleListItemViewHolder;
 import edu.sjsu.thelaughingtribble.parkhere.controllers.MySpotsActivity;
 import edu.sjsu.thelaughingtribble.parkhere.models.pojo.Place;
+import edu.sjsu.thelaughingtribble.parkhere.models.pojo.User;
 import edu.sjsu.thelaughingtribble.parkhere.models.pojo.Vehicle;
 
 /**
@@ -23,15 +24,18 @@ public class PlaceListAdapter extends RecyclerView.Adapter<PlaceListItemViewHold
 
     private ArrayList<Place> places = new ArrayList<>();
     private PlaceListItemViewHolder placeListUIComponents;
+    private User user;
 
-    public PlaceListAdapter(ArrayList<Place> places){
+    public PlaceListAdapter(ArrayList<Place> places, User user){
         this.places = places;
+        this.user = user;
     }
 
     @Override
     public void onBindViewHolder(PlaceListItemViewHolder holder, int position) {
         Place place = places.get(position);
         placeListUIComponents.setPlace(place);
+        placeListUIComponents.setUser(user);
         placeListUIComponents.getAddressText().setText(place.getAddress());
 
     }
@@ -48,6 +52,11 @@ public class PlaceListAdapter extends RecyclerView.Adapter<PlaceListItemViewHold
     @Override
     public int getItemCount() {
         return places.size();
+    }
+
+    public void setPlacesList(ArrayList<Place> data){
+        places = data;
+        notifyDataSetChanged();
     }
 
 

@@ -9,6 +9,7 @@ import android.widget.TextView;
 import edu.sjsu.thelaughingtribble.parkhere.R;
 import edu.sjsu.thelaughingtribble.parkhere.controllers.MySpotsActivity;
 import edu.sjsu.thelaughingtribble.parkhere.models.pojo.Place;
+import edu.sjsu.thelaughingtribble.parkhere.models.pojo.User;
 
 /**
  * Created by jennifernghinguyen on 10/31/17.
@@ -19,7 +20,7 @@ public class PlaceListItemViewHolder extends RecyclerView.ViewHolder implements 
     private Context context;
     private TextView addressText;
     private Place place;
-
+    private User user;
     /*
     view is the inflated xml layout
      */
@@ -30,6 +31,13 @@ public class PlaceListItemViewHolder extends RecyclerView.ViewHolder implements 
         this.addressText = (TextView) vehicleListItem.findViewById(R.id.address_text);
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     public Context getContext() {
         return context;
@@ -57,6 +65,6 @@ public class PlaceListItemViewHolder extends RecyclerView.ViewHolder implements 
 
     @Override
     public void onClick(View v) {
-        MySpotsActivity.startIntent(v.getContext(), getPlace());
+        MySpotsActivity.startIntent(v.getContext(), getUser(), getPlace());
     }
 }

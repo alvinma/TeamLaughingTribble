@@ -1,27 +1,32 @@
 package edu.sjsu.thelaughingtribble.parkhere.controllers;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 
 import edu.sjsu.thelaughingtribble.parkhere.R;
 import edu.sjsu.thelaughingtribble.parkhere.Utils.Constant;
 import edu.sjsu.thelaughingtribble.parkhere.Utils.Utilities;
+import edu.sjsu.thelaughingtribble.parkhere.models.pojo.User;
 import edu.sjsu.thelaughingtribble.parkhere.models.viewModels.MyProfileActivityViewModel;
 
 public class MyProfileActivity extends AppCompatActivity {
 
     MyProfileActivityViewModel myProfileActivityUIComponents;
-
+    private User user;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_profile);
-
+        user = (User) getIntent().getSerializableExtra(Constant.INTENT_EXTRA_USER);
         myProfileActivityUIComponents = new MyProfileActivityViewModel(this);
+        myProfileActivityUIComponents.setUser(user);
 
         if (myProfileActivityUIComponents.getActionBar() != null) {
             myProfileActivityUIComponents.getActionBar().setTitle("My Profile");
@@ -104,4 +109,10 @@ public class MyProfileActivity extends AppCompatActivity {
         });
     }
 
+    public static void startIntent(Context context, User user) {
+        Intent intent = new Intent(context, MyProfileActivity.class);
+        Log.i("myprofile startIntent", user.getUid() + " " + user.getEmail());
+        intent.putExtra(Constant.INTENT_EXTRA_USER, user);
+        context.startActivity(intent);
+    }
 }

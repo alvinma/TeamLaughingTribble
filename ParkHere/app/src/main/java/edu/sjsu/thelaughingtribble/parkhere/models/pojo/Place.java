@@ -13,12 +13,26 @@ import java.util.Map;
 @IgnoreExtraProperties
 public class Place implements Serializable {
     private String address;
+    private String firebaseKey;
 
     // Default Constructor
     public Place() {}
 
     public Place(String address) {
+        this.firebaseKey = firebaseKey;
         this.address = address;
+    }
+    public Place(String firebaseKey, String address) {
+        this.firebaseKey = firebaseKey;
+        this.address = address;
+    }
+
+    public String getFirebaseKey() {
+        return firebaseKey;
+    }
+
+    public void setFirebaseKey(String firebaseKey) {
+        this.firebaseKey = firebaseKey;
     }
 
     public String getAddress() {

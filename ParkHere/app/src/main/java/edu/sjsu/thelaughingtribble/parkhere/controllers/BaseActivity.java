@@ -5,10 +5,17 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
 
+import edu.sjsu.thelaughingtribble.parkhere.models.pojo.Place;
+import edu.sjsu.thelaughingtribble.parkhere.models.pojo.Spot;
+import edu.sjsu.thelaughingtribble.parkhere.models.pojo.User;
+
 
 public class BaseActivity extends AppCompatActivity {
 
+
     private ProgressDialog mProgressDialog;
+
+
 
     public void showProgressDialog() {
         if (mProgressDialog == null) {

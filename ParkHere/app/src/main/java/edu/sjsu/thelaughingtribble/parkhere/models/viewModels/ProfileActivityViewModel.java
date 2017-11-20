@@ -82,8 +82,7 @@ public class ProfileActivityViewModel extends ActivityCommonViewModel {
         this.myProfileLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(), MyProfileActivity.class);
-                getContext().startActivity(intent);
+                MyProfileActivity.startIntent(getContext(), getUser());
             }
         });
     }
@@ -92,8 +91,7 @@ public class ProfileActivityViewModel extends ActivityCommonViewModel {
         this.myVehicleLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(), MyVehiclesActivity.class);
-                getContext().startActivity(intent);
+                MyVehiclesActivity.startIntent(getContext(), getUser());
             }
         });
     }
@@ -102,8 +100,7 @@ public class ProfileActivityViewModel extends ActivityCommonViewModel {
         this.myPlacesLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(), MyPlacesActivity.class);
-                getContext().startActivity(intent);
+                MyPlacesActivity.startIntent(getContext(), getUser());
             }
         });
     }
@@ -112,8 +109,7 @@ public class ProfileActivityViewModel extends ActivityCommonViewModel {
         this.myRentingSpotsLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(), MyRentingSpotsActivity.class);
-                getContext().startActivity(intent);
+                MyRentingSpotsActivity.startIntent(getContext(), getUser());
             }
         });
     }
