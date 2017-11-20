@@ -10,12 +10,19 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.util.ArrayList;
 
 import edu.sjsu.thelaughingtribble.parkhere.R;
 import edu.sjsu.thelaughingtribble.parkhere.Utils.Constant;
 import edu.sjsu.thelaughingtribble.parkhere.adapters.homePostList.HomePostListAdapter;
 import edu.sjsu.thelaughingtribble.parkhere.adapters.vehicleList.VehicleListAdapter;
+import edu.sjsu.thelaughingtribble.parkhere.models.pojo.Place;
 import edu.sjsu.thelaughingtribble.parkhere.models.pojo.User;
 import edu.sjsu.thelaughingtribble.parkhere.models.pojo.Vehicle;
 import edu.sjsu.thelaughingtribble.parkhere.models.viewModels.MyVehiclesActivityViewModel;
@@ -25,13 +32,15 @@ public class MyVehiclesActivity extends AppCompatActivity {
     private RecyclerView.Adapter adapter;
     private ArrayList<Vehicle> vehicles = new ArrayList<>();
     private User user;
+    private FirebaseDatabase database;
+    private DatabaseReference reference;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_vehicles);
         user = (User) getIntent().getSerializableExtra(Constant.INTENT_EXTRA_USER);
 
-
+        database = FirebaseDatabase.getInstance();
         //vehicles.add(new Vehicle("WAUFFAFM3CA000000", "Toyota", "Corrola", "2013", "White", "ABC1233", "https://www.enterprise.com/content/dam/global-vehicle-images/cars/VAUX_INSI_2014.png" ));
         if(myVehiclesActivityUIComponents==null) {
             myVehiclesActivityUIComponents = new MyVehiclesActivityViewModel(this);
@@ -44,7 +53,7 @@ public class MyVehiclesActivity extends AppCompatActivity {
 
 
         myVehiclesActivityUIComponents.getVehicleList().setLayoutManager(myVehiclesActivityUIComponents.getLayoutManager());
-
+        getAllVehicles(user.getUid());
         adapter = new VehicleListAdapter(vehicles);
         myVehiclesActivityUIComponents.getVehicleList().setAdapter(adapter);
 
@@ -73,5 +82,36 @@ public class MyVehiclesActivity extends AppCompatActivity {
         Log.i("my vehicle startIntent", user.getUid() + " " + user.getEmail());
         intent.putExtra(Constant.INTENT_EXTRA_USER, user);
         context.startActivity(intent);
+    }
+
+    public ArrayList<Vehicle> getVehicles() {
+        return vehicles;
+    }
+
+    public void setVehicles(ArrayList<Vehicle> vehicles) {
+        this.vehicles = vehicles;
+    }
+
+    private void getAllVehicles(String uid){
+
+        reference = database.getReference("vehicles/"+uid);
+
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for(DataSnapshot item: dataSnapshot.getChildren()){
+                    Vehicle vehicle = item.getValue(Vehicle.class);
+                    vehicles.add(vehicle);
+                    setVehicles(vehicles);
+                    adapter.notifyDataSetChanged();
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
     }
 }
