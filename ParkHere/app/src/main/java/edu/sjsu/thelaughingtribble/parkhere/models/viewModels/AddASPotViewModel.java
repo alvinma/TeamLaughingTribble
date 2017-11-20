@@ -176,9 +176,5 @@ public class AddASPotViewModel extends ActivityCommonViewModel {
         }
     }
 
-    public void setSpotImg(String url){
-        Glide.with(getContext())
-                .load(url)
-                .into(spotImg);
-    }
+
 }

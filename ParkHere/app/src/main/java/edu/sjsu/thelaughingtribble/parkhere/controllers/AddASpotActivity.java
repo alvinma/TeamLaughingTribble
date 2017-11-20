@@ -33,9 +33,10 @@ public class AddASpotActivity extends AppCompatActivity {
 
     private AddASPotViewModel addASPotUI;
     private Place place = null;
-    private StorageReference firebaseStorage;
+
     private User user;
     private Uri uri;
+    private StorageReference firebaseStorage;
     private DatabaseReference database;
 
     private String type;
@@ -69,34 +70,34 @@ public class AddASpotActivity extends AppCompatActivity {
         addASPotUI.getSubmit().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!addASPotUI.getSpotNum().getText().equals("")) {
+                if (!addASPotUI.getSpotNum().getText().toString().equals("")) {
                     spotNumber = addASPotUI.getSpotNum().getText().toString();
                 } else {
                     addASPotUI.getSpotNum().setError(Constant.REQUIRE_TEXT);
                 }
 
-                if (!addASPotUI.getPrice().getText().equals("")) {
+                if (!addASPotUI.getPrice().getText().toString().equals("")) {
                     price = Double.valueOf(addASPotUI.getPrice().getText().toString());
                 } else {
                     addASPotUI.getSpotNum().setError(Constant.REQUIRE_TEXT);
                 }
 
-                if (!addASPotUI.getDescription().getText().equals("")) {
+                if (!addASPotUI.getDescription().getText().toString().equals("")) {
                     description = addASPotUI.getDescription().getText().toString();
                 } else {
                     addASPotUI.getSpotNum().setError(Constant.REQUIRE_TEXT);
                 }
 
-                renting = "no";
+                renting = "yes";
                 nextAvailable = Utilities.getNextDateAvailable();
 
                 Log.i("address", place.getAddress());
                 Spot spot = null;
                 String key = database.child("spots").child(user.getUid()).push().getKey();
                 if (photo == null) {
-                    spot = new Spot(place.getAddress(), type, description, price, permitRequired, spotNumber, renting, nextAvailable, key);
+                    spot = new Spot(place.getAddress(), type, description, price, permitRequired, spotNumber, renting, nextAvailable, place.getFirebaseKey());
                 } else {
-                    spot = new Spot(place.getAddress(), type, description, price, permitRequired, spotNumber, renting, nextAvailable, key, photo);
+                    spot = new Spot(place.getAddress(), type, description, price, permitRequired, spotNumber, renting, nextAvailable, place.getFirebaseKey(), photo);
                 }
                 database.child("spots/"+user.getUid()+"/"+key).setValue(spot);
 
@@ -131,12 +132,12 @@ public class AddASpotActivity extends AppCompatActivity {
         if (requestCode == GALLLERY_INTENT_CODE && resultCode == RESULT_OK) {
             addASPotUI.setSpotImageVisibility(false);
             uri = data.getData();
-            StorageReference path = firebaseStorage.child("Photos").child(uri.getLastPathSegment());
+            StorageReference path = firebaseStorage.child("Photos/"+user.getUid()+"/spots").child(uri.getLastPathSegment());
             path.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                     //
-                    StorageReference pathReference = firebaseStorage.child("Photos/" + uri.getLastPathSegment());
+                    StorageReference pathReference = firebaseStorage.child("Photos/"+user.getUid()+"/spots/" + uri.getLastPathSegment());
                     getDownLoadUrl(pathReference);
                     Toast.makeText(AddASpotActivity.this, pathReference.toString(), Toast.LENGTH_LONG).show();
                     addASPotUI.setSpotImageVisibility(true);

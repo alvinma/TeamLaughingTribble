@@ -32,7 +32,7 @@ public class MyVehiclesActivity extends AppCompatActivity {
         user = (User) getIntent().getSerializableExtra(Constant.INTENT_EXTRA_USER);
 
 
-        vehicles.add(new Vehicle("WAUFFAFM3CA000000", "Toyota", "Corrola", "2013", "White", "ABC1233", "https://www.enterprise.com/content/dam/global-vehicle-images/cars/VAUX_INSI_2014.png" ));
+        //vehicles.add(new Vehicle("WAUFFAFM3CA000000", "Toyota", "Corrola", "2013", "White", "ABC1233", "https://www.enterprise.com/content/dam/global-vehicle-images/cars/VAUX_INSI_2014.png" ));
         if(myVehiclesActivityUIComponents==null) {
             myVehiclesActivityUIComponents = new MyVehiclesActivityViewModel(this);
             myVehiclesActivityUIComponents.setUser(user);
@@ -51,8 +51,7 @@ public class MyVehiclesActivity extends AppCompatActivity {
         myVehiclesActivityUIComponents.getAddVehicleButton().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(myVehiclesActivityUIComponents.getContext(), AddAVehicle.class);
-                startActivity(intent);
+               AddAVehicle.startIntent(MyVehiclesActivity.this,user);
             }
         });
 
