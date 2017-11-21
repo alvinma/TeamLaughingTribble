@@ -14,6 +14,7 @@ import edu.sjsu.thelaughingtribble.parkhere.R;
 public class MySpotsViewModel extends ActivityCommonViewModel {
     private RecyclerView spotList;
     private FloatingActionButton addSpotButton;
+
     public MySpotsViewModel(Context context) {
         super(context);
         spotList = (RecyclerView) ((Activity) context).findViewById(R.id.spots_list);

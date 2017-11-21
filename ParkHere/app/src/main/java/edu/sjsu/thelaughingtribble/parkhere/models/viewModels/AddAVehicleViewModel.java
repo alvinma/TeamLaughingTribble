@@ -132,11 +132,11 @@ public class AddAVehicleViewModel extends ActivityCommonViewModel {
         this.cancelTextView = cancelTextView;
     }
 
-    public void setVehicleImageVisibility(boolean visible){
-        if(visible){
+    public void setVehicleImageVisibility(boolean visible) {
+        if (visible) {
             this.vehicleImg.setVisibility(View.VISIBLE);
             this.loading.setVisibility(View.GONE);
-        }else {
+        } else {
             this.vehicleImg.setVisibility(View.GONE);
             this.loading.setVisibility(View.VISIBLE);
         }

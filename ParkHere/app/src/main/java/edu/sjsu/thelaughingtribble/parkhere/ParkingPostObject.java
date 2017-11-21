@@ -10,7 +10,7 @@ public class ParkingPostObject {
 
     // Object Constructors
 
-    ParkingPostObject(){
+    ParkingPostObject() {
         ObjectID = -1;
         OwnerName = "Not Given";
         AddressLocation = "Not Given";
@@ -19,44 +19,44 @@ public class ParkingPostObject {
 
     // Object Setters
 
-    public void setParkingPost(Integer id, String name, String location, String desc){
+    public void setParkingPost(Integer id, String name, String location, String desc) {
         this.ObjectID = id;
         this.OwnerName = name;
         this.AddressLocation = location;
         this.Description = desc;
     }
 
-    public void setObjectID(Integer id){
+    public void setObjectID(Integer id) {
         this.ObjectID = id;
     }
 
-    public void setOwnerName(String name){
+    public void setOwnerName(String name) {
         this.OwnerName = name;
     }
 
-    public void setAddressLocation(String address){
+    public void setAddressLocation(String address) {
         this.AddressLocation = address;
     }
 
-    public void setDescription(String description){
+    public void setDescription(String description) {
         this.Description = description;
     }
 
     // Object Getters
 
-    public Integer getObjectID(){
+    public Integer getObjectID() {
         return ObjectID;
     }
 
-    public String getOwnerName(){
+    public String getOwnerName() {
         return OwnerName;
     }
 
-    public String getAddressLocation(){
+    public String getAddressLocation() {
         return AddressLocation;
     }
 
-    public String getDescription(){
+    public String getDescription() {
         return Description;
     }
 

@@ -87,13 +87,14 @@ public class MySpotsActivity extends AppCompatActivity {
         this.spots = spots;
     }
 
-    private void getAllSpot(String uid){
-        reference = database.getReference("spots/"+uid);
+    private void getAllSpot(String uid) {
+        spots.clear();
+        reference = database.getReference("spots/" + uid);
 
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                for(DataSnapshot item: dataSnapshot.getChildren()){
+                for (DataSnapshot item : dataSnapshot.getChildren()) {
                     Spot spot = item.getValue(Spot.class);
                     spots.add(spot);
                     setSpots(spots);
@@ -107,6 +108,7 @@ public class MySpotsActivity extends AppCompatActivity {
             }
         });
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {

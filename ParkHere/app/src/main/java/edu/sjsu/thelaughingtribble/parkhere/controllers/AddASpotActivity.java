@@ -27,8 +27,6 @@ import edu.sjsu.thelaughingtribble.parkhere.models.pojo.Spot;
 import edu.sjsu.thelaughingtribble.parkhere.models.pojo.User;
 import edu.sjsu.thelaughingtribble.parkhere.models.viewModels.AddASPotViewModel;
 
-import static android.R.attr.key;
-
 public class AddASpotActivity extends AppCompatActivity {
 
     private AddASPotViewModel addASPotUI;
@@ -41,7 +39,7 @@ public class AddASpotActivity extends AppCompatActivity {
 
     private String type;
     private String description;
-    private double price;
+    private double price = 0;
     private String permitRequired;
     private String spotNumber;
     private String photo = null;
@@ -79,29 +77,30 @@ public class AddASpotActivity extends AppCompatActivity {
                 if (!addASPotUI.getPrice().getText().toString().equals("")) {
                     price = Double.valueOf(addASPotUI.getPrice().getText().toString());
                 } else {
-                    addASPotUI.getSpotNum().setError(Constant.REQUIRE_TEXT);
+                    addASPotUI.getPrice().setError(Constant.REQUIRE_TEXT);
                 }
 
                 if (!addASPotUI.getDescription().getText().toString().equals("")) {
                     description = addASPotUI.getDescription().getText().toString();
                 } else {
-                    addASPotUI.getSpotNum().setError(Constant.REQUIRE_TEXT);
+                    addASPotUI.getDescription().setError(Constant.REQUIRE_TEXT);
                 }
 
-                renting = "yes";
-                nextAvailable = Utilities.getNextDateAvailable();
+                if (place.getAddress() != null && type != null && description != null && price != 0 && permitRequired != null && spotNumber != null && place.getFirebaseKey() != null) {
+                    renting = "yes";
+                    nextAvailable = Utilities.getNextDateAvailable();
+                    Spot spot = null;
+                    String key = database.child("spots").child(user.getUid()).push().getKey();
+                    if (photo == null) {
+                        spot = new Spot(place.getAddress(), type, description, price, permitRequired, spotNumber, renting, nextAvailable, place.getFirebaseKey());
+                    } else {
+                        spot = new Spot(place.getAddress(), type, description, price, permitRequired, spotNumber, renting, nextAvailable, place.getFirebaseKey(), photo);
+                    }
+                    database.child("spots/" + user.getUid() + "/" + key).setValue(spot);
 
-                Log.i("address", place.getAddress());
-                Spot spot = null;
-                String key = database.child("spots").child(user.getUid()).push().getKey();
-                if (photo == null) {
-                    spot = new Spot(place.getAddress(), type, description, price, permitRequired, spotNumber, renting, nextAvailable, place.getFirebaseKey());
-                } else {
-                    spot = new Spot(place.getAddress(), type, description, price, permitRequired, spotNumber, renting, nextAvailable, place.getFirebaseKey(), photo);
+                    MySpotsActivity.startIntent(AddASpotActivity.this, user, place);
+
                 }
-                database.child("spots/"+user.getUid()+"/"+key).setValue(spot);
-
-                MySpotsActivity.startIntent(AddASpotActivity.this, user, place);
             }
         });
     }
@@ -132,12 +131,12 @@ public class AddASpotActivity extends AppCompatActivity {
         if (requestCode == GALLLERY_INTENT_CODE && resultCode == RESULT_OK) {
             addASPotUI.setSpotImageVisibility(false);
             uri = data.getData();
-            StorageReference path = firebaseStorage.child("Photos/"+user.getUid()+"/spots").child(uri.getLastPathSegment());
+            StorageReference path = firebaseStorage.child("Photos/" + user.getUid() + "/spots").child(uri.getLastPathSegment());
             path.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                     //
-                    StorageReference pathReference = firebaseStorage.child("Photos/"+user.getUid()+"/spots/" + uri.getLastPathSegment());
+                    StorageReference pathReference = firebaseStorage.child("Photos/" + user.getUid() + "/spots/" + uri.getLastPathSegment());
                     getDownLoadUrl(pathReference);
                     Toast.makeText(AddASpotActivity.this, pathReference.toString(), Toast.LENGTH_LONG).show();
                     addASPotUI.setSpotImageVisibility(true);

@@ -2,8 +2,8 @@ package edu.sjsu.thelaughingtribble.parkhere.controllers;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MenuItem;
 
@@ -15,6 +15,7 @@ import edu.sjsu.thelaughingtribble.parkhere.models.viewModels.MyRentingSpotsActi
 public class MyRentingSpotsActivity extends AppCompatActivity {
     MyRentingSpotsActivityViewModel myRentingSpotsActivityUIComponents;
     private User user;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,7 +23,7 @@ public class MyRentingSpotsActivity extends AppCompatActivity {
         user = (User) getIntent().getSerializableExtra(Constant.INTENT_EXTRA_USER);
         myRentingSpotsActivityUIComponents = new MyRentingSpotsActivityViewModel(this);
         myRentingSpotsActivityUIComponents.setUser(user);
-        if(myRentingSpotsActivityUIComponents.getActionBar()!=null){
+        if (myRentingSpotsActivityUIComponents.getActionBar() != null) {
             myRentingSpotsActivityUIComponents.getActionBar().setTitle("My Renting Spot");
             myRentingSpotsActivityUIComponents.getActionBar().setDisplayHomeAsUpEnabled(true);
         }

@@ -1,7 +1,6 @@
 package edu.sjsu.thelaughingtribble.parkhere.adapters.homePostList;
 
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,7 +21,7 @@ public class HomePostListAdapter extends RecyclerView.Adapter<homePostListItemVi
     private ArrayList<Post> posts = new ArrayList<>();
     private homePostListItemViewHolder homePostListUI;
 
-    public HomePostListAdapter(ArrayList<Post> posts){
+    public HomePostListAdapter(ArrayList<Post> posts) {
         this.posts = posts;
 
     }
@@ -44,9 +43,9 @@ public class HomePostListAdapter extends RecyclerView.Adapter<homePostListItemVi
         homePostListUI.getPostPrice().setText(String.valueOf(currentPost.getSpot().getPrice()));
         homePostListUI.getPostDescription().setText(currentPost.getSpot().getDescription());
 
-        if(currentPost.getSpot().getPhoto()!=null){
+        if (currentPost.getSpot().getPhoto() != null) {
             Glide.with(homePostListUI.getContext()).load(currentPost.getSpot().getPhoto()).into(homePostListUI.getPostImage());
-        }else {
+        } else {
             homePostListUI.getPostImage().setImageResource(R.drawable.not_available);
         }
     }

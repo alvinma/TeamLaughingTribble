@@ -23,14 +23,13 @@ public class homePostListItemViewHolder extends RecyclerView.ViewHolder {
     private Context context;
 
 
-
     /*
 
         view is the inflated xml layout
          */
     public homePostListItemViewHolder(View homePostListItem) {
         super(homePostListItem);
-        this.context= homePostListItem.getContext();
+        this.context = homePostListItem.getContext();
         this.postTitle = (TextView) homePostListItem.findViewById(R.id.post_title);
         this.postImage = (ImageView) homePostListItem.findViewById(R.id.post_image);
         this.postOwner = (TextView) homePostListItem.findViewById(R.id.post_owner);
@@ -47,6 +46,7 @@ public class homePostListItemViewHolder extends RecyclerView.ViewHolder {
     public void setContext(Context context) {
         this.context = context;
     }
+
     public TextView getPostTitle() {
         return postTitle;
     }

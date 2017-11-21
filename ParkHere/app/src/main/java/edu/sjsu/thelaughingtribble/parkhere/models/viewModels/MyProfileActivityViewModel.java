@@ -27,6 +27,7 @@ public class MyProfileActivityViewModel extends ActivityCommonViewModel {
     private FloatingActionButton doneButton;
     private EditText fullNameEdit;
     private EditText phoneEdit;
+
     public MyProfileActivityViewModel(Context context) {
         super(context);
         avarta = (CircleImageView) ((Activity) context).findViewById(R.id.avarta);
@@ -103,15 +104,15 @@ public class MyProfileActivityViewModel extends ActivityCommonViewModel {
         this.phoneEdit = phoneEdit;
     }
 
-    public void setAvartaUrl(String url){
+    public void setAvartaUrl(String url) {
         Glide.with(getContext()).load(url).into(getAvarta());
 
     }
 
-    public boolean isEmptyFields(EditText editText){
+    public boolean isEmptyFields(EditText editText) {
         boolean status = false;
 
-        if(TextUtils.isEmpty(editText.getText().toString())){
+        if (TextUtils.isEmpty(editText.getText().toString())) {
             editText.setError(Constant.REQUIRE_TEXT);
             status = true;
         }
@@ -119,7 +120,7 @@ public class MyProfileActivityViewModel extends ActivityCommonViewModel {
         return status;
     }
 
-    public void setError(EditText editText, String error){
+    public void setError(EditText editText, String error) {
         editText.setError(error);
     }
 }

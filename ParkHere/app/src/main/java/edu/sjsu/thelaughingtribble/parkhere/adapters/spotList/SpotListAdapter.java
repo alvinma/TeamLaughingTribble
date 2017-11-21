@@ -10,9 +10,7 @@ import com.bumptech.glide.Glide;
 import java.util.ArrayList;
 
 import edu.sjsu.thelaughingtribble.parkhere.R;
-import edu.sjsu.thelaughingtribble.parkhere.adapters.vehicleList.VehicleListItemViewHolder;
 import edu.sjsu.thelaughingtribble.parkhere.models.pojo.Spot;
-import edu.sjsu.thelaughingtribble.parkhere.models.pojo.Vehicle;
 
 /**
  * Created by jennifernghinguyen on 10/31/17.
@@ -23,7 +21,7 @@ public class SpotListAdapter extends RecyclerView.Adapter<SpotListItemViewHolder
     private ArrayList<Spot> spots = new ArrayList<>();
     private SpotListItemViewHolder spotListUIComponents;
 
-    public SpotListAdapter(ArrayList<Spot> spots){
+    public SpotListAdapter(ArrayList<Spot> spots) {
         this.spots = spots;
     }
 
@@ -39,9 +37,9 @@ public class SpotListAdapter extends RecyclerView.Adapter<SpotListItemViewHolder
         spotListUIComponents.getSpotNumberText().setText(spot.getSpotNumber());
 
 
-        if(spot.getPhoto()!=null){
+        if (spot.getPhoto() != null) {
             Glide.with(spotListUIComponents.getContext()).load(spot.getPhoto()).into(spotListUIComponents.getSpotImage());
-        }else {
+        } else {
             spotListUIComponents.getSpotImage().setImageResource(R.drawable.not_available);
         }
     }
@@ -52,7 +50,6 @@ public class SpotListAdapter extends RecyclerView.Adapter<SpotListItemViewHolder
         spotListUIComponents = new SpotListItemViewHolder(mView);
         return spotListUIComponents;
     }
-
 
 
     @Override

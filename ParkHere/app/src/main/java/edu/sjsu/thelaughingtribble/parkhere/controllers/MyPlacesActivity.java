@@ -2,12 +2,11 @@ package edu.sjsu.thelaughingtribble.parkhere.controllers;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -20,10 +19,8 @@ import java.util.ArrayList;
 import edu.sjsu.thelaughingtribble.parkhere.R;
 import edu.sjsu.thelaughingtribble.parkhere.Utils.Constant;
 import edu.sjsu.thelaughingtribble.parkhere.adapters.placeList.PlaceListAdapter;
-import edu.sjsu.thelaughingtribble.parkhere.adapters.vehicleList.VehicleListAdapter;
 import edu.sjsu.thelaughingtribble.parkhere.models.pojo.Place;
 import edu.sjsu.thelaughingtribble.parkhere.models.pojo.User;
-import edu.sjsu.thelaughingtribble.parkhere.models.pojo.Vehicle;
 import edu.sjsu.thelaughingtribble.parkhere.models.viewModels.MyPlacesActivityViewModel;
 
 public class MyPlacesActivity extends AppCompatActivity {
@@ -42,11 +39,10 @@ public class MyPlacesActivity extends AppCompatActivity {
         user = (User) getIntent().getSerializableExtra(Constant.INTENT_EXTRA_USER);
         myPlacesActivityUIComponents = new MyPlacesActivityViewModel(this);
         myPlacesActivityUIComponents.setUser(user);
-        if(myPlacesActivityUIComponents.getActionBar()!=null){
+        if (myPlacesActivityUIComponents.getActionBar() != null) {
             myPlacesActivityUIComponents.getActionBar().setTitle("My Places");
             myPlacesActivityUIComponents.getActionBar().setDisplayHomeAsUpEnabled(true);
         }
-        places.clear();
         getAllPlaces(user.getUid());
 
 
@@ -81,14 +77,14 @@ public class MyPlacesActivity extends AppCompatActivity {
         this.places = places;
     }
 
-    private void getAllPlaces(String uid){
-
-        reference = database.getReference("places/"+uid);
+    private void getAllPlaces(String uid) {
+        places.clear();
+        reference = database.getReference("places/" + uid);
 
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                for(DataSnapshot item: dataSnapshot.getChildren()){
+                for (DataSnapshot item : dataSnapshot.getChildren()) {
                     Place place = item.getValue(Place.class);
                     places.add(place);
                     setPlaces(places);
@@ -103,6 +99,7 @@ public class MyPlacesActivity extends AppCompatActivity {
         });
 
     }
+
     public static void startIntent(Context context, User user) {
         Intent intent = new Intent(context, MyPlacesActivity.class);
         Log.i("my places startIntent", user.getUid() + " " + user.getEmail());
