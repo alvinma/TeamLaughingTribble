@@ -56,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
 
         init();
         initList();
+        getParkingList();
         mainActivityUiComponets.getSpotSubmission().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -89,10 +90,19 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        getParkingList();
+        //getParkingList();
+    }
+
+    public ArrayList<Post> getPosts() {
+        return posts;
+    }
+
+    public void setPosts(ArrayList<Post> posts) {
+        this.posts = posts;
     }
 
     private void getParkingList() {
+        posts.clear();
         mReference = mDatabase.getReference("post");
 
         // Attach a listener to read the data at our posts reference
@@ -102,6 +112,8 @@ public class MainActivity extends AppCompatActivity {
                 for (DataSnapshot item : dataSnapshot.getChildren()) {
                     Post post = item.getValue(Post.class);
                     posts.add(post);
+                    setPosts(posts);
+                    mAdapter.notifyDataSetChanged();
                 }
             }
 

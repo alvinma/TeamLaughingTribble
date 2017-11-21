@@ -5,16 +5,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.bumptech.glide.Glide;
-
 import java.util.ArrayList;
 
 import edu.sjsu.thelaughingtribble.parkhere.R;
-import edu.sjsu.thelaughingtribble.parkhere.adapters.vehicleList.VehicleListItemViewHolder;
-import edu.sjsu.thelaughingtribble.parkhere.controllers.MySpotsActivity;
 import edu.sjsu.thelaughingtribble.parkhere.models.pojo.Place;
 import edu.sjsu.thelaughingtribble.parkhere.models.pojo.User;
-import edu.sjsu.thelaughingtribble.parkhere.models.pojo.Vehicle;
 
 /**
  * Created by jennifernghinguyen on 10/31/17.
@@ -26,7 +21,7 @@ public class PlaceListAdapter extends RecyclerView.Adapter<PlaceListItemViewHold
     private PlaceListItemViewHolder placeListUIComponents;
     private User user;
 
-    public PlaceListAdapter(ArrayList<Place> places, User user){
+    public PlaceListAdapter(ArrayList<Place> places, User user) {
         this.places = places;
         this.user = user;
     }
@@ -48,13 +43,12 @@ public class PlaceListAdapter extends RecyclerView.Adapter<PlaceListItemViewHold
     }
 
 
-
     @Override
     public int getItemCount() {
         return places.size();
     }
 
-    public void setPlacesList(ArrayList<Place> data){
+    public void setPlacesList(ArrayList<Place> data) {
         places = data;
         notifyDataSetChanged();
     }

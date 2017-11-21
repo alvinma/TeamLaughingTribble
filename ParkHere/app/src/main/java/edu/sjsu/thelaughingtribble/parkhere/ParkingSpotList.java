@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import edu.sjsu.thelaughingtribble.parkhere.controllers.MainActivity;
 
 
-public class ParkingSpotList extends AppCompatActivity{
+public class ParkingSpotList extends AppCompatActivity {
 
     ArrayList<String> tempList = new ArrayList<String>();
 
@@ -30,14 +30,14 @@ public class ParkingSpotList extends AppCompatActivity{
             tempList.add(" list number is positioned at :: " + Integer.toString(i));
         }*/
 
-        for(int i = 0; i < temp.tempDB.size(); i++){
+        for (int i = 0; i < temp.tempDB.size(); i++) {
             tempList.add(temp.tempObjectDB.get(i).getAddressLocation());
         }
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, android.R.id.text1, tempList);
         listView.setAdapter(adapter);
 
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
 

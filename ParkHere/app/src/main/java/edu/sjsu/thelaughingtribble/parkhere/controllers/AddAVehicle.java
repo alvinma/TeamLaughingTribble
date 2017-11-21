@@ -31,13 +31,13 @@ public class AddAVehicle extends AppCompatActivity {
     private User user;
     private static final int GALLLERY_INTENT_CODE = 1;
 
-    String brand;
-    String make;
-    String year;
-    String color;
-    String vin;
-    String photo;
-    String plateNumber;
+    String brand = null;
+    String make = null;
+    String year = null;
+    String color = null;
+    String vin = null;
+    String photo = null;
+    String plateNumber = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,17 +100,26 @@ public class AddAVehicle extends AppCompatActivity {
                 } else {
                     addAVehicleUIComponents.getVinEditText().setError(Constant.REQUIRE_TEXT);
                 }
-                Vehicle vehicle = null;
 
-                if (photo == null) {
-                    vehicle = new Vehicle(vin, brand, make, year, color, plateNumber);
+                if (!addAVehicleUIComponents.getPlateEditText().getText().toString().equals("")) {
+                    plateNumber = addAVehicleUIComponents.getPlateEditText().getText().toString().trim();
                 } else {
-                    vehicle = new Vehicle(vin, brand, make, year, color, plateNumber, photo);
+                    addAVehicleUIComponents.getPlateEditText().setError(Constant.REQUIRE_TEXT);
                 }
-                String key = database.child("vehicles").child(user.getUid()).push().getKey();
-                database.child("vehicles/" + user.getUid() + "/" + key).setValue(vehicle);
 
-                MyVehiclesActivity.startIntent(AddAVehicle.this, user);
+                if (vin != null && brand != null && make != null && year != null && color != null && plateNumber != null) {
+                    Vehicle vehicle = null;
+
+                    if (photo == null) {
+                        vehicle = new Vehicle(vin, brand, make, year, color, plateNumber);
+                    } else {
+                        vehicle = new Vehicle(vin, brand, make, year, color, plateNumber, photo);
+                    }
+                    String key = database.child("vehicles").child(user.getUid()).push().getKey();
+                    database.child("vehicles/" + user.getUid() + "/" + key).setValue(vehicle);
+
+                    MyVehiclesActivity.startIntent(AddAVehicle.this, user);
+                }
 
             }
         });

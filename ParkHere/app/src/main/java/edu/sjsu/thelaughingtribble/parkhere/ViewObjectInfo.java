@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import edu.sjsu.thelaughingtribble.parkhere.controllers.MainActivity;
 
-public class ViewObjectInfo extends AppCompatActivity{
+public class ViewObjectInfo extends AppCompatActivity {
 
     TextView name;
     TextView location;
@@ -24,15 +24,15 @@ public class ViewObjectInfo extends AppCompatActivity{
         setContentView(R.layout.view_object_info);
 
         MainActivity tempObjectDB = new MainActivity();
-        name = (TextView)findViewById(R.id.name);
-        location = (TextView)findViewById(R.id.location);
-        description = (TextView)findViewById(R.id.description);
-        parkingImage = (ImageView)findViewById(R.id.parkingImage);
-        purchaseButton = (Button)findViewById(R.id.purchaseButton);
+        name = (TextView) findViewById(R.id.name);
+        location = (TextView) findViewById(R.id.location);
+        description = (TextView) findViewById(R.id.description);
+        parkingImage = (ImageView) findViewById(R.id.parkingImage);
+        purchaseButton = (Button) findViewById(R.id.purchaseButton);
 
         int position = 0;
         Bundle extras = getIntent().getExtras();
-        if(extras != null){
+        if (extras != null) {
             position = extras.getInt("position");
         }
 

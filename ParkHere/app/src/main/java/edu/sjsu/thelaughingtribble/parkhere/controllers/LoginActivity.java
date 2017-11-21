@@ -1,9 +1,7 @@
 package edu.sjsu.thelaughingtribble.parkhere.controllers;
 
-import android.content.Intent;
-import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -25,7 +23,7 @@ import edu.sjsu.thelaughingtribble.parkhere.Utils.Utilities;
 import edu.sjsu.thelaughingtribble.parkhere.models.pojo.User;
 import edu.sjsu.thelaughingtribble.parkhere.models.viewModels.LoginViewModel;
 
-public class LoginActivity extends BaseActivity implements View.OnClickListener{
+public class LoginActivity extends BaseActivity implements View.OnClickListener {
 
 
     private static final String TAG = "SignInActivity";
@@ -114,15 +112,16 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
                 });
     }
 
-    public static FirebaseAuth signOut(FirebaseAuth mAuth){
-        if(mAuth!= null && mAuth.getCurrentUser()!=null){
+    public static FirebaseAuth signOut(FirebaseAuth mAuth) {
+        if (mAuth != null && mAuth.getCurrentUser() != null) {
             mAuth.signOut();
-            mAuth=null;
+            mAuth = null;
         }
 
         return mAuth;
 
     }
+
     private void signUp() {
         Log.d(TAG, "signUp");
         if (!validateForm()) {
@@ -191,7 +190,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
 
     // [START basic_write]
     private void writeNewUser(String userId, String name, String email) {
-         mUser = new User(userId, name, email);
+        mUser = new User(userId, name, email);
 
         Log.i("Login", mUser.getUid() + " " + mUser.getEmail());
 

@@ -20,6 +20,7 @@ public class MyProfileActivity extends AppCompatActivity {
 
     MyProfileActivityViewModel myProfileActivityUIComponents;
     private User user;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -90,7 +91,7 @@ public class MyProfileActivity extends AppCompatActivity {
                 }
 
 
-                if (!(TextUtils.isEmpty(fullName))  && Utilities.phoneMatcher(phone)) {
+                if (!(TextUtils.isEmpty(fullName)) && Utilities.phoneMatcher(phone)) {
                     editMode(false);
                 }
 

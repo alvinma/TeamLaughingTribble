@@ -16,6 +16,7 @@ import edu.sjsu.thelaughingtribble.parkhere.controllers.AddAPlace;
 public class MyPlacesActivityViewModel extends ActivityCommonViewModel {
     private RecyclerView placeList;
     private FloatingActionButton addPlaceButton;
+
     public MyPlacesActivityViewModel(Context context) {
         super(context);
         placeList = (RecyclerView) ((Activity) context).findViewById(R.id.places_list);
@@ -39,7 +40,7 @@ public class MyPlacesActivityViewModel extends ActivityCommonViewModel {
         this.addPlaceButton = addPlaceButton;
     }
 
-    private void setAddButtonListener(){
+    private void setAddButtonListener() {
         addPlaceButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

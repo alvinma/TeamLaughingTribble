@@ -2,9 +2,8 @@ package edu.sjsu.thelaughingtribble.parkhere.controllers;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.MenuItem;
@@ -20,9 +19,7 @@ import java.util.ArrayList;
 
 import edu.sjsu.thelaughingtribble.parkhere.R;
 import edu.sjsu.thelaughingtribble.parkhere.Utils.Constant;
-import edu.sjsu.thelaughingtribble.parkhere.adapters.homePostList.HomePostListAdapter;
 import edu.sjsu.thelaughingtribble.parkhere.adapters.vehicleList.VehicleListAdapter;
-import edu.sjsu.thelaughingtribble.parkhere.models.pojo.Place;
 import edu.sjsu.thelaughingtribble.parkhere.models.pojo.User;
 import edu.sjsu.thelaughingtribble.parkhere.models.pojo.Vehicle;
 import edu.sjsu.thelaughingtribble.parkhere.models.viewModels.MyVehiclesActivityViewModel;
@@ -34,6 +31,7 @@ public class MyVehiclesActivity extends AppCompatActivity {
     private User user;
     private FirebaseDatabase database;
     private DatabaseReference reference;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,11 +40,11 @@ public class MyVehiclesActivity extends AppCompatActivity {
 
         database = FirebaseDatabase.getInstance();
         //vehicles.add(new Vehicle("WAUFFAFM3CA000000", "Toyota", "Corrola", "2013", "White", "ABC1233", "https://www.enterprise.com/content/dam/global-vehicle-images/cars/VAUX_INSI_2014.png" ));
-        if(myVehiclesActivityUIComponents==null) {
+        if (myVehiclesActivityUIComponents == null) {
             myVehiclesActivityUIComponents = new MyVehiclesActivityViewModel(this);
             myVehiclesActivityUIComponents.setUser(user);
         }
-        if(myVehiclesActivityUIComponents.getActionBar()!=null){
+        if (myVehiclesActivityUIComponents.getActionBar() != null) {
             myVehiclesActivityUIComponents.getActionBar().setTitle("My Vehicles");
             myVehiclesActivityUIComponents.getActionBar().setDisplayHomeAsUpEnabled(true);
         }
@@ -60,7 +58,7 @@ public class MyVehiclesActivity extends AppCompatActivity {
         myVehiclesActivityUIComponents.getAddVehicleButton().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               AddAVehicle.startIntent(MyVehiclesActivity.this,user);
+                AddAVehicle.startIntent(MyVehiclesActivity.this, user);
             }
         });
 
@@ -92,14 +90,14 @@ public class MyVehiclesActivity extends AppCompatActivity {
         this.vehicles = vehicles;
     }
 
-    private void getAllVehicles(String uid){
+    private void getAllVehicles(String uid) {
 
-        reference = database.getReference("vehicles/"+uid);
+        reference = database.getReference("vehicles/" + uid);
 
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                for(DataSnapshot item: dataSnapshot.getChildren()){
+                for (DataSnapshot item : dataSnapshot.getChildren()) {
                     Vehicle vehicle = item.getValue(Vehicle.class);
                     vehicles.add(vehicle);
                     setVehicles(vehicles);
