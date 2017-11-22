@@ -13,6 +13,7 @@ import java.util.Map;
  */
 @IgnoreExtraProperties
 public class User implements Serializable {
+    private String uid;
     private String userID;
     private String firstName;
     private String lastName;
@@ -73,6 +74,20 @@ public class User implements Serializable {
     public User(String userID, String email) {
         this.userID = userID;
         this.email = email;
+    }
+
+    public User(String uid, String userID, String email) {
+        this.uid = uid;
+        this.userID = userID;
+        this.email = email;
+    }
+
+    public String getUid() {
+        return uid;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
     }
 
     public String getUserID() {

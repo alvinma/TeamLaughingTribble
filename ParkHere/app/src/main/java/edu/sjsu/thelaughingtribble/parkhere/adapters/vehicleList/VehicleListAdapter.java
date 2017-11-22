@@ -1,7 +1,6 @@
 package edu.sjsu.thelaughingtribble.parkhere.adapters.vehicleList;
 
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,9 +10,6 @@ import com.bumptech.glide.Glide;
 import java.util.ArrayList;
 
 import edu.sjsu.thelaughingtribble.parkhere.R;
-import edu.sjsu.thelaughingtribble.parkhere.adapters.homePostList.homePostListItemViewHolder;
-import edu.sjsu.thelaughingtribble.parkhere.models.pojo.Post;
-
 import edu.sjsu.thelaughingtribble.parkhere.models.pojo.Vehicle;
 
 /**
@@ -25,7 +21,7 @@ public class VehicleListAdapter extends RecyclerView.Adapter<VehicleListItemView
     private ArrayList<Vehicle> vehicles = new ArrayList<>();
     private VehicleListItemViewHolder vehicleListUIComponents;
 
-    public VehicleListAdapter(ArrayList<Vehicle> vehicles){
+    public VehicleListAdapter(ArrayList<Vehicle> vehicles) {
         this.vehicles = vehicles;
     }
 
@@ -38,9 +34,9 @@ public class VehicleListAdapter extends RecyclerView.Adapter<VehicleListItemView
         vehicleListUIComponents.getColor().setText(vehicle.getColor());
         vehicleListUIComponents.getPlateNumber().setText(vehicle.getPlateNumber());
 
-        if(vehicle.getPhoto()!=null){
+        if (vehicle.getPhoto() != null) {
             Glide.with(vehicleListUIComponents.getContext()).load(vehicle.getPhoto()).into(vehicleListUIComponents.getVehicleImage());
-        }else {
+        } else {
             vehicleListUIComponents.getVehicleImage().setImageResource(R.drawable.not_available);
         }
     }
@@ -51,7 +47,6 @@ public class VehicleListAdapter extends RecyclerView.Adapter<VehicleListItemView
         vehicleListUIComponents = new VehicleListItemViewHolder(mView);
         return vehicleListUIComponents;
     }
-
 
 
     @Override

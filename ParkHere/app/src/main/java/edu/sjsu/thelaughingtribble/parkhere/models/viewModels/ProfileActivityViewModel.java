@@ -2,7 +2,6 @@ package edu.sjsu.thelaughingtribble.parkhere.models.viewModels;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.view.View;
 import android.widget.LinearLayout;
 
@@ -11,7 +10,6 @@ import edu.sjsu.thelaughingtribble.parkhere.controllers.MyPlacesActivity;
 import edu.sjsu.thelaughingtribble.parkhere.controllers.MyProfileActivity;
 import edu.sjsu.thelaughingtribble.parkhere.controllers.MyRentingSpotsActivity;
 import edu.sjsu.thelaughingtribble.parkhere.controllers.MyVehiclesActivity;
-import edu.sjsu.thelaughingtribble.parkhere.controllers.ProfileActivity;
 
 /**
  * Created by jennifernghinguyen on 11/2/17.
@@ -27,11 +25,11 @@ public class ProfileActivityViewModel extends ActivityCommonViewModel {
 
     public ProfileActivityViewModel(Context context) {
         super(context);
-        this.myProfileLayout = (LinearLayout)  ((Activity) context).findViewById(R.id.myprofile_layout);
-        this.myVehicleLayout = (LinearLayout)  ((Activity) context).findViewById(R.id.myvehicle_layout);
-        this.myPlacesLayout = (LinearLayout)  ((Activity) context).findViewById(R.id.myplaces_layout);
-        this.myRentingSpotsLayout = (LinearLayout)  ((Activity) context).findViewById(R.id.myrentingspots_layout);
-        this.logoutLayout = (LinearLayout)  ((Activity) context).findViewById(R.id.logout_layout);
+        this.myProfileLayout = (LinearLayout) ((Activity) context).findViewById(R.id.myprofile_layout);
+        this.myVehicleLayout = (LinearLayout) ((Activity) context).findViewById(R.id.myvehicle_layout);
+        this.myPlacesLayout = (LinearLayout) ((Activity) context).findViewById(R.id.myplaces_layout);
+        this.myRentingSpotsLayout = (LinearLayout) ((Activity) context).findViewById(R.id.myrentingspots_layout);
+        this.logoutLayout = (LinearLayout) ((Activity) context).findViewById(R.id.logout_layout);
         setMyVehiclesIntent();
         setMyPlacesIntent();
         setMyprofileIntent();
@@ -78,42 +76,38 @@ public class ProfileActivityViewModel extends ActivityCommonViewModel {
         this.logoutLayout = logoutLayout;
     }
 
-    private void setMyprofileIntent(){
+    private void setMyprofileIntent() {
         this.myProfileLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(), MyProfileActivity.class);
-                getContext().startActivity(intent);
+                MyProfileActivity.startIntent(getContext(), getUser());
             }
         });
     }
 
-    private void setMyVehiclesIntent(){
+    private void setMyVehiclesIntent() {
         this.myVehicleLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(), MyVehiclesActivity.class);
-                getContext().startActivity(intent);
+                MyVehiclesActivity.startIntent(getContext(), getUser());
             }
         });
     }
 
-    private void setMyPlacesIntent(){
+    private void setMyPlacesIntent() {
         this.myPlacesLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(), MyPlacesActivity.class);
-                getContext().startActivity(intent);
+                MyPlacesActivity.startIntent(getContext(), getUser());
             }
         });
     }
 
-    private void setMyRentingSpotsIntent(){
+    private void setMyRentingSpotsIntent() {
         this.myRentingSpotsLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(), MyRentingSpotsActivity.class);
-                getContext().startActivity(intent);
+                MyRentingSpotsActivity.startIntent(getContext(), getUser());
             }
         });
     }

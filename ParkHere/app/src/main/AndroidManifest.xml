@@ -32,10 +32,14 @@
         <activity android:name=".controllers.MyPlacesActivity" />
         <activity android:name=".controllers.MyRentingSpotsActivity" />
         <activity android:name=".controllers.AddAVehicle" />
-        <activity android:name=".controllers.MySpotsActivity"></activity>
+        <activity android:name=".controllers.MySpotsActivity" />
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyAGXlOk9q9UDaGoGh7_YcHQ-iG4a8_Kkns"/>
+            android:value="AIzaSyAGXlOk9q9UDaGoGh7_YcHQ-iG4a8_Kkns" />
+
+        <activity android:name=".controllers.AddASpotActivity" />
+        <activity android:name=".controllers.AddAPlace"></activity>
     </application>
 
 </manifest>

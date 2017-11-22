@@ -10,22 +10,22 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import edu.sjsu.thelaughingtribble.parkhere.Utils.Utilities;
+import edu.sjsu.thelaughingtribble.parkhere.controllers.BaseActivity;
 import edu.sjsu.thelaughingtribble.parkhere.models.pojo.Owner;
 import edu.sjsu.thelaughingtribble.parkhere.models.pojo.Post;
 import edu.sjsu.thelaughingtribble.parkhere.models.pojo.Spot;
-import edu.sjsu.thelaughingtribble.parkhere.controllers.BaseActivity;
 
-public class CreateParkingSpotListing extends BaseActivity{
+public class CreateParkingSpotListing extends BaseActivity {
 
     private static final String TAG = "NewPostActivity";
     private static final String REQUIRED = "Required";
@@ -49,10 +49,10 @@ public class CreateParkingSpotListing extends BaseActivity{
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
-        mSubmitButton = (Button)findViewById(R.id.submitButton);
-        mNameField = (EditText)findViewById(R.id.ownerName);
-        mLocationField = (EditText)findViewById(R.id.spotLocation);
-        mDescriptionField = (EditText)findViewById(R.id.description);
+        mSubmitButton = (Button) findViewById(R.id.submitButton);
+        mNameField = (EditText) findViewById(R.id.ownerName);
+        mLocationField = (EditText) findViewById(R.id.spotLocation);
+        mDescriptionField = (EditText) findViewById(R.id.description);
 
 
         mSubmitButton.setOnClickListener(new View.OnClickListener() {
@@ -111,7 +111,7 @@ public class CreateParkingSpotListing extends BaseActivity{
                                     Toast.LENGTH_SHORT).show();
                         } else {
                             // Write new post
-                                writeNewPost(userId, user, location, description);
+                            writeNewPost(userId, user, location, description);
                         }
 
                         // Finish this Activity, back to the stream
@@ -155,7 +155,7 @@ public class CreateParkingSpotListing extends BaseActivity{
         String renting = "Yes";
         String nextAvaliable = "11-02-17";
         String defaultTitle = "SUV Parking";
-        Spot spot = new Spot(location, type, description, price, permitRequired, spotNumber, renting, nextAvaliable);
+        Spot spot = new Spot(location, type, description, price, permitRequired, spotNumber, renting, nextAvaliable, "example key");
         Post post = new Post(defaultTitle, spot, user, Utilities.getTodayDate());
         Map<String, Object> postValues = post.toMap();
 

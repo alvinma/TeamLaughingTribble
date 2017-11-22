@@ -2,6 +2,13 @@
 CS 160 Team Project
 By: Alvin Ma, Byron Wang, Jennifer Nghi Nguyen, Marco Sandoval
 
+<b>Note: Update README assignment 5: All work are done within Android repo. No changes to backend repo <br/></b>
+
+Login infomation on Android:<br/>
+username: laughingtribble@gmail.com<br/>
+pass: laughingtribbleteam<br/>
+
+
 <b>Note: Update README assignment 4: in assignment 4 all the tests are carried out in Client (Android) project; backend project remains untouched. <br/></b>
 
 1. Client (Android) <br />
