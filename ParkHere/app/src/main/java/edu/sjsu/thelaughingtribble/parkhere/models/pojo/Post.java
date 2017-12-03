@@ -26,8 +26,7 @@ public class Post implements Serializable {
     private String title;
 
     // Default Constructor
-    public Post() {};
-
+    public Post() {}
 
     //new post
     public Post(String title, Spot spot, Owner owner, String datePosted) {

@@ -69,5 +69,6 @@
         <item>Yes</item>
         <item>No</item>
     </string-array>
+    <string name="title_activity_post_information">PostInformationActivity</string>
 
 </resources>

@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -55,8 +56,10 @@ public class MainActivity extends AppCompatActivity {
 
 
         init();
-        initList();
         getParkingList();
+        initList();
+
+        //TODO: moved the order of getPArkingList() from below init() & initList() to TOP
         mainActivityUiComponets.getSpotSubmission().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -72,6 +75,7 @@ public class MainActivity extends AppCompatActivity {
         mAdapter = new HomePostListAdapter(posts);
         mainActivityUiComponets.getHomePostList().setAdapter(mAdapter);
 
+//        mainActivityUiComponets.getHomePostList().
     }
 
     private void init() {
@@ -90,6 +94,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+        //TODO: research why getParkingList() is commented
+        //Current solution calls getParkingList() @onCreate
         //getParkingList();
     }
 
@@ -112,14 +118,17 @@ public class MainActivity extends AppCompatActivity {
                 for (DataSnapshot item : dataSnapshot.getChildren()) {
                     Post post = item.getValue(Post.class);
                     posts.add(post);
-                    setPosts(posts);
-                    mAdapter.notifyDataSetChanged();
                 }
+                //Moved the setPosts(posts) outside the loop.
+                //logic issue where it will override the post ArrayList if its left in the for loop
+                setPosts(posts);
+                mAdapter.notifyDataSetChanged();
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
                 Log.d(TAG, "postTransaction:onComplete:" + databaseError);
+                Toast.makeText(getApplicationContext(), "ERROR: DatabaseError !!!!!", Toast.LENGTH_SHORT).show();
             }
         });
     }

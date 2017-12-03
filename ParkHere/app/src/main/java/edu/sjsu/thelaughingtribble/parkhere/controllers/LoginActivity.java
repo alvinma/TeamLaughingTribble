@@ -119,7 +119,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         }
 
         return mAuth;
-
     }
 
     private void signUp() {
@@ -149,6 +148,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                 });
     }
 
+    //TODO: Add a 'Create NEW user ', activity. Adding in the Name, phone number, address...
     private void onAuthSuccess(FirebaseUser user) {
         String username = Utilities.usernameFromEmail(user.getEmail());
 

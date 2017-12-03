@@ -1,15 +1,20 @@
 package edu.sjsu.thelaughingtribble.parkhere.adapters.homePostList;
 
+import android.content.Intent;
+import android.support.design.widget.Snackbar;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 
 import edu.sjsu.thelaughingtribble.parkhere.R;
+import edu.sjsu.thelaughingtribble.parkhere.controllers.PostInformationActivity;
 import edu.sjsu.thelaughingtribble.parkhere.models.pojo.Post;
 
 /**
@@ -35,7 +40,7 @@ public class HomePostListAdapter extends RecyclerView.Adapter<homePostListItemVi
 
     @Override
     public void onBindViewHolder(homePostListItemViewHolder holder, int position) {
-        Post currentPost = posts.get(position);
+        final Post currentPost = posts.get(position);
 
         homePostListUI.getDatePosted().setText(currentPost.getDatePosted());
         homePostListUI.getPostTitle().setText(currentPost.getTitle());
@@ -48,6 +53,22 @@ public class HomePostListAdapter extends RecyclerView.Adapter<homePostListItemVi
         } else {
             homePostListUI.getPostImage().setImageResource(R.drawable.not_available);
         }
+
+        homePostListUI.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+//                Snackbar.make(view, "TESTING OUT THE NEW FEATURE", Snackbar.LENGTH_LONG)
+//                        .setAction("Action", null).show();
+
+                Toast.makeText(view.getContext(), "Clicked on item", Toast.LENGTH_SHORT).show();
+
+                Intent intent = new Intent(view.getContext(), PostInformationActivity.class);
+                intent.putExtra("Post.class", currentPost);
+                intent.putExtra("image", homePostListUI.getPostImage().getId());
+                view.getContext().startActivity(intent);
+            }
+        });
     }
 
     @Override
