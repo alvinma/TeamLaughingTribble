@@ -76,7 +76,7 @@ public class SpotDetailActivity extends AppCompatActivity {
     private void getIntentData() {
         user = (User) getIntent().getSerializableExtra(Constant.INTENT_EXTRA_USER);
         spot = (Spot) getIntent().getSerializableExtra(Constant.INTENT_EXTRA_SPOT);
-        place = new Place(spot.getAddress());
+        place = new Place(spot.getAddress(), spot.getFirebasePlaceKey());
     }
 
     private void deleteSpot() {
@@ -170,7 +170,7 @@ public class SpotDetailActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.edit_spot:
-
+                AddASpotActivity.startIntent(getApplicationContext(), user, place, spot);
                 return true;
             case R.id.delete_spot:
                 confirmDelete();
