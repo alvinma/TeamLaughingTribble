@@ -3,10 +3,12 @@ package edu.sjsu.thelaughingtribble.parkhere.controllers;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.SyncStateContract;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -14,8 +16,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.sql.Time;
 import java.sql.Timestamp;
@@ -26,6 +31,9 @@ import edu.sjsu.thelaughingtribble.parkhere.R;
 import edu.sjsu.thelaughingtribble.parkhere.Utils.Constant;
 import edu.sjsu.thelaughingtribble.parkhere.adapters.homePostList.homePostListItemViewHolder;
 import edu.sjsu.thelaughingtribble.parkhere.models.pojo.Post;
+import edu.sjsu.thelaughingtribble.parkhere.models.pojo.PostHistory;
+import edu.sjsu.thelaughingtribble.parkhere.models.pojo.Renter;
+import edu.sjsu.thelaughingtribble.parkhere.models.pojo.Renting;
 import edu.sjsu.thelaughingtribble.parkhere.models.pojo.User;
 
 public class PostInformationActivity extends AppCompatActivity {
@@ -43,8 +51,7 @@ public class PostInformationActivity extends AppCompatActivity {
     private TextView postPrice;
     private TextView postDescription;
 
-    //TODO: idea 1, add post info from the previous posting.
-    //just add button to book post
+    PostHistory postHistory;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +60,7 @@ public class PostInformationActivity extends AppCompatActivity {
 //        setContentView(R.layout.content_post_information);
 
         mDatabase = FirebaseDatabase.getInstance();
+        mReference = mDatabase.getReference();
         user = (User) getIntent().getSerializableExtra(Constant.INTENT_EXTRA_USER);
 
 
@@ -80,10 +88,8 @@ public class PostInformationActivity extends AppCompatActivity {
                 Snackbar.make(view, "Purchasing the item", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
 
-
-                //TODO: uncomment
-//                Intent intent_purchase = new Intent(view, BookPost.class);
-//                view.getContext().startActivity(intent_purchase);
+                Intent intent_purchase = new Intent(view.getContext(), BookingActivity.class);
+                view.getContext().startActivity(intent_purchase);
             }
         });
     }

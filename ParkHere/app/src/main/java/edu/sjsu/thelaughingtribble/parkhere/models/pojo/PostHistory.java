@@ -2,6 +2,7 @@ package edu.sjsu.thelaughingtribble.parkhere.models.pojo;
 
 import com.google.firebase.database.Exclude;
 
+import java.io.Serializable;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -11,43 +12,46 @@ import java.util.Map;
  * Created by CROOOME on 12/1/17.
  */
 
+public class PostHistory implements Serializable{
 
-//TODO: may not need this class
-public class PostHistory {
-
-    private Post post;
-    private ArrayList<DateFormat> history;
+    private Spot spot;
+    private ArrayList<Renting> history;
 
     public void PostHistory(){}
 
-    public void addBookedTime(DateFormat start, DateFormat end){
-//        if(history.contains(date)){
-//
-//        }
-//        history.add(date);
+    public void PostHistory(Spot spot, ArrayList<Renting> history){
+        this.spot = spot;
+        this.history = history;
     }
 
-    public Boolean isAvaliable(DateFormat start, DateFormat end){
+    public void setSpot(Spot spot){
+        this.spot = spot;
+    }
 
-        for(DateFormat booking: history){
-            if(true){
-                return true;
-            }
+    public Spot getSpot(){
+        return this.spot;
+    }
+
+    public void addToHistory(Renting booking){
+        if(!this.history.contains(booking)){
+            this.history.add(booking);
         }
-
-        return false;
     }
 
-    public Boolean endDate(){
-        return false;
+    public void removeFromHistory(Renting booking){
+        if(this.history.contains(booking)){
+            this.history.remove(booking);
+        }
     }
 
-
+    public ArrayList<Renting> getHistory(){
+        return this.history;
+    }
 
     @Exclude
     public Map<String, Object> toMap() {
         HashMap<String, Object> result = new HashMap<>();
-        result.put("post", post);
+        result.put("spot", spot);
         result.put("history", history);
 
         return result;

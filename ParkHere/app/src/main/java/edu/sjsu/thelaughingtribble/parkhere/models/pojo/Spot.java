@@ -154,6 +154,7 @@ public class Spot extends Place implements Serializable {
         result.put("photo", photo);
         result.put("renting", renting);
         result.put("nextAvailable", nextAvailable);
+        result.put("firebaseKey", firebaseKey);
 
         return result;
     }
