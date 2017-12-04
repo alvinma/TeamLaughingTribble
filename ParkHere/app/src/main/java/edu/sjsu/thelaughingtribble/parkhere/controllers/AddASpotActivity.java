@@ -27,10 +27,13 @@ import edu.sjsu.thelaughingtribble.parkhere.models.pojo.Spot;
 import edu.sjsu.thelaughingtribble.parkhere.models.pojo.User;
 import edu.sjsu.thelaughingtribble.parkhere.models.viewModels.AddASPotViewModel;
 
+import static android.R.attr.key;
+
 public class AddASpotActivity extends AppCompatActivity {
 
     private AddASPotViewModel addASPotUI;
     private Place place = null;
+    private Spot edit_data;
 
     private User user;
     private Uri uri;
@@ -46,6 +49,7 @@ public class AddASpotActivity extends AppCompatActivity {
     private String renting;
     private String nextAvailable;
     private static final int GALLLERY_INTENT_CODE = 1;
+    private boolean edit = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,43 +63,34 @@ public class AddASpotActivity extends AppCompatActivity {
         }
 
         init();
-        submit();
+
 
     }
 
 
-    private void submit() {
+    private void submitNewSpot() {
+
         addASPotUI.getSubmit().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.i("add spot", "submitting");
+
                 if (!addASPotUI.getSpotNum().getText().toString().equals("")) {
                     spotNumber = addASPotUI.getSpotNum().getText().toString();
-                    Log.i("spotNumber", spotNumber);
                 } else {
                     addASPotUI.getSpotNum().setError(Constant.REQUIRE_TEXT);
                 }
 
                 if (!addASPotUI.getPrice().getText().toString().equals("")) {
                     price = Double.valueOf(addASPotUI.getPrice().getText().toString());
-                    Log.i("price", ""+price);
                 } else {
                     addASPotUI.getPrice().setError(Constant.REQUIRE_TEXT);
                 }
 
                 if (!addASPotUI.getDescription().getText().toString().equals("")) {
                     description = addASPotUI.getDescription().getText().toString();
-                    Log.i("description", description);
                 } else {
                     addASPotUI.getDescription().setError(Constant.REQUIRE_TEXT);
                 }
-
-                Log.i("address", place.getAddress());
-                Log.i("type", type);
-                Log.i("permit", permitRequired);
-
-                Log.i("getFirebasePlaceKey()", place.getFirebaseKey());
-
 
                 if (place.getAddress() != null && type != null && description != null && price != 0 && permitRequired != null && spotNumber != null && place.getFirebaseKey() != null) {
                     renting = "yes";
@@ -108,9 +103,50 @@ public class AddASpotActivity extends AppCompatActivity {
                         spot = new Spot(place.getAddress(), type, description, price, permitRequired, spotNumber, renting, nextAvailable, place.getFirebaseKey(), key, photo);
                     }
 
-                    Log.i("spot", spot.getSpotId());
-
                     database.child("spots/" + user.getUid() + "/" + key).setValue(spot);
+
+                    MySpotsActivity.startIntent(AddASpotActivity.this, user, place);
+
+                }
+            }
+        });
+    }
+
+    private void updateSpot() {
+        Log.i("update spot", "updating");
+        addASPotUI.getSubmit().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (!addASPotUI.getSpotNum().getText().toString().equals("")) {
+                    spotNumber = addASPotUI.getSpotNum().getText().toString();
+                } else {
+                    addASPotUI.getSpotNum().setError(Constant.REQUIRE_TEXT);
+                }
+
+                if (!addASPotUI.getPrice().getText().toString().equals("")) {
+                    price = Double.valueOf(addASPotUI.getPrice().getText().toString());
+                } else {
+                    addASPotUI.getPrice().setError(Constant.REQUIRE_TEXT);
+                }
+
+                if (!addASPotUI.getDescription().getText().toString().equals("")) {
+                    description = addASPotUI.getDescription().getText().toString();
+                } else {
+                    addASPotUI.getDescription().setError(Constant.REQUIRE_TEXT);
+                }
+
+                if (place.getAddress() != null && type != null && description != null && price != 0 && permitRequired != null && spotNumber != null && place.getFirebaseKey() != null && edit_data.getSpotId()!=null) {
+
+                    renting = edit_data.getRenting();
+                    nextAvailable = edit_data.getNextAvailable();
+                    Spot spot = null;
+                   // database.child("spots").child(user.getUid()).child(edit_data.getSpotId());
+
+                    spot = new Spot(place.getAddress(), type, description, price, permitRequired, spotNumber, renting, nextAvailable, place.getFirebaseKey(), edit_data.getSpotId(), photo);
+
+
+                    database.child("spots/" + user.getUid() + "/" + edit_data.getSpotId()).setValue(spot);
 
                     MySpotsActivity.startIntent(AddASpotActivity.this, user, place);
 
@@ -123,9 +159,21 @@ public class AddASpotActivity extends AppCompatActivity {
         database = FirebaseDatabase.getInstance().getReference();
         setFirebaseStorage();
         getDataFromIntent();
-        setUpPermitSpinner();
-        setUpTypeSpinner();
-        setUploadImageListener();
+        setUpUI();
+
+        if(edit){
+            updateSpot();
+        }else {
+            submitNewSpot();
+        }
+
+        addASPotUI.getCancel().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
     }
 
     private void setUploadImageListener() {
@@ -183,6 +231,11 @@ public class AddASpotActivity extends AppCompatActivity {
     private void getDataFromIntent() {
         user = (User) getIntent().getSerializableExtra(Constant.INTENT_EXTRA_USER);
         place = (Place) getIntent().getSerializableExtra(Constant.INTENT_EXTRA_PLACE);
+        if ((Spot) getIntent().getSerializableExtra(Constant.INTENT_EXTRA_SPOT) != null) {
+            edit_data = (Spot) getIntent().getSerializableExtra(Constant.INTENT_EXTRA_SPOT);
+            edit = true;
+        }
+
 
         addASPotUI.setPlace(place);
         addASPotUI.setUser(user);
@@ -195,9 +248,6 @@ public class AddASpotActivity extends AppCompatActivity {
         addASPotUI.getPermitRequired().setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-               /* Toast.makeText(parent.getContext(),
-                        "Selecting " + parent.getItemAtPosition(position).toString(),
-                        Toast.LENGTH_SHORT).show();*/
 
                 permitRequired = parent.getItemAtPosition(position).toString().trim();
             }
@@ -209,6 +259,68 @@ public class AddASpotActivity extends AppCompatActivity {
         });
     }
 
+    private void setUpUI() {
+        setUpTypeSpinner();
+        setUploadImageListener();
+        setUpPermitSpinner();
+        spotNumber = edit_data.getSpotNumber();
+        price = edit_data.getPrice();
+        description = edit_data.getDescription();
+        type = edit_data.getType();
+        permitRequired = edit_data.getPermitRequired();
+        photo = edit_data.getPhoto();
+        if (edit) {
+            if (edit_data.getPhoto() != null || edit_data.getPhoto().equals("")) {
+                Glide.with(this).load(edit_data.getPhoto()).into(addASPotUI.getSpotImg());
+            }
+            addASPotUI.getAddress().setText(edit_data.getAddress());
+            addASPotUI.getDescription().setText(edit_data.getDescription());
+            addASPotUI.getPrice().setText(String.valueOf(edit_data.getPrice()));
+            addASPotUI.getSpotNum().setText(edit_data.getSpotNumber());
+            Log.i("edit_data.getType()", edit_data.getType() + " " + getPositionType(edit_data.getType()));
+            Log.i("getPermitRequired()", edit_data.getPermitRequired() + " " + getPositionPermit(edit_data.getPermitRequired()));
+            addASPotUI.getType().setSelection(getPositionType(edit_data.getType()));
+           // addASPotUI.getPermitRequired().setSelection(getPositionPermit(edit_data.getPermitRequired()));
+            addASPotUI.getPermitRequired().setSelection(1);
+        }else {
+            addASPotUI.getAddress().setText("");
+            addASPotUI.getDescription().setText("");
+            addASPotUI.getPrice().setText(String.valueOf(0.0));
+            addASPotUI.getSpotNum().setText("");
+
+        }
+    }
+
+    private int getPositionType(String type) {
+        int po = 0;
+        switch (type.trim()) {
+            case "Daily":
+                po = 1;
+                break;
+            case "Semester":
+                po = 2;
+                break;
+            case "Monthly":
+                po = 3;
+                break;
+            default:
+                po = 0;
+                break;
+        }
+        return po;
+    }
+    private int getPositionPermit(String permit) {
+        int po = 0;
+        switch (permit.trim()) {
+            case "No":
+                po = 1;
+                break;
+            default:
+                po = 0;
+                break;
+        }
+        return po;
+    }
 
     private void setUpTypeSpinner() {
 
@@ -216,9 +328,6 @@ public class AddASpotActivity extends AppCompatActivity {
         addASPotUI.getType().setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                /*Toast.makeText(parent.getContext(),
-                        "Selecting " + parent.getItemAtPosition(position).toString(),
-                        Toast.LENGTH_SHORT).show();*/
 
                 type = parent.getItemAtPosition(position).toString().trim();
             }
@@ -237,6 +346,15 @@ public class AddASpotActivity extends AppCompatActivity {
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         intent.putExtra(Constant.INTENT_EXTRA_PLACE, place);
         intent.putExtra(Constant.INTENT_EXTRA_USER, user);
+        context.startActivity(intent);
+    }
+
+    public static void startIntent(Context context, User user, Place place, Spot spot) {
+        Intent intent = new Intent(context, AddASpotActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.putExtra(Constant.INTENT_EXTRA_PLACE, place);
+        intent.putExtra(Constant.INTENT_EXTRA_USER, user);
+        intent.putExtra(Constant.INTENT_EXTRA_SPOT, spot);
         context.startActivity(intent);
     }
 
