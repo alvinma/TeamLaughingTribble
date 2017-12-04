@@ -10,7 +10,24 @@ public class BaseActivity extends AppCompatActivity {
 
 
     private ProgressDialog mProgressDialog;
+    private String title;
 
+    public ProgressDialog getmProgressDialog() {
+        return mProgressDialog;
+    }
+
+    public void setmProgressDialog(ProgressDialog mProgressDialog) {
+        this.mProgressDialog = mProgressDialog;
+    }
+
+
+    public String getTittle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
     public void showProgressDialog() {
         if (mProgressDialog == null) {

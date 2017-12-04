@@ -26,6 +26,15 @@ public final class Utilities {
         date = c.getTime();
         return dateFormat.format(date);
     }
+    public static String setDateExpired(int days) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd MM, yyyy HH:mm");
+        Date date = new Date();
+        Calendar c = Calendar.getInstance();
+        c.setTime(date);
+        c.add(Calendar.DATE, days);
+        date = c.getTime();
+        return dateFormat.format(date);
+    }
 
     public static String usernameFromEmail(String email) {
         email = email.replace(" ", "");

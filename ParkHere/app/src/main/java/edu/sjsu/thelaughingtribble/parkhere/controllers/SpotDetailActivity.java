@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.bumptech.glide.Glide;
 import com.google.firebase.database.DataSnapshot;
@@ -34,12 +35,25 @@ public class SpotDetailActivity extends AppCompatActivity {
     private Place place;
     private FirebaseDatabase database;
     private DatabaseReference reference;
+    private String title;
+    private String placeId;
+    private boolean posting;
 
     public static void startIntent(Context context, User user, Spot spot) {
         Log.i("startIntent detail spot", "click");
         Intent intent = new Intent(context, SpotDetailActivity.class);
         intent.putExtra(Constant.INTENT_EXTRA_USER, user);
         intent.putExtra(Constant.INTENT_EXTRA_SPOT, spot);
+        context.startActivity(intent);
+    }
+    public static void startIntent(Context context, User user, Spot spot, String title, String placeId, boolean posting) {
+        Log.i("startIntent detail spot", "click");
+        Intent intent = new Intent(context, SpotDetailActivity.class);
+        intent.putExtra(Constant.INTENT_EXTRA_USER, user);
+        intent.putExtra(Constant.INTENT_EXTRA_SPOT, spot);
+        intent.putExtra(Constant.TITLE, title);
+        intent.putExtra(Constant.PLACEID, placeId);
+        intent.putExtra(Constant.POSTING, posting);
         context.startActivity(intent);
     }
 
@@ -55,7 +69,8 @@ public class SpotDetailActivity extends AppCompatActivity {
     private void setup() {
         spotDetailUI = new SpotDetailViewModel(this);
         database = FirebaseDatabase.getInstance();
-        //setSupportActionBar(spotDetailUI.getToolbar());
+
+
     }
 
     private void initView() {
@@ -70,6 +85,22 @@ public class SpotDetailActivity extends AppCompatActivity {
         spotDetailUI.getRentingText().setText(spot.getRenting());
         spotDetailUI.getSpotNumberText().setText(spot.getSpotNumber());
 
+        if(posting){
+            spotDetailUI.getActionBar().setTitle("Select this spot");
+            spotDetailUI.getActionBar().setDisplayHomeAsUpEnabled(true);
+            spotDetailUI.getSelect().setVisibility(View.VISIBLE);
+            spotDetailUI.getSelect().setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    PostDetailActivity.startIntent(getBaseContext(), title, user, spot, placeId, posting);
+                }
+            });
+        }else {
+            spotDetailUI.getActionBar().setTitle("");
+            spotDetailUI.getActionBar().setDisplayHomeAsUpEnabled(true);
+            spotDetailUI.getSelect().setVisibility(View.GONE);
+        }
+
 
     }
 
@@ -77,6 +108,17 @@ public class SpotDetailActivity extends AppCompatActivity {
         user = (User) getIntent().getSerializableExtra(Constant.INTENT_EXTRA_USER);
         spot = (Spot) getIntent().getSerializableExtra(Constant.INTENT_EXTRA_SPOT);
         place = new Place(spot.getFirebasePlaceKey(), spot.getAddress());
+        if(getIntent().hasExtra(Constant.POSTING)){
+            posting  = getIntent().getExtras().getBoolean(Constant.POSTING);
+        }
+
+        if(getIntent().hasExtra(Constant.TITLE)){
+                title =  getIntent().getExtras().getString(Constant.TITLE);
+        }
+
+        if(getIntent().hasExtra(Constant.PLACEID)){
+            placeId =   getIntent().getExtras().getString(Constant.PLACEID);
+        }
     }
 
     private void deleteSpot() {

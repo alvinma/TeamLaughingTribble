@@ -31,6 +31,9 @@ public class SpotListItemViewHolder extends RecyclerView.ViewHolder implements V
     private ImageView spotImage;
     private User user;
     private Spot spot;
+    private String title;
+    private boolean posting;
+    private String placeId;
 
 
     /*
@@ -47,6 +50,23 @@ public class SpotListItemViewHolder extends RecyclerView.ViewHolder implements V
         nextAvailableText = (TextView) spotsListItem.findViewById(R.id.next_available_text);
         descriptionText = (TextView) spotsListItem.findViewById(R.id.description_text);
         spotImage = (ImageView) spotsListItem.findViewById(R.id.spot_image);
+        spotsListItem.setOnClickListener(this);
+    }
+
+    public SpotListItemViewHolder(View spotsListItem, String title, String placeId, boolean posting)  {
+        super(spotsListItem);
+        this.context = spotsListItem.getContext();
+        spotNumberText = (TextView) spotsListItem.findViewById(R.id.spot_number_text);
+        typeText = (TextView) spotsListItem.findViewById(R.id.type_text);
+        priceText = (TextView) spotsListItem.findViewById(R.id.price_text);
+        permitRequiredText = (TextView) spotsListItem.findViewById(R.id.permit_required_text);
+        rentingText = (TextView) spotsListItem.findViewById(R.id.renting_text);
+        nextAvailableText = (TextView) spotsListItem.findViewById(R.id.next_available_text);
+        descriptionText = (TextView) spotsListItem.findViewById(R.id.description_text);
+        spotImage = (ImageView) spotsListItem.findViewById(R.id.spot_image);
+        this.title = title;
+        this.posting = posting;
+        this.placeId = placeId;
         spotsListItem.setOnClickListener(this);
     }
 
@@ -141,7 +161,10 @@ public class SpotListItemViewHolder extends RecyclerView.ViewHolder implements V
 
     @Override
     public void onClick(View v) {
-        Log.i("SpotListItemViewHolder", "onclick");
-        SpotDetailActivity.startIntent(v.getContext(), getUser(), getSpot());
+        if(posting){
+            SpotDetailActivity.startIntent(v.getContext(), getUser(), getSpot(), title, placeId, posting);
+        }else {
+            SpotDetailActivity.startIntent(v.getContext(), getUser(), getSpot());
+        }
     }
 }

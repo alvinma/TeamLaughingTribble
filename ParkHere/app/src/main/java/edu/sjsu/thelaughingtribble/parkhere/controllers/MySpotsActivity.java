@@ -33,6 +33,8 @@ public class MySpotsActivity extends AppCompatActivity {
     User user;
     private FirebaseDatabase database;
     private DatabaseReference reference;
+    private boolean posting = false;
+    private String title = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,16 +44,16 @@ public class MySpotsActivity extends AppCompatActivity {
         putExtra();
         database = FirebaseDatabase.getInstance();
         //spots.add(new Spot(place.getAddress(), "monthly", "park on driveway on the left", 50, "no", "2", "no", Utilities.getTodayDate()));
-        if (mySpotsActivityUIComponents == null) {
-            mySpotsActivityUIComponents = new MySpotsViewModel(this);
-            mySpotsActivityUIComponents.setUser(user);
-        }
-        mySpotsActivityUIComponents.getActionBar().setDisplayHomeAsUpEnabled(true);
-        mySpotsActivityUIComponents.getActionBar().setTitle("My Spots");
+       setUpUI();
+
         mySpotsActivityUIComponents.getSpotList().setLayoutManager(mySpotsActivityUIComponents.getLayoutManager());
 
         getAllSpot(user.getUid());
-        adapter = new SpotListAdapter(spots, user);
+        if(posting) {
+            adapter = new SpotListAdapter(spots, user, title, place.getFirebaseKey(), posting);
+        }else {
+            adapter = new SpotListAdapter(spots, user);
+        }
         mySpotsActivityUIComponents.getSpotList().setAdapter(adapter);
 
         mySpotsActivityUIComponents.getAddSpotButton().setOnClickListener(new View.OnClickListener() {
@@ -60,13 +62,38 @@ public class MySpotsActivity extends AppCompatActivity {
                 AddASpotActivity.startIntent(getApplicationContext(), user, place);
             }
         });
+
+        Log.i("title", title);
+        Log.i("placeid", place.getFirebaseKey());
+        Log.i("posting", " "+posting);
+    }
+
+    private void setUpUI(){
+        if (mySpotsActivityUIComponents == null) {
+            mySpotsActivityUIComponents = new MySpotsViewModel(this);
+            mySpotsActivityUIComponents.setUser(user);
+        }
+        if(posting){
+            mySpotsActivityUIComponents.getActionBar().setDisplayHomeAsUpEnabled(true);
+            mySpotsActivityUIComponents.getActionBar().setTitle("Choose a spot");
+
+        }else {
+            mySpotsActivityUIComponents.getActionBar().setDisplayHomeAsUpEnabled(true);
+            mySpotsActivityUIComponents.getActionBar().setTitle("My Spots");
+        }
     }
 
     private void putExtra() {
         place = (Place) getIntent().getSerializableExtra(Constant.INTENT_EXTRA_PLACE);
-
         user = (User) getIntent().getSerializableExtra(Constant.INTENT_EXTRA_USER);
 
+        if(getIntent().hasExtra(Constant.POSTING)){
+            posting = getIntent().getExtras().getBoolean(Constant.POSTING);
+        }
+
+        if(getIntent().hasExtra(Constant.TITLE)){
+            title = getIntent().getExtras().getString(Constant.TITLE);
+        }
     }
 
     public static void startIntent(Context context, User user, Place place) {
@@ -77,6 +104,15 @@ public class MySpotsActivity extends AppCompatActivity {
         context.startActivity(intent);
     }
 
+    public static void startIntent(Context context, User user, Place place, String title, boolean posting) {
+        Intent intent = new Intent(context, MySpotsActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.putExtra(Constant.INTENT_EXTRA_PLACE, place);
+        intent.putExtra(Constant.INTENT_EXTRA_USER, user);
+        intent.putExtra(Constant.TITLE, title);
+        intent.putExtra(Constant.POSTING, posting);
+        context.startActivity(intent);
+    }
     public ArrayList<Spot> getSpots() {
         return spots;
     }
@@ -87,7 +123,7 @@ public class MySpotsActivity extends AppCompatActivity {
 
     private void getAllSpot(String uid) {
         spots.clear();
-        reference = database.getReference("spots/" + uid);
+        reference = database.getReference("spots/"+uid+"/" + place.getFirebaseKey());
 
         reference.addValueEventListener(new ValueEventListener() {
             @Override

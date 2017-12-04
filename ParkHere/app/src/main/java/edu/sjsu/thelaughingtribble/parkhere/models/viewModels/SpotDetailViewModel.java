@@ -3,6 +3,7 @@ package edu.sjsu.thelaughingtribble.parkhere.models.viewModels;
 import android.app.Activity;
 import android.content.Context;
 import android.support.v7.widget.Toolbar;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -23,6 +24,7 @@ public class SpotDetailViewModel extends ActivityCommonViewModel {
     private TextView nextAvailableText;
     private TextView descriptionText;
     private ImageView spotImage;
+    private Button select;
     public SpotDetailViewModel(Context context) {
         super(context);
 
@@ -34,9 +36,17 @@ public class SpotDetailViewModel extends ActivityCommonViewModel {
         nextAvailableText = (TextView) ((Activity) context).findViewById(R.id.next_available_text);
         descriptionText = (TextView) ((Activity) context).findViewById(R.id.description_text);
         spotImage = (ImageView) ((Activity) context).findViewById(R.id.spot_image);
+        select = (Button) ((Activity) context).findViewById(R.id.select);
     }
 
 
+    public Button getSelect() {
+        return select;
+    }
+
+    public void setSelect(Button select) {
+        this.select = select;
+    }
 
     public TextView getSpotNumberText() {
         return spotNumberText;

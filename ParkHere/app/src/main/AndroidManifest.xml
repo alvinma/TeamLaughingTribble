@@ -40,7 +40,9 @@
 
         <activity android:name=".controllers.AddASpotActivity" />
         <activity android:name=".controllers.AddAPlace" />
-        <activity android:name=".controllers.SpotDetailActivity"></activity>
+        <activity android:name=".controllers.SpotDetailActivity" />
+        <activity android:name=".controllers.PostDetailActivity" />
+        <activity android:name=".controllers.AddPostActivity"></activity>
     </application>
 
 </manifest>

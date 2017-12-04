@@ -23,12 +23,22 @@ public class SpotListAdapter extends RecyclerView.Adapter<SpotListItemViewHolder
     private ArrayList<Spot> spots = new ArrayList<>();
     private SpotListItemViewHolder spotListUIComponents;
     private User user;
+    private String title="";
+    private boolean posting=false;
+    private String placeId="";
 
     public SpotListAdapter(ArrayList<Spot> spots, User user) {
         this.spots = spots;
         this.user = user;
 
-        Log.i("SpotListAdapter user" , user.getUid());
+    }
+
+    public SpotListAdapter(ArrayList<Spot> spots, User user, String title, String placeID,  boolean posting) {
+        this.spots = spots;
+        this.user = user;
+        this.title = title;
+        this.placeId = placeID;
+        this.posting = posting;
 
     }
 
@@ -56,7 +66,11 @@ public class SpotListAdapter extends RecyclerView.Adapter<SpotListItemViewHolder
     @Override
     public SpotListItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View mView = LayoutInflater.from(parent.getContext()).inflate(R.layout.spot_list_item, parent, false);
-        spotListUIComponents = new SpotListItemViewHolder(mView);
+        if(posting) {
+            spotListUIComponents = new SpotListItemViewHolder(mView, title, placeId, posting);
+        }else {
+            spotListUIComponents = new SpotListItemViewHolder(mView);
+        }
         return spotListUIComponents;
     }
 
