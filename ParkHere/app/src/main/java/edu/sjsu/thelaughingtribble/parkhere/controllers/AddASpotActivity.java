@@ -59,7 +59,6 @@ public class AddASpotActivity extends AppCompatActivity {
         if (addASPotUI == null) {
             addASPotUI = new AddASPotViewModel(this);
             addASPotUI.getActionBar().setDisplayHomeAsUpEnabled(true);
-            addASPotUI.getActionBar().setTitle("Add A Spot");
         }
 
         init();
@@ -113,7 +112,6 @@ public class AddASpotActivity extends AppCompatActivity {
     }
 
     private void updateSpot() {
-        Log.i("update spot", "updating");
         addASPotUI.getSubmit().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -197,15 +195,10 @@ public class AddASpotActivity extends AppCompatActivity {
             path.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                    //
                     StorageReference pathReference = firebaseStorage.child("Photos/" + user.getUid() + "/spots/" + uri.getLastPathSegment());
                     getDownLoadUrl(pathReference);
                     Toast.makeText(AddASpotActivity.this, pathReference.toString(), Toast.LENGTH_LONG).show();
                     addASPotUI.setSpotImageVisibility(true);
-                    //addASPotUI.setSpotImg(pathReference);
-                    Log.i("image path", pathReference.toString());
-
-
                 }
             });
         }
@@ -215,7 +208,6 @@ public class AddASpotActivity extends AppCompatActivity {
         storage.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
-                Log.i("download url", uri.toString());
                 photo = uri.toString();
                 Glide.with(AddASpotActivity.this)
                         .load(uri.toString())
@@ -239,7 +231,6 @@ public class AddASpotActivity extends AppCompatActivity {
 
         addASPotUI.setPlace(place);
         addASPotUI.setUser(user);
-        addASPotUI.getAddress().setText(place.getAddress());
     }
 
     private void setUpPermitSpinner() {
@@ -263,27 +254,26 @@ public class AddASpotActivity extends AppCompatActivity {
         setUpTypeSpinner();
         setUploadImageListener();
         setUpPermitSpinner();
-        spotNumber = edit_data.getSpotNumber();
-        price = edit_data.getPrice();
-        description = edit_data.getDescription();
-        type = edit_data.getType();
-        permitRequired = edit_data.getPermitRequired();
-        photo = edit_data.getPhoto();
         if (edit) {
-            if (edit_data.getPhoto() != null || edit_data.getPhoto().equals("")) {
+            spotNumber = edit_data.getSpotNumber();
+            price = edit_data.getPrice();
+            description = edit_data.getDescription();
+            type = edit_data.getType();
+            permitRequired = edit_data.getPermitRequired();
+            photo = edit_data.getPhoto();
+            if (edit_data.getPhoto() != null && edit_data.getPhoto().equals("") && edit_data.getPhoto().equals("null")) {
                 Glide.with(this).load(edit_data.getPhoto()).into(addASPotUI.getSpotImg());
             }
+            addASPotUI.getActionBar().setTitle("Edit Spot");
             addASPotUI.getAddress().setText(edit_data.getAddress());
             addASPotUI.getDescription().setText(edit_data.getDescription());
             addASPotUI.getPrice().setText(String.valueOf(edit_data.getPrice()));
             addASPotUI.getSpotNum().setText(edit_data.getSpotNumber());
-            Log.i("edit_data.getType()", edit_data.getType() + " " + getPositionType(edit_data.getType()));
-            Log.i("getPermitRequired()", edit_data.getPermitRequired() + " " + getPositionPermit(edit_data.getPermitRequired()));
             addASPotUI.getType().setSelection(getPositionType(edit_data.getType()));
-           // addASPotUI.getPermitRequired().setSelection(getPositionPermit(edit_data.getPermitRequired()));
-            addASPotUI.getPermitRequired().setSelection(1);
+            addASPotUI.getPermitRequired().setSelection(getPositionPermit(edit_data.getPermitRequired()));
         }else {
-            addASPotUI.getAddress().setText("");
+            addASPotUI.getActionBar().setTitle("Add a Spot");
+            addASPotUI.getAddress().setText(place.getAddress());
             addASPotUI.getDescription().setText("");
             addASPotUI.getPrice().setText(String.valueOf(0.0));
             addASPotUI.getSpotNum().setText("");
@@ -340,8 +330,6 @@ public class AddASpotActivity extends AppCompatActivity {
     }
 
     public static void startIntent(Context context, User user, Place place) {
-        Log.i("intent to add spot ", place.getAddress());
-        Log.i("intent to add spot ", user.getUid() + " " + user.getEmail());
         Intent intent = new Intent(context, AddASpotActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         intent.putExtra(Constant.INTENT_EXTRA_PLACE, place);
