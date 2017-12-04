@@ -1,7 +1,5 @@
 package edu.sjsu.thelaughingtribble.parkhere.models.pojo;
 
-import android.graphics.Bitmap;
-
 import com.google.firebase.database.Exclude;
 import com.google.firebase.database.IgnoreExtraProperties;
 
@@ -20,13 +18,27 @@ public class Spot extends Place implements Serializable {
     private String type;
     private String description;
     private double price;
+
+    public String getSpotId() {
+        return spotId;
+    }
+
+    public void setSpotId(String spotId) {
+        this.spotId = spotId;
+    }
+
     private String permitRequired = "false";
     private String spotNumber;
     private String photo;
     private String renting;
     private String nextAvailable;
+<<<<<<< HEAD
     private String firebaseKey;
     private ArrayList<DateFormat> bookedTimes;
+=======
+    private String firebasePlaceKey;
+    private String spotId;
+>>>>>>> spot delete
 
     //Sample Photos:
     //"https://previews.123rf.com/images/mack2happy/mack2happy1106/mack2happy110600045/9809346-parking-lot-Stock-Photo.jpg"
@@ -35,7 +47,7 @@ public class Spot extends Place implements Serializable {
     // Default Constructor
     public Spot(){}
 
-    public Spot(String address, String type, String description, double price, String permitRequired, String spotNumber, String renting, String nextAvailable, String firebaseKey) {
+    public Spot(String address, String type, String description, double price, String permitRequired, String spotNumber, String renting, String nextAvailable, String firebasePlaceKey, String spotId) {
         super(address);
         this.type = type;
         this.description = description;
@@ -45,12 +57,15 @@ public class Spot extends Place implements Serializable {
         this.renting = renting;
         this.nextAvailable = nextAvailable;
         this.photo = null;
-        this.firebaseKey = firebaseKey;
+        this.firebasePlaceKey = firebasePlaceKey;
+        this.spotId = spotId;
+
     }
 
-    public Spot(String address, String type, String description, double price, String permitRequired, String spotNumber, String renting, String nextAvailable, String firebaseKey, String photo) {
+    public Spot(String address, String type, String description, double price, String permitRequired, String spotNumber, String renting, String nextAvailable, String firebasePlaceKey, String spotId, String photo) {
         super(address);
-        this.firebaseKey = firebaseKey;
+        this.spotId = spotId;
+        this.firebasePlaceKey = firebasePlaceKey;
         this.type = type;
         this.description = description;
         this.price = price;
@@ -59,16 +74,15 @@ public class Spot extends Place implements Serializable {
         this.photo = photo;
         this.renting = renting;
         this.nextAvailable = nextAvailable;
+
     }
 
-    @Override
-    public String getFirebaseKey() {
-        return firebaseKey;
+    public String getFirebasePlaceKey() {
+        return firebasePlaceKey;
     }
 
-    @Override
-    public void setFirebaseKey(String firebaseKey) {
-        this.firebaseKey = firebaseKey;
+    public void setFirebasePlaceKey(String firebasePlaceKey) {
+        this.firebasePlaceKey = firebasePlaceKey;
     }
 
     public String getType() {

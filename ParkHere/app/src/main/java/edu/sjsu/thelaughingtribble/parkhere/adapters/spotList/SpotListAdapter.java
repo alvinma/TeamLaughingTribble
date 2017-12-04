@@ -1,6 +1,7 @@
 package edu.sjsu.thelaughingtribble.parkhere.adapters.spotList;
 
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import java.util.ArrayList;
 
 import edu.sjsu.thelaughingtribble.parkhere.R;
 import edu.sjsu.thelaughingtribble.parkhere.models.pojo.Spot;
+import edu.sjsu.thelaughingtribble.parkhere.models.pojo.User;
 
 /**
  * Created by jennifernghinguyen on 10/31/17.
@@ -20,14 +22,21 @@ public class SpotListAdapter extends RecyclerView.Adapter<SpotListItemViewHolder
 
     private ArrayList<Spot> spots = new ArrayList<>();
     private SpotListItemViewHolder spotListUIComponents;
+    private User user;
 
-    public SpotListAdapter(ArrayList<Spot> spots) {
+    public SpotListAdapter(ArrayList<Spot> spots, User user) {
         this.spots = spots;
+        this.user = user;
+
+        Log.i("SpotListAdapter user" , user.getUid());
+
     }
 
     @Override
     public void onBindViewHolder(SpotListItemViewHolder holder, int position) {
         Spot spot = spots.get(position);
+        spotListUIComponents.setSpot(spot);
+        spotListUIComponents.setUser(user);
         spotListUIComponents.getDescriptionText().setText(spot.getDescription());
         spotListUIComponents.getNextAvailableText().setText(spot.getNextAvailable());
         spotListUIComponents.getPermitRequiredText().setText(spot.getPermitRequired());
