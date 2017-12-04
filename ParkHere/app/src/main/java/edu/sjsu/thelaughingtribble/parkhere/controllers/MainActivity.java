@@ -24,6 +24,7 @@ import edu.sjsu.thelaughingtribble.parkhere.R;
 import edu.sjsu.thelaughingtribble.parkhere.Utils.Constant;
 import edu.sjsu.thelaughingtribble.parkhere.adapters.homePostList.HomePostListAdapter;
 import edu.sjsu.thelaughingtribble.parkhere.models.pojo.Post;
+import edu.sjsu.thelaughingtribble.parkhere.models.pojo.Spot;
 import edu.sjsu.thelaughingtribble.parkhere.models.pojo.User;
 import edu.sjsu.thelaughingtribble.parkhere.models.viewModels.MainActivityViewModel;
 import edu.sjsu.thelaughingtribble.parkhere.models.viewModels.NavigationViewModel;
@@ -55,6 +56,13 @@ public class MainActivity extends AppCompatActivity {
 
 
         init();
+        getParkingList();
+        Log.i("post size",""+ posts.size());
+        for(Post s: posts){
+            Log.i("post", s.getSpotId());
+            Log.i("post", s.getOwnerId());
+            Log.i("post", s.getTitle());
+        }
         if(posts.size()>0){
             initList();
             getParkingList();
@@ -70,6 +78,13 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    private void getOwner(String ownerId){
+
+    }
+
+    private void getSpot(String spotId){
+
+    }
     private void initList() {
         mainActivityUiComponets.getHomePostList().setLayoutManager(mainActivityUiComponets.getLayoutManager());
         mAdapter = new HomePostListAdapter(posts);
@@ -80,11 +95,11 @@ public class MainActivity extends AppCompatActivity {
     private void init() {
         mDatabase = FirebaseDatabase.getInstance();
         user = (User) getIntent().getSerializableExtra(Constant.INTENT_EXTRA_USER);
-        Log.i("Main", user.getUid() + " " + user.getEmail());
+
         menuUIComponents = new NavigationViewModel(this);
         mainActivityUiComponets = new MainActivityViewModel(this);
         menuUIComponents.setUser(user);
-        Log.i("Main menuUIComponents", menuUIComponents.getUser().getUid() + " " + menuUIComponents.getUser().getEmail());
+
         menuUIComponents.setHomeIntent();
         menuUIComponents.setNotificationIntent();
         menuUIComponents.setProfileIntent();
@@ -114,9 +129,14 @@ public class MainActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot item : dataSnapshot.getChildren()) {
                     Post post = item.getValue(Post.class);
+
+                    // public Post(String title, Spot spot, Owner owner, String datePosted)
+                    Log.i("postonDataChangespot id", post.getSpotId());
+                    //Log.i("postonDataChangeowner ", post.getOwnerId());
+                    Log.i("postonDataChangetitle ", post.getTitle());
                     posts.add(post);
                     setPosts(posts);
-                    mAdapter.notifyDataSetChanged();
+                    //mAdapter.notifyDataSetChanged();
                 }
             }
 
