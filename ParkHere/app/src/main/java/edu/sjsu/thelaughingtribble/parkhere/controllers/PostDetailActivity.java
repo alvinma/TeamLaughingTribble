@@ -76,7 +76,7 @@ public class PostDetailActivity extends AppCompatActivity {
     private void submitPost(){
         String postId = database.getReference().child("post").child(user.getUid()).push().getKey();
         post = new Post(placeId, spot.getSpotId(), user.getUid(), title);
-        database.getReference().child("post/" + user.getUid() + "/" + postId).setValue(post);
+        database.getReference().child("post/" + postId).setValue(post);
         MainActivity.startIntent(getBaseContext(), user);
     }
     private void getSpot(String placeId){
