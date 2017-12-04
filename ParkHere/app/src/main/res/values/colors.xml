@@ -5,4 +5,5 @@
     <color name="colorAccent">#FF4081</color>
     <color name="googleBackGround">#d83226</color>
     <color name="menuText">#646464</color>
+    <color name="white">#ffffff</color>
 </resources>

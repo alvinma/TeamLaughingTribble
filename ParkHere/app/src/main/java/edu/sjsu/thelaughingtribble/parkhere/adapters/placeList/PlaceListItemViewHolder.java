@@ -21,6 +21,8 @@ public class PlaceListItemViewHolder extends RecyclerView.ViewHolder implements 
     private TextView addressText;
     private Place place;
     private User user;
+    private String title;
+    private boolean posting;
     /*
     view is the inflated xml layout
      */
@@ -29,6 +31,15 @@ public class PlaceListItemViewHolder extends RecyclerView.ViewHolder implements 
         vehicleListItem.setOnClickListener(this);
         this.context = vehicleListItem.getContext();
         this.addressText = (TextView) vehicleListItem.findViewById(R.id.address_text);
+    }
+
+    public PlaceListItemViewHolder(View vehicleListItem, String title, boolean posting) {
+        super(vehicleListItem);
+        vehicleListItem.setOnClickListener(this);
+        this.context = vehicleListItem.getContext();
+        this.addressText = (TextView) vehicleListItem.findViewById(R.id.address_text);
+        this.title = title;
+        this.posting = posting;
     }
 
     public User getUser() {
@@ -65,6 +76,10 @@ public class PlaceListItemViewHolder extends RecyclerView.ViewHolder implements 
 
     @Override
     public void onClick(View v) {
-        MySpotsActivity.startIntent(v.getContext(), getUser(), getPlace());
+        if(posting){
+            MySpotsActivity.startIntent(v.getContext(), getUser(), getPlace(), title, posting);
+        }else {
+            MySpotsActivity.startIntent(v.getContext(), getUser(), getPlace());
+        }
     }
 }

@@ -102,7 +102,7 @@ public class AddASpotActivity extends AppCompatActivity {
                         spot = new Spot(place.getAddress(), type, description, price, permitRequired, spotNumber, renting, nextAvailable, place.getFirebaseKey(), key, photo);
                     }
 
-                    database.child("spots/" + user.getUid() + "/" + key).setValue(spot);
+                    database.child("spots/" + user.getUid() + "/" + place.getFirebaseKey()+"/"+ key).setValue(spot);
 
                     MySpotsActivity.startIntent(AddASpotActivity.this, user, place);
 
@@ -144,7 +144,7 @@ public class AddASpotActivity extends AppCompatActivity {
                     spot = new Spot(place.getAddress(), type, description, price, permitRequired, spotNumber, renting, nextAvailable, place.getFirebaseKey(), edit_data.getSpotId(), photo);
 
 
-                    database.child("spots/" + user.getUid() + "/" + edit_data.getSpotId()).setValue(spot);
+                    database.child("spots/" + user.getUid() + "/" + place.getFirebaseKey()+"/"+ key).setValue(spot);
 
                     MySpotsActivity.startIntent(AddASpotActivity.this, user, place);
 
