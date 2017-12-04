@@ -86,6 +86,8 @@ public class MyPlacesActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot item : dataSnapshot.getChildren()) {
                     Place place = item.getValue(Place.class);
+                    Log.i("add", place.getAddress());
+                    Log.i("key", place.getFirebaseKey());
                     places.add(place);
                     setPlaces(places);
                     adapter.notifyDataSetChanged();
