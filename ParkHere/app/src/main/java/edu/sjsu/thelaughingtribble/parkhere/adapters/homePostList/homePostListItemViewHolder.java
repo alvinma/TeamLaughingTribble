@@ -29,6 +29,10 @@ public class homePostListItemViewHolder extends RecyclerView.ViewHolder{
     private TextView postPrice;
     private TextView postDescription;
     private Context context;
+<<<<<<< HEAD
+=======
+    private TextView totalRate;
+>>>>>>> fix post db
 
     /*
 
@@ -43,8 +47,16 @@ public class homePostListItemViewHolder extends RecyclerView.ViewHolder{
         this.datePosted = (TextView) homePostListItem.findViewById(R.id.post_date_posted);
         this.postPrice = (TextView) homePostListItem.findViewById(R.id.post_price);
         this.postDescription = (TextView) homePostListItem.findViewById(R.id.post_description);
+        this.totalRate = (TextView) homePostListItem.findViewById(R.id.total_rate);
     }
 
+    public TextView getTotalRate() {
+        return totalRate;
+    }
+
+    public void setTotalRate(TextView totalRate) {
+        this.totalRate = totalRate;
+    }
 
     public Context getContext() {
         return context;
