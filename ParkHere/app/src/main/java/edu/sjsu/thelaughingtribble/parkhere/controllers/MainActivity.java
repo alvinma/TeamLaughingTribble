@@ -56,14 +56,22 @@ public class MainActivity extends AppCompatActivity {
 
 
         init();
+<<<<<<< HEAD
         getParkingList();
         initList();
 
         //TODO: moved the order of getPArkingList() from below init() & initList() to TOP
+=======
+        if(posts.size()>0){
+            initList();
+            getParkingList();
+        }
+>>>>>>> post sumit POST done
         mainActivityUiComponets.getSpotSubmission().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                registerParking();
+                //registerParking();
+                AddPostActivity.startIntent(getBaseContext(), user);
             }
         });
 
@@ -156,7 +164,6 @@ public class MainActivity extends AppCompatActivity {
 
     public static void startIntent(Context context, User user) {
         Intent intent = new Intent(context, MainActivity.class);
-        Log.i("Main Intent", user.getUid() + " " + user.getEmail());
         intent.putExtra(Constant.INTENT_EXTRA_USER, user);
         context.startActivity(intent);
     }

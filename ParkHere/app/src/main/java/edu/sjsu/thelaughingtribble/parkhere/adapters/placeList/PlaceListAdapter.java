@@ -20,10 +20,18 @@ public class PlaceListAdapter extends RecyclerView.Adapter<PlaceListItemViewHold
     private ArrayList<Place> places = new ArrayList<>();
     private PlaceListItemViewHolder placeListUIComponents;
     private User user;
+    private boolean posting = false;
+    private String title = "";
 
     public PlaceListAdapter(ArrayList<Place> places, User user) {
         this.places = places;
         this.user = user;
+    }
+    public PlaceListAdapter(ArrayList<Place> places, User user, String title, boolean posting) {
+        this.places = places;
+        this.user = user;
+        this.title = title;
+        this.posting = posting;
     }
 
     @Override
@@ -38,7 +46,12 @@ public class PlaceListAdapter extends RecyclerView.Adapter<PlaceListItemViewHold
     @Override
     public PlaceListItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         final View mView = LayoutInflater.from(parent.getContext()).inflate(R.layout.place_list_item, parent, false);
-        placeListUIComponents = new PlaceListItemViewHolder(mView);
+       if(posting){
+           placeListUIComponents = new PlaceListItemViewHolder(mView, title, posting);
+       }else {
+           placeListUIComponents = new PlaceListItemViewHolder(mView);
+       }
+
         return placeListUIComponents;
     }
 

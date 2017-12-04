@@ -9,6 +9,8 @@ public final class Constant {
     public static String INTENT_EXTRA_PLACE = "place";
     public static String INTENT_EXTRA_USER = "user";
     public static String INTENT_EXTRA_SPOT = "spot";
+    public static String INTENT_EXTRA_POST = "post";
+    public static String PLACEID = "placeId";
     public static String REQUIRE_TEXT = "Required";
     public static String ERROR = "ERROR ";
     public static String PHONE_FORMAT_TEXT = "Phone number must be in format ###-###-####";
@@ -24,6 +26,11 @@ public final class Constant {
     public static String DELETE_DIALOG_NO = "NO";
     public static String DELETE_DIALOG_TITLE = "Confirm Delete";
     public static String DELETE_DIALOG_SUCCESS = "Delete successfull";
+<<<<<<< HEAD
 >>>>>>> spot delete
 
+=======
+    public static String POSTING = "posting";
+    public static String TITLE = "title";
+>>>>>>> post sumit POST done
 }

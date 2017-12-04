@@ -23,33 +23,37 @@ import edu.sjsu.thelaughingtribble.parkhere.models.pojo.Place;
 import edu.sjsu.thelaughingtribble.parkhere.models.pojo.User;
 import edu.sjsu.thelaughingtribble.parkhere.models.viewModels.MyPlacesActivityViewModel;
 
-public class MyPlacesActivity extends AppCompatActivity {
+public class MyPlacesActivity extends BaseActivity {
     MyPlacesActivityViewModel myPlacesActivityUIComponents;
     private RecyclerView.Adapter adapter;
     private ArrayList<Place> places = new ArrayList<>();
     private User user;
     private FirebaseDatabase database;
     private DatabaseReference reference;
+    private boolean posting = false;
+    private String title = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_places);
         database = FirebaseDatabase.getInstance();
-        user = (User) getIntent().getSerializableExtra(Constant.INTENT_EXTRA_USER);
-        myPlacesActivityUIComponents = new MyPlacesActivityViewModel(this);
-        myPlacesActivityUIComponents.setUser(user);
-        if (myPlacesActivityUIComponents.getActionBar() != null) {
-            myPlacesActivityUIComponents.getActionBar().setTitle("My Places");
-            myPlacesActivityUIComponents.getActionBar().setDisplayHomeAsUpEnabled(true);
-        }
+        getDataFromIntent();
+        setupUI();
+
+
         getAllPlaces(user.getUid());
 
 
         myPlacesActivityUIComponents.getPlaceList().setLayoutManager(myPlacesActivityUIComponents.getLayoutManager());
 
-        adapter = new PlaceListAdapter(places, user);
+        if(posting){
+            adapter = new PlaceListAdapter(places, user, title, posting);
+        }else {
+            adapter = new PlaceListAdapter(places, user);
+        }
         myPlacesActivityUIComponents.getPlaceList().setAdapter(adapter);
+
 
     }
 
@@ -57,6 +61,33 @@ public class MyPlacesActivity extends AppCompatActivity {
         return places;
     }
 
+    public void setupUI(){
+        myPlacesActivityUIComponents = new MyPlacesActivityViewModel(this);
+        myPlacesActivityUIComponents.setUser(user);
+        if(posting){
+            if (myPlacesActivityUIComponents.getActionBar() != null) {
+                myPlacesActivityUIComponents.getActionBar().setTitle("Select a place");
+                myPlacesActivityUIComponents.getActionBar().setDisplayHomeAsUpEnabled(true);
+            }
+        }else {
+            if (myPlacesActivityUIComponents.getActionBar() != null) {
+                myPlacesActivityUIComponents.getActionBar().setTitle("My Places");
+                myPlacesActivityUIComponents.getActionBar().setDisplayHomeAsUpEnabled(true);
+            }
+        }
+    }
+    private void getDataFromIntent(){
+        user = (User) getIntent().getSerializableExtra(Constant.INTENT_EXTRA_USER);
+        if(getIntent().hasExtra(Constant.POSTING)) {
+            posting = getIntent().getExtras().getBoolean(Constant.POSTING);
+        }else {
+            posting = false;
+        }
+
+        if(getIntent().hasExtra(Constant.TITLE)) {
+            title = getIntent().getExtras().getString(Constant.TITLE);
+        }
+    }
     @Override
     protected void onStart() {
         super.onStart();
@@ -104,8 +135,15 @@ public class MyPlacesActivity extends AppCompatActivity {
 
     public static void startIntent(Context context, User user) {
         Intent intent = new Intent(context, MyPlacesActivity.class);
-        Log.i("my places startIntent", user.getUid() + " " + user.getEmail());
         intent.putExtra(Constant.INTENT_EXTRA_USER, user);
+        context.startActivity(intent);
+    }
+
+    public static void startIntent(Context context, User user, String title, boolean posting) {
+        Intent intent = new Intent(context, MyPlacesActivity.class);
+        intent.putExtra(Constant.INTENT_EXTRA_USER, user);
+        intent.putExtra(Constant.POSTING, posting);
+        intent.putExtra(Constant.TITLE, title);
         context.startActivity(intent);
     }
 
