@@ -76,7 +76,7 @@ public class SpotDetailActivity extends AppCompatActivity {
     private void getIntentData() {
         user = (User) getIntent().getSerializableExtra(Constant.INTENT_EXTRA_USER);
         spot = (Spot) getIntent().getSerializableExtra(Constant.INTENT_EXTRA_SPOT);
-        place = new Place(spot.getAddress(), spot.getFirebasePlaceKey());
+        place = new Place(spot.getFirebasePlaceKey(), spot.getAddress());
     }
 
     private void deleteSpot() {
