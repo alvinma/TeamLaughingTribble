@@ -68,23 +68,34 @@ public class AddASpotActivity extends AppCompatActivity {
         addASPotUI.getSubmit().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.i("add spot", "submitting");
                 if (!addASPotUI.getSpotNum().getText().toString().equals("")) {
                     spotNumber = addASPotUI.getSpotNum().getText().toString();
+                    Log.i("spotNumber", spotNumber);
                 } else {
                     addASPotUI.getSpotNum().setError(Constant.REQUIRE_TEXT);
                 }
 
                 if (!addASPotUI.getPrice().getText().toString().equals("")) {
                     price = Double.valueOf(addASPotUI.getPrice().getText().toString());
+                    Log.i("price", ""+price);
                 } else {
                     addASPotUI.getPrice().setError(Constant.REQUIRE_TEXT);
                 }
 
                 if (!addASPotUI.getDescription().getText().toString().equals("")) {
                     description = addASPotUI.getDescription().getText().toString();
+                    Log.i("description", description);
                 } else {
                     addASPotUI.getDescription().setError(Constant.REQUIRE_TEXT);
                 }
+
+                Log.i("address", place.getAddress());
+                Log.i("type", type);
+                Log.i("permit", permitRequired);
+
+                Log.i("getFirebasePlaceKey()", place.getFirebaseKey());
+
 
                 if (place.getAddress() != null && type != null && description != null && price != 0 && permitRequired != null && spotNumber != null && place.getFirebaseKey() != null) {
                     renting = "yes";
@@ -92,10 +103,13 @@ public class AddASpotActivity extends AppCompatActivity {
                     Spot spot = null;
                     String key = database.child("spots").child(user.getUid()).push().getKey();
                     if (photo == null) {
-                        spot = new Spot(place.getAddress(), type, description, price, permitRequired, spotNumber, renting, nextAvailable, place.getFirebaseKey());
+                        spot = new Spot(place.getAddress(), type, description, price, permitRequired, spotNumber, renting, nextAvailable, place.getFirebaseKey(), key);
                     } else {
-                        spot = new Spot(place.getAddress(), type, description, price, permitRequired, spotNumber, renting, nextAvailable, place.getFirebaseKey(), photo);
+                        spot = new Spot(place.getAddress(), type, description, price, permitRequired, spotNumber, renting, nextAvailable, place.getFirebaseKey(), key, photo);
                     }
+
+                    Log.i("spot", spot.getSpotId());
+
                     database.child("spots/" + user.getUid() + "/" + key).setValue(spot);
 
                     MySpotsActivity.startIntent(AddASpotActivity.this, user, place);

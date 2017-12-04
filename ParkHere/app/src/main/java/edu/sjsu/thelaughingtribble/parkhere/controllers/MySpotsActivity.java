@@ -51,7 +51,7 @@ public class MySpotsActivity extends AppCompatActivity {
         mySpotsActivityUIComponents.getSpotList().setLayoutManager(mySpotsActivityUIComponents.getLayoutManager());
 
         getAllSpot(user.getUid());
-        adapter = new SpotListAdapter(spots);
+        adapter = new SpotListAdapter(spots, user);
         mySpotsActivityUIComponents.getSpotList().setAdapter(adapter);
 
         mySpotsActivityUIComponents.getAddSpotButton().setOnClickListener(new View.OnClickListener() {
@@ -70,8 +70,6 @@ public class MySpotsActivity extends AppCompatActivity {
     }
 
     public static void startIntent(Context context, User user, Place place) {
-        Log.i("intent to spot ", place.getAddress());
-        Log.i("intent to spot ", user.getUid() + " " + user.getEmail());
         Intent intent = new Intent(context, MySpotsActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         intent.putExtra(Constant.INTENT_EXTRA_PLACE, place);

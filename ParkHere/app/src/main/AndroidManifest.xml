@@ -39,7 +39,8 @@
             android:value="AIzaSyAGXlOk9q9UDaGoGh7_YcHQ-iG4a8_Kkns" />
 
         <activity android:name=".controllers.AddASpotActivity" />
-        <activity android:name=".controllers.AddAPlace"></activity>
+        <activity android:name=".controllers.AddAPlace" />
+        <activity android:name=".controllers.SpotDetailActivity"></activity>
     </application>
 
 </manifest>
