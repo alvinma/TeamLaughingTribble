@@ -65,7 +65,6 @@ public class HomePostListAdapter extends RecyclerView.Adapter<homePostListItemVi
 
                 Intent intent = new Intent(view.getContext(), PostInformationActivity.class);
                 intent.putExtra("Post.class", currentPost);
-                intent.putExtra("image", homePostListUI.getPostImage().getId());
                 view.getContext().startActivity(intent);
             }
         });

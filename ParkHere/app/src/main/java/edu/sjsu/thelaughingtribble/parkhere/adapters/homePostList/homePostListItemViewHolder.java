@@ -101,48 +101,4 @@ public class homePostListItemViewHolder extends RecyclerView.ViewHolder{
     public void setPostDescription(TextView postDescription) {
         this.postDescription = postDescription;
     }
-
-    //DELETE
-    public void setOnClickListener1() {
-        this.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //MyProfileActivity.startIntent(getContext(), getUser());
-                //Toast.makeText(getContext(),"Clicked: " + postTitle.getText() , Toast.LENGTH_SHORT).show();
-                Snackbar.make(v, "Clicked: " + postTitle.getText(), Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-
-//                private TextView postTitle;
-//                private ImageView postImage;
-//                private TextView postOwner;
-//                private TextView datePosted;
-//                private TextView postPrice;
-//                private TextView postDescription;
-//                private Context context;
-
-
-
-                Intent intent = new Intent(getContext(), PostInformationActivity.class);
-//                intent.putExtra(Constant.INTENT_EXTRA_USER, user);
-
-                intent.putExtra("postTitle", postTitle.getText());
-               // intent.putExtra("postImage", postImage.get);
-//                intent.putExtra("image", postImage.);
-                intent.putExtra("class", this.getClass());
-                intent.putExtra("postOwner", postOwner.getText());
-                intent.putExtra("datePosted", datePosted.getText());
-                intent.putExtra("postPrice", postPrice.getText());
-                intent.putExtra("postDescription", postDescription.getText());
-
-                context.startActivity(intent);
-            }
-        });
-    }
-
-    //DELETE
-    public void callback(){
-        Intent intent = new Intent(getContext(), PostInformationActivity.class);
-        ////intent.putExtra(Constant.INTENT_EXTRA_USER, user);
-        context.startActivity(intent);
-    }
 }

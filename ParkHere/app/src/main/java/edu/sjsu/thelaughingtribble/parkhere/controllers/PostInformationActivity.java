@@ -14,6 +14,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.sql.Time;
 import java.sql.Timestamp;
@@ -21,11 +23,16 @@ import java.text.DateFormat;
 import java.util.Date;
 
 import edu.sjsu.thelaughingtribble.parkhere.R;
+import edu.sjsu.thelaughingtribble.parkhere.Utils.Constant;
 import edu.sjsu.thelaughingtribble.parkhere.adapters.homePostList.homePostListItemViewHolder;
 import edu.sjsu.thelaughingtribble.parkhere.models.pojo.Post;
+import edu.sjsu.thelaughingtribble.parkhere.models.pojo.User;
 
 public class PostInformationActivity extends AppCompatActivity {
 
+    private FirebaseDatabase mDatabase;
+    private DatabaseReference mReference;
+    private User user;
     private Post post;
     private Button purchaseButton;
 
@@ -44,6 +51,11 @@ public class PostInformationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post_information);
 //        setContentView(R.layout.content_post_information);
+
+        mDatabase = FirebaseDatabase.getInstance();
+        user = (User) getIntent().getSerializableExtra(Constant.INTENT_EXTRA_USER);
+
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("Post Information");
         setSupportActionBar(toolbar);
@@ -67,7 +79,9 @@ public class PostInformationActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Snackbar.make(view, "Purchasing the item", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
-//TODO: uncomment
+
+
+                //TODO: uncomment
 //                Intent intent_purchase = new Intent(view, BookPost.class);
 //                view.getContext().startActivity(intent_purchase);
             }
