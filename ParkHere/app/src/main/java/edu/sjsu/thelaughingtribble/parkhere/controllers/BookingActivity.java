@@ -15,6 +15,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
@@ -166,6 +168,26 @@ public class BookingActivity extends AppCompatActivity {
                     return;
                 }
 
+                String key = mReference.child(user.getUid()).push().getKey();
+                //Adding values to purchase History
+                //GET HISTORY //TODO: GETHISITOYR
+
+                String spotID = post.getSpot().getFirebaseKey();
+                mReference = mDatabase.getReference(Constant.POST_HISTORY + "/" + spotID);
+                mReference.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        for(DataSnapshot item : dataSnapshot.getChildren()){
+                            Renting booking = item.getValue(Renting.class);
+                            postHistory.addToHistory(booking);
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
                 //tests the avaliability of the spot
                 if(!openSlot(startDate.getText().toString(), endDate.getText().toString())){
                     return;
@@ -174,37 +196,13 @@ public class BookingActivity extends AppCompatActivity {
                 Snackbar.make(view, "Purchasing the item", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
 
-                String key = mReference.child(user.getUid()).push().getKey();
-                //Adding values to purchase History
-                //GET HISTORY //TODO: GETHISITOYR
-
-
-                String spotID = post.getSpot().getFirebaseKey();
-                mReference = mDatabase.getReference(Constant.POST_HISTORY + "/" + spotID);
-
-
-//                mReference.addValueEventListener(new ValueEventListener() {
-//                    @Override
-//                    public void onDataChange(DataSnapshot dataSnapshot) {
-//                        for(DataSnapshot item : dataSnapshot.getChildren()){
-//                            Renting booking = item.getValue(Renting.class);
-//                            postHistory.addToHistory(booking);
-//                        }
-//                    }
-//
-//                    @Override
-//                    public void onCancelled(DatabaseError databaseError) {
-//
-//                    }
-//                });
-
                 Spot spot = post.getSpot();
 
-                String startDate = "START";
-                String endDate = "END";
+                String startDate_l = startDate.getText().toString();    //"Start Date"
+                String endDate_l = endDate.getText().toString();        //"End Date"
 
                 Renter user_renting = (Renter) user;
-                Renting booking = new Renting(spot, user_renting, post.getOwner(), startDate, endDate);
+                Renting booking = new Renting(spot, user_renting, post.getOwner(), startDate_l, endDate_l);
                 booking.setOwner(post.getOwner());
                 booking.setRenter(user_renting);
 
@@ -222,6 +220,7 @@ public class BookingActivity extends AppCompatActivity {
             postPrice.setText(String.valueOf(post.getSpot().getPrice()));
         }else{
             postDescription.setText("Description: Empty Value");
+            postPrice.setText("Price: Missing");
         }
 
         if(post.getOwner() != null){
