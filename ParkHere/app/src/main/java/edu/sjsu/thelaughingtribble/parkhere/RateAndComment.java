@@ -1,5 +1,6 @@
 package edu.sjsu.thelaughingtribble.parkhere;
 
+import android.content.Intent;
 import android.icu.text.SimpleDateFormat;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -8,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RatingBar;
 import android.widget.TextView;
+
 
 /**
  * Created by Alvin on 11/20/2017.
@@ -49,8 +51,13 @@ public class RateAndComment extends AppCompatActivity{
         submitFeedback.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 // put code to process data here
+                String rName = renterName.getText().toString();
+                String rComment = comment.getText().toString();
+                String rCurrentTime = currentTime.getText().toString();
+                Double dObj = new Double(grade);
+
+
 
                 finish();
             }
