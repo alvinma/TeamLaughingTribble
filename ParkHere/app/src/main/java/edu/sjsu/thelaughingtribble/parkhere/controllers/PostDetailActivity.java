@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.google.firebase.database.DataSnapshot;
@@ -19,6 +20,8 @@ import edu.sjsu.thelaughingtribble.parkhere.Utils.Constant;
 import edu.sjsu.thelaughingtribble.parkhere.Utils.Utilities;
 import edu.sjsu.thelaughingtribble.parkhere.models.pojo.Place;
 import edu.sjsu.thelaughingtribble.parkhere.models.pojo.Post;
+import edu.sjsu.thelaughingtribble.parkhere.models.pojo.Renter;
+import edu.sjsu.thelaughingtribble.parkhere.models.pojo.Renting;
 import edu.sjsu.thelaughingtribble.parkhere.models.pojo.Spot;
 import edu.sjsu.thelaughingtribble.parkhere.models.pojo.User;
 import edu.sjsu.thelaughingtribble.parkhere.models.viewModels.PostDetailActivityViewModel;
@@ -26,12 +29,14 @@ import edu.sjsu.thelaughingtribble.parkhere.models.viewModels.SpotDetailViewMode
 
 import static android.R.attr.id;
 import static android.R.attr.key;
+import static android.R.attr.start;
 import static edu.sjsu.thelaughingtribble.parkhere.Utils.Constant.POSTING;
 
 public class PostDetailActivity extends AppCompatActivity {
 
     private boolean posting;
     private User user;
+    private Renter renter;
     private Spot spot;
     private Place place;
     private Post post;
@@ -57,9 +62,33 @@ public class PostDetailActivity extends AppCompatActivity {
         setUpUI();
 
     }
+    private boolean isDebugging(){
+        boolean debugging = false;
+        try {
+            debugging = getIntent().getExtras().getBoolean(Constant.DEBUGGING);
+        }
+        catch (Exception ex){
+            //Value not set
+        }
+        if(debugging){
+            post = (Post) getIntent().getSerializableExtra(Constant.INTENT_EXTRA_POST);
+            user = (User) getIntent().getSerializableExtra(Constant.INTENT_EXTRA_USER);
+//            renter = (Renter) user;
+            renter = new Renter(user);
+            spot = post.getSpot();
+            placeId = post.getPlaceID();
+            title = post.getTitle();
+            return true;
+        }
+        return false;
+    }
     private void getDataFromIntent(){
         posting = getIntent().getExtras().getBoolean(Constant.POSTING);
-        if(posting){
+        if(isDebugging()){
+            //getting the info in the method
+            return;
+        }
+        else if(posting){
             user = (User) getIntent().getSerializableExtra(Constant.INTENT_EXTRA_USER);
             spot = (Spot) getIntent().getSerializableExtra(Constant.INTENT_EXTRA_SPOT);
             placeId = getIntent().getExtras().getString(Constant.PLACEID);
@@ -70,13 +99,27 @@ public class PostDetailActivity extends AppCompatActivity {
             post = (Post) getIntent().getSerializableExtra(Constant.INTENT_EXTRA_POST);
             title = post.getTitle();
         }
-
     }
 
     private void submitPost(){
         String postId = database.getReference().child("post").child(user.getUid()).push().getKey();
         post = new Post(placeId, spot.getSpotId(), user.getUid(), title);
         database.getReference().child("post/" + postId).setValue(post);
+        MainActivity.startIntent(getBaseContext(), user);
+    }
+    //Edited user ->renter
+    private void bookPost(){
+        String postId = database.getReference().child("post").child(user.getUid()).push().getKey();
+        post = new Post(placeId, spot.getSpotId(), renter.getUid(), title);
+        Renting booking = new Renting();
+        booking.setOwner(post.getOwner());
+        booking.setRenter(renter);
+        booking.setStartDate("START_DATE");
+        booking.setEndDate("END_DATE");
+        database.getReference().child("postHistory/" + spot.getFirebaseKey() + "/" + postId).setValue(booking);
+
+
+        //Go back to main
         MainActivity.startIntent(getBaseContext(), user);
     }
     private void getSpot(String placeId){
@@ -115,6 +158,7 @@ public class PostDetailActivity extends AppCompatActivity {
         if(posting){
             postDetailUI.getPostButton().setVisibility(View.VISIBLE);
             postDetailUI.getBookButton().setVisibility(View.GONE);
+            postDetailUI.getCommentsButton().setVisibility(View.GONE);
             postDetailUI.getDate().setVisibility(View.GONE);
 
             postDetailUI.getPostButton().setOnClickListener(new View.OnClickListener() {
@@ -127,6 +171,26 @@ public class PostDetailActivity extends AppCompatActivity {
         }else {
             postDetailUI.getPostButton().setVisibility(View.GONE);
             postDetailUI.getBookButton().setVisibility(View.VISIBLE);
+            postDetailUI.getCommentsButton().setVisibility(View.VISIBLE);
+
+            postDetailUI.getBookButton().setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    bookPost();
+                }
+            });
+
+            postDetailUI.getCommentsButton().setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    //TODO: Uses Alvins part
+//                    Intent intent = new Intent(view.getContext(), COMMENTS_CLASS.class);
+//                    intent.putExtra(Constant.INTENT_EXTRA_POST, post);
+//                    view.getContext().startActivity(intent);
+
+                    Toast.makeText(view.getContext(), "Loading Comments...", Toast.LENGTH_SHORT).show();
+                }
+            });
         }
 
     }

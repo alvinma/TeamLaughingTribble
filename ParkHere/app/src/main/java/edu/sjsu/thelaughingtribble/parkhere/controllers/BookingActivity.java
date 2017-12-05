@@ -82,7 +82,6 @@ public class BookingActivity extends AppCompatActivity {
             }
         }
 
-
         postImage = (ImageView) findViewById(R.id.post_image_info);
         postTitle = (TextView) findViewById(R.id.post_location_info);
         postPrice = (TextView) findViewById(R.id.post_price_info);
@@ -101,17 +100,17 @@ public class BookingActivity extends AppCompatActivity {
 
     //Return false if the given times are not avaliable
     public Boolean openSlot(String startDate, String endDate){
-        //startDate is later than endDate
-        if(startDate.compareTo(endDate) > 0){
-            return false;
-        }
-
-
         Date startDate_f = Utilities.convertStringDate(startDate);
         Date endDate_f = Utilities.convertStringDate(endDate);
 
+        //startDate is later than endDate
+        if(startDate_f.compareTo(endDate_f) > 0){
+            return false;
+        }
+
         Date booked_start;
         Date booked_end;
+
         for(Renting booking: postHistory.getHistory()){
             booked_start = Utilities.convertStringDate(booking.getStartDate());
             booked_end = Utilities.convertStringDate(booking.getEndDate());
@@ -136,14 +135,11 @@ public class BookingActivity extends AppCompatActivity {
             //s+d, b_s, b_e, s+e
             //s+d, b_s, s+e, b_e
         }
-
         return true;
     }
 
     public void init(){
-
         final Calendar myCalendar = Calendar.getInstance();
-
         final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
 
             @Override
@@ -154,9 +150,7 @@ public class BookingActivity extends AppCompatActivity {
                 myCalendar.set(Calendar.MONTH, monthOfYear);
                 myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
             }
-
         };
-
 
         startDate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -181,7 +175,6 @@ public class BookingActivity extends AppCompatActivity {
                 //Moved to subtree from "~/" to "~/postHistory/spotID/bookingID"
                 mReference = mReference.child(user.getUid());
                 String key = mReference.push().getKey();
-
 
                 mReference.addValueEventListener(new ValueEventListener() {
                     @Override
@@ -208,11 +201,11 @@ public class BookingActivity extends AppCompatActivity {
 
                 Spot spot = post.getSpot();
 
-                String startDate_l = startDate.getText().toString();    //"Start Date"
-                String endDate_l = endDate.getText().toString();        //"End Date"
+                String startDate_i = startDate.getText().toString();    //"Start Date"
+                String endDate_i = endDate.getText().toString();        //"End Date"
 
                 Renter user_renting = (Renter) user;
-                Renting booking = new Renting(spot, user_renting, post.getOwner(), startDate_l, endDate_l);
+                Renting booking = new Renting(spot, user_renting, post.getOwner(), startDate_i, endDate_i);
                 booking.setOwner(post.getOwner());
                 booking.setRenter(user_renting);
 
@@ -220,7 +213,6 @@ public class BookingActivity extends AppCompatActivity {
 
                 String bookingID = booking.getFirebaseKey();
                 mReference.child("postHistory/" + spotID + "/" + bookingID).setValue(booking);
-
 
                 //TODO:
                 //  -What gets affected with the booking of a post

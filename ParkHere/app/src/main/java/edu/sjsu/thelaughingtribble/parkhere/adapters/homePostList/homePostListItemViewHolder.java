@@ -15,6 +15,7 @@ import edu.sjsu.thelaughingtribble.parkhere.R;
 import edu.sjsu.thelaughingtribble.parkhere.Utils.Constant;
 import edu.sjsu.thelaughingtribble.parkhere.controllers.MyProfileActivity;
 import edu.sjsu.thelaughingtribble.parkhere.controllers.PostInformationActivity;
+import edu.sjsu.thelaughingtribble.parkhere.models.pojo.User;
 
 /**
  * Created by jennifernghinguyen on 10/31/17.
@@ -30,7 +31,6 @@ public class homePostListItemViewHolder extends RecyclerView.ViewHolder{
     private TextView postDescription;
     private Context context;
     private TextView totalRate;
-
     /*
 
         view is the inflated xml layout

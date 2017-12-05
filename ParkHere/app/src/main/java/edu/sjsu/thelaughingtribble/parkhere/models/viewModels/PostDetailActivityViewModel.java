@@ -25,6 +25,7 @@ public class PostDetailActivityViewModel extends ActivityCommonViewModel {
     private TextView description;
     private Button postButton;
     private Button bookButton;
+    private Button commentsButton;
 
 
     public PostDetailActivityViewModel(Context context) {
@@ -35,11 +36,12 @@ public class PostDetailActivityViewModel extends ActivityCommonViewModel {
         spotImage = (ImageView) ((Activity) context).findViewById(R.id.spot_image);
         spotNum =  (TextView) ((Activity) context).findViewById(R.id.spot_number_text);
         type = (TextView) ((Activity) context).findViewById(R.id.type_text);
-        price = (TextView) ((Activity) context).findViewById(R.id.price_text);;
+        price = (TextView) ((Activity) context).findViewById(R.id.price_text);
          permit = (TextView) ((Activity) context).findViewById(R.id.permit_required_text);
-         description = (TextView) ((Activity) context).findViewById(R.id.description_text);;
+         description = (TextView) ((Activity) context).findViewById(R.id.description_text);
          postButton = (Button) ((Activity) context).findViewById(R.id.post_button);
-         bookButton = (Button) ((Activity) context).findViewById(R.id.book_button);;
+         bookButton = (Button) ((Activity) context).findViewById(R.id.book_button);
+        commentsButton = (Button) ((Activity) context).findViewById(R.id.comments_button);
     }
 
     public TextView getTitle() {
@@ -129,4 +131,8 @@ public class PostDetailActivityViewModel extends ActivityCommonViewModel {
     public void setBookButton(Button bookButton) {
         this.bookButton = bookButton;
     }
+
+    public Button getCommentsButton(){ return commentsButton;}
+
+    public void setCommentsButton(Button commentsButton){ this.commentsButton = commentsButton;}
 }

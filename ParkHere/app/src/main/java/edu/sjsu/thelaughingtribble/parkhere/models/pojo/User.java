@@ -13,16 +13,25 @@ import java.util.Map;
  */
 @IgnoreExtraProperties
 public class User implements Serializable {
-    private String uid;
-    private String userID;
-    private String firstName;
-    private String lastName;
-    private String email;
-    private String cellphone;
-    private ArrayList<Vehicle> vehicles;
+    private String uid = "D_uid";
+    private String userID = "D_userID";
+    private String firstName = "FirstName";
+    private String lastName = "LastName";
+    private String email = "email@email.com";
+    private String cellphone = "(408)555-1234";
+    private ArrayList<Vehicle> vehicles = new ArrayList<Vehicle>();
 
     public User(){
         // Default constructor required for calls to DataSnapshot.getValue(User.class)
+    }
+
+    public User(User user){
+        this.userID = user.getUserID();
+        this.firstName = user.getFirstName();
+        this.lastName = user.getLastName();
+        this.email = user.getEmail();
+        this.cellphone = user.getCellphone();
+        this.vehicles = user.getVehicles();
     }
 
     public User(String userID, String firstName, String lastName, String email, String cellphone) {

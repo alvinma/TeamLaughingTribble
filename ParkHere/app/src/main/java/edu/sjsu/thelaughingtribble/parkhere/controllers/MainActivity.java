@@ -60,8 +60,6 @@ public class MainActivity extends AppCompatActivity {
         getParkingList();
         initList();
 
-        //TODO: moved the order of getPArkingList() from below init() & initList() to TOP
-        getParkingList();
         Log.i("post size",""+ posts.size());
         for(Post s: posts){
             Log.i("post", s.getSpotId());
@@ -92,10 +90,8 @@ public class MainActivity extends AppCompatActivity {
     }
     private void initList() {
         mainActivityUiComponets.getHomePostList().setLayoutManager(mainActivityUiComponets.getLayoutManager());
-        mAdapter = new HomePostListAdapter(posts);
+        mAdapter= new HomePostListAdapter(posts, user);
         mainActivityUiComponets.getHomePostList().setAdapter(mAdapter);
-
-//        mainActivityUiComponets.getHomePostList().
     }
 
     private void init() {
@@ -114,7 +110,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        //TODO: research why getParkingList() is commented
         //Current solution calls getParkingList() @onCreate
         //getParkingList();
     }

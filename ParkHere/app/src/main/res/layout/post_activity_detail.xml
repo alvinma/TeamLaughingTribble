@@ -213,6 +213,24 @@
             android:layout_height="50dp"
             android:foregroundGravity="bottom"
             android:gravity="center_horizontal|center" />
+
+        <Button
+            android:id="@+id/comments_button"
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:layout_above="@+id/post_button"
+            android:layout_alignStart="@+id/post_button"
+            android:background="@color/colorPrimary"
+            android:foregroundGravity="left"
+            android:gravity="center_horizontal|center"
+            android:text="Comments"
+            android:textColor="@color/white"
+            android:textStyle="bold" />
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
         <Button
             android:id="@+id/book_button"
             android:background="@color/colorPrimary"
@@ -222,6 +240,8 @@
             android:layout_width="150dp"
             android:layout_height="50dp"
             android:foregroundGravity="bottom"
-            android:gravity="center_horizontal|center" />
+            android:gravity="center_horizontal|center"
+            android:layout_below="@+id/comments_button"/>
+
     </RelativeLayout>
 </LinearLayout>

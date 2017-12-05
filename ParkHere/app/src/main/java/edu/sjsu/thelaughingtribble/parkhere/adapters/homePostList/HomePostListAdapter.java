@@ -14,8 +14,13 @@ import com.bumptech.glide.Glide;
 import java.util.ArrayList;
 
 import edu.sjsu.thelaughingtribble.parkhere.R;
+import edu.sjsu.thelaughingtribble.parkhere.Utils.Constant;
+import edu.sjsu.thelaughingtribble.parkhere.controllers.PostDetailActivity;
 import edu.sjsu.thelaughingtribble.parkhere.controllers.PostInformationActivity;
+import edu.sjsu.thelaughingtribble.parkhere.models.pojo.Owner;
 import edu.sjsu.thelaughingtribble.parkhere.models.pojo.Post;
+import edu.sjsu.thelaughingtribble.parkhere.models.pojo.Spot;
+import edu.sjsu.thelaughingtribble.parkhere.models.pojo.User;
 
 /**
  * Created by jennifernghinguyen on 10/31/17.
@@ -25,10 +30,24 @@ public class HomePostListAdapter extends RecyclerView.Adapter<homePostListItemVi
 
     private ArrayList<Post> posts = new ArrayList<>();
     private homePostListItemViewHolder homePostListUI;
+    private User user;
 
     public HomePostListAdapter(ArrayList<Post> posts) {
         this.posts = posts;
 
+    }
+
+    public HomePostListAdapter(ArrayList<Post> posts, User user) {
+        this.posts = posts;
+        this.user = user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public User getUser() {
+        return user;
     }
 
     @Override
@@ -44,7 +63,14 @@ public class HomePostListAdapter extends RecyclerView.Adapter<homePostListItemVi
 
         homePostListUI.getDatePosted().setText(currentPost.getDatePosted());
         homePostListUI.getPostTitle().setText(currentPost.getTitle());
+        if(currentPost.getOwner() == null){
+            currentPost.setOwner(new Owner());
+        }
         homePostListUI.getPostOwner().setText(currentPost.getOwner().getFullName());
+
+        if(currentPost.getSpot() == null){
+            currentPost.setSpot(new Spot());
+        }
         homePostListUI.getPostPrice().setText(String.valueOf("$"+currentPost.getSpot().getPrice()));
         homePostListUI.getPostTitle().setText(String.valueOf(currentPost.getTotalGrade()));
         homePostListUI.getPostDescription().setText(currentPost.getSpot().getDescription());
@@ -58,14 +84,10 @@ public class HomePostListAdapter extends RecyclerView.Adapter<homePostListItemVi
         homePostListUI.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-//                Snackbar.make(view, "TESTING OUT THE NEW FEATURE", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-
-                Toast.makeText(view.getContext(), "Clicked on item", Toast.LENGTH_SHORT).show();
-
-                Intent intent = new Intent(view.getContext(), PostInformationActivity.class);
-                intent.putExtra("Post.class", currentPost);
+                Intent intent = new Intent(view.getContext(), PostDetailActivity.class);
+                intent.putExtra(Constant.DEBUGGING, true);
+                intent.putExtra(Constant.INTENT_EXTRA_POST, currentPost);
+                intent.putExtra(Constant.INTENT_EXTRA_USER, user);
                 view.getContext().startActivity(intent);
             }
         });

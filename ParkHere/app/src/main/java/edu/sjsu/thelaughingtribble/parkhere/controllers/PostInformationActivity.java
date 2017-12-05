@@ -36,7 +36,9 @@ import edu.sjsu.thelaughingtribble.parkhere.models.pojo.Renter;
 import edu.sjsu.thelaughingtribble.parkhere.models.pojo.Renting;
 import edu.sjsu.thelaughingtribble.parkhere.models.pojo.User;
 
-public class PostInformationActivity extends AppCompatActivity {
+//TODO: CRITICAL || extend the PostDetailActivity.java class
+//
+public class PostInformationActivity extends PostDetailActivity {
 
     private FirebaseDatabase mDatabase;
     private DatabaseReference mReference;

@@ -12,8 +12,8 @@ import java.util.Map;
  */
 @IgnoreExtraProperties
 public class Place implements Serializable {
-    private String address;
-    private String firebaseKey;
+    private String address = "123 Address Street. San Jose";
+    private String firebaseKey = "firebaseKey";
 
     // Default Constructor
     public Place() {}

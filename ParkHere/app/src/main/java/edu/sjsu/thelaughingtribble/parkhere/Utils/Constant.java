@@ -27,4 +27,5 @@ public final class Constant {
 
     public static String POSTING = "posting";
     public static String TITLE = "title";
+    public static String DEBUGGING = "debugging";
 }
