@@ -20,7 +20,6 @@ public class MyProfileActivity extends AppCompatActivity {
 
     MyProfileActivityViewModel myProfileActivityUIComponents;
     private User user;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

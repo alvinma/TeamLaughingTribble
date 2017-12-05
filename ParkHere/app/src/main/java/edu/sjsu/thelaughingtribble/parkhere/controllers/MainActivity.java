@@ -2,6 +2,10 @@ package edu.sjsu.thelaughingtribble.parkhere.controllers;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ShortcutInfo;
+import android.content.pm.ShortcutManager;
+import android.graphics.drawable.Icon;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
@@ -16,6 +20,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import edu.sjsu.thelaughingtribble.parkhere.CreateParkingSpotListing;
@@ -46,14 +51,11 @@ public class MainActivity extends AppCompatActivity {
     private User user;
     //post list
     ArrayList<Post> posts = new ArrayList<>();
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();
         setContentView(R.layout.activity_main);
-
-
         init();
         if(posts.size()>0){
             initList();

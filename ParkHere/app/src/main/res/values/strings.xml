@@ -64,6 +64,12 @@
     <string name="ph_plate_number">1273ZG</string>
     <string name="ph_address">1 Washington Sq, San Jose, CA 95112</string>
 
+    <!--strings for shortcut implementation-->
+    <string name="quickstart">View Profile</string>
+    <string name="quickstart_long">View My Profile</string>
+    <string name="quickstart2">Add Vehicle</string>
+    <string name="quickstart_long2">Add a Vehicle</string>
+    <string name="quickstart_disabled">quickstart_disabled</string>
 
     <string-array name="spot_type_array">
         <item>Hourly</item>
