@@ -39,7 +39,7 @@ public class HomePostListAdapter extends RecyclerView.Adapter<homePostListItemVi
 
         homePostListUI.getDatePosted().setText(currentPost.getDatePosted());
         homePostListUI.getPostTitle().setText(currentPost.getTitle());
-        homePostListUI.getPostOwner().setText(currentPost.getOwner().getFullName());
+        homePostListUI.getPostOwner().setText(currentPost.getOwner().getUserID());
         homePostListUI.getPostPrice().setText(String.valueOf("$"+currentPost.getSpot().getPrice()));
         homePostListUI.getPostTitle().setText(String.valueOf(currentPost.getTotalGrade()));
         homePostListUI.getPostDescription().setText(currentPost.getSpot().getDescription());
