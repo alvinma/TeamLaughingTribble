@@ -18,16 +18,26 @@ public class CommentAndRating implements Serializable{
     private String renter;
     private String comment;
     private String date;
+    private int commentID;
 
     // Default Constructor
     public CommentAndRating(){}
 
-    public CommentAndRating(Spot spot, double grade, String renter, String comment, String date) {
+    public CommentAndRating(Spot spot, double grade, String renter, String comment, String date, int commentID) {
         this.spot = spot;
         this.grade = grade;
         this.renter = renter;
         this.comment = comment;
         this.date = date;
+        this.commentID = commentID;
+    }
+
+    public CommentAndRating(double grade, String renter, String comment, String date, int commentID) {
+        this.grade = grade;
+        this.renter = renter;
+        this.comment = comment;
+        this.date = date;
+        this.commentID = commentID;
     }
 
     public Spot getSpot() {
@@ -70,6 +80,14 @@ public class CommentAndRating implements Serializable{
         this.date = date;
     }
 
+    public int getCommentID() {
+        return commentID;
+    }
+
+    public void setCommentID(int commentID) {
+        this.commentID = commentID;
+    }
+
     @Exclude
     public Map<String, Object> toMap() {
         HashMap<String, Object> result = new HashMap<>();
@@ -78,6 +96,7 @@ public class CommentAndRating implements Serializable{
         result.put("renter", renter);
         result.put("comment", comment);
         result.put("date", date);
+        result.put("commentID", commentID);
 
         return result;
     }
