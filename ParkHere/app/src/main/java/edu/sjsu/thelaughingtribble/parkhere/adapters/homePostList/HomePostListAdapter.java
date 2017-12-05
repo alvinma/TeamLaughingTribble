@@ -1,6 +1,7 @@
 package edu.sjsu.thelaughingtribble.parkhere.adapters.homePostList;
 
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,7 +37,6 @@ public class HomePostListAdapter extends RecyclerView.Adapter<homePostListItemVi
     @Override
     public void onBindViewHolder(homePostListItemViewHolder holder, int position) {
         Post currentPost = posts.get(position);
-
         homePostListUI.getDatePosted().setText(currentPost.getDatePosted());
         homePostListUI.getPostTitle().setText(currentPost.getTitle());
         homePostListUI.getPostOwner().setText(currentPost.getOwner().getUserID());

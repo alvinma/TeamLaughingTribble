@@ -144,7 +144,7 @@ public class AddASpotActivity extends AppCompatActivity {
                     spot = new Spot(place.getAddress(), type, description, price, permitRequired, spotNumber, renting, nextAvailable, place.getFirebaseKey(), edit_data.getSpotId(), photo);
 
 
-                    database.child("spots/" + user.getUid() + "/" + place.getFirebaseKey()+"/"+ key).setValue(spot);
+                    database.child("spots/" + user.getUid()+"/"+ spot.getFirebasePlaceKey()).child(spot.getSpotId()).setValue(spot);
 
                     MySpotsActivity.startIntent(AddASpotActivity.this, user, place);
 
