@@ -32,13 +32,11 @@ public class Spot extends Place implements Serializable {
     private String photo;
     private String renting;
     private String nextAvailable;
-<<<<<<< HEAD
     private String firebaseKey;
     private ArrayList<DateFormat> bookedTimes;
-=======
+
     private String firebasePlaceKey;
     private String spotId;
->>>>>>> spot delete
 
     //Sample Photos:
     //"https://previews.123rf.com/images/mack2happy/mack2happy1106/mack2happy110600045/9809346-parking-lot-Stock-Photo.jpg"

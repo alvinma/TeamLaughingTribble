@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseDatabase mDatabase;
     private DatabaseReference mReference;
 
-    private static final String TAG = "MAINACTIVITY|___|";
+    private static final String TAG = "MainActivity";
     private User user;
     //post list
     ArrayList<Post> posts = new ArrayList<>();
@@ -57,14 +57,10 @@ public class MainActivity extends AppCompatActivity {
 
 
         init();
-<<<<<<< HEAD
-<<<<<<< HEAD
         getParkingList();
         initList();
 
         //TODO: moved the order of getPArkingList() from below init() & initList() to TOP
-=======
-=======
         getParkingList();
         Log.i("post size",""+ posts.size());
         for(Post s: posts){
@@ -72,12 +68,12 @@ public class MainActivity extends AppCompatActivity {
             Log.i("post", s.getOwnerId());
             Log.i("post", s.getTitle());
         }
->>>>>>> fix post db
+
         if(posts.size()>0){
             initList();
             getParkingList();
         }
->>>>>>> post sumit POST done
+
         mainActivityUiComponets.getSpotSubmission().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -85,8 +81,6 @@ public class MainActivity extends AppCompatActivity {
                 AddPostActivity.startIntent(getBaseContext(), user);
             }
         });
-
-
     }
 
     private void getOwner(String ownerId){
@@ -149,11 +143,7 @@ public class MainActivity extends AppCompatActivity {
                     //Log.i("postonDataChangeowner ", post.getOwnerId());
                     Log.i("postonDataChangetitle ", post.getTitle());
                     posts.add(post);
-<<<<<<< HEAD
-=======
-                    setPosts(posts);
                     //mAdapter.notifyDataSetChanged();
->>>>>>> fix post db
                 }
                 //Moved the setPosts(posts) outside the loop.
                 //logic issue where it will override the post ArrayList if its left in the for loop

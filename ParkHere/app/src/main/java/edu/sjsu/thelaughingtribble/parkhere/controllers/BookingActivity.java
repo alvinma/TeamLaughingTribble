@@ -23,10 +23,13 @@ import com.google.firebase.database.ValueEventListener;
 
 import org.w3c.dom.Text;
 
+import java.sql.Time;
 import java.util.ArrayList;
+import java.util.Date;
 
 import edu.sjsu.thelaughingtribble.parkhere.R;
 import edu.sjsu.thelaughingtribble.parkhere.Utils.Constant;
+import edu.sjsu.thelaughingtribble.parkhere.Utils.Utilities;
 import edu.sjsu.thelaughingtribble.parkhere.models.pojo.Post;
 import edu.sjsu.thelaughingtribble.parkhere.models.pojo.PostHistory;
 import edu.sjsu.thelaughingtribble.parkhere.models.pojo.Renter;
@@ -87,35 +90,41 @@ public class BookingActivity extends AppCompatActivity {
 //        datePosted = (TextView) findViewById(R.id.post_date_posted);
         postDescription = (TextView) findViewById(R.id.post_description_info);
         purchaseButton = (Button) findViewById(R.id.purchaseButton);
-        startDate = (TextView) findViewById(R.id.start_date);
-        endDate = (TextView) findViewById(R.id.end_date);
+//        startDate = (TextView) findViewById(R.id.start_date);
+//        endDate = (TextView) findViewById(R.id.end_date);
+        //TODO: editing the startDate and endDate
     }
 
     public void updateLabel(){
         endDate.setText("end Time");
     }
 
+    //Return false if the given times are not avaliable
     public Boolean openSlot(String startDate, String endDate){
         //startDate is later than endDate
         if(startDate.compareTo(endDate) > 0){
             return false;
         }
 
-        String booked_start;
-        String booked_end;
+
+        Date startDate_f = Utilities.convertStringDate(startDate);
+        Date endDate_f = Utilities.convertStringDate(endDate);
+
+        Date booked_start;
+        Date booked_end;
         for(Renting booking: postHistory.getHistory()){
-            booked_start = booking.getStartDate();
-            booked_end = booking.getEndDate();
+            booked_start = Utilities.convertStringDate(booking.getStartDate());
+            booked_end = Utilities.convertStringDate(booking.getEndDate());
 
             //TODO: haven't testing this function but the logic is there
             //startDate is earlier than booked_Start
-            if(startDate.compareTo(booked_start) < 0){
+            if(startDate_f.compareTo(booked_start) < 0){
                 //endDate is later than booked_start
-                if(endDate.compareTo(booked_start) > 0){
+                if(endDate_f.compareTo(booked_start) > 0){
                     return false;
                 }
             }else{
-                if(startDate.compareTo(booked_end) < 0){
+                if(startDate_f.compareTo(booked_end) < 0){
                     return false;
                 }
             }
@@ -163,17 +172,17 @@ public class BookingActivity extends AppCompatActivity {
         purchaseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 if(!FLAG_DATES_PICKED){
                     return;
                 }
 
-                String key = mReference.child(user.getUid()).push().getKey();
-                //Adding values to purchase History
-                //GET HISTORY //TODO: GETHISITOYR
-
                 String spotID = post.getSpot().getFirebaseKey();
                 mReference = mDatabase.getReference(Constant.POST_HISTORY + "/" + spotID);
+                //Moved to subtree from "~/" to "~/postHistory/spotID/bookingID"
+                mReference = mReference.child(user.getUid());
+                String key = mReference.push().getKey();
+
+
                 mReference.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
@@ -190,6 +199,7 @@ public class BookingActivity extends AppCompatActivity {
                 });
                 //tests the avaliability of the spot
                 if(!openSlot(startDate.getText().toString(), endDate.getText().toString())){
+                    //Cancel the booking if the time is not avaliable
                     return;
                 }
 
@@ -206,10 +216,16 @@ public class BookingActivity extends AppCompatActivity {
                 booking.setOwner(post.getOwner());
                 booking.setRenter(user_renting);
 
-                booking.setFirebaseKey(mDatabase.getReference().getKey()); //TODO: might not be the way to get the keyID
+                booking.setFirebaseKey(mDatabase.getReference().push().getKey()); //TODO: might not be the way to get the keyID
 
                 String bookingID = booking.getFirebaseKey();
                 mReference.child("postHistory/" + spotID + "/" + bookingID).setValue(booking);
+
+
+                //TODO:
+                //  -What gets affected with the booking of a post
+                //  +seeker
+                //  +owner
             }
         });
     }

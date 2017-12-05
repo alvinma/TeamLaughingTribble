@@ -14,10 +14,8 @@ public final class Constant {
     public static String REQUIRE_TEXT = "Required";
     public static String ERROR = "ERROR ";
     public static String PHONE_FORMAT_TEXT = "Phone number must be in format ###-###-####";
-<<<<<<< HEAD
     public static String POST_HISTORY = "postHistory";
 
-=======
     public static String DELETE_DIALOG_MESS = "Do you want to delete this spot? ";
     public static String DELETE_DIALOG_SUCC_MESS = "Spot deleted succesfull! ";
     public static String DELETE_DIALOG_FAIL_MESS = "Spot can't be deleted ";
@@ -26,11 +24,7 @@ public final class Constant {
     public static String DELETE_DIALOG_NO = "NO";
     public static String DELETE_DIALOG_TITLE = "Confirm Delete";
     public static String DELETE_DIALOG_SUCCESS = "Delete successfull";
-<<<<<<< HEAD
->>>>>>> spot delete
 
-=======
     public static String POSTING = "posting";
     public static String TITLE = "title";
->>>>>>> post sumit POST done
 }

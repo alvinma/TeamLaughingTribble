@@ -29,10 +29,7 @@ public class homePostListItemViewHolder extends RecyclerView.ViewHolder{
     private TextView postPrice;
     private TextView postDescription;
     private Context context;
-<<<<<<< HEAD
-=======
     private TextView totalRate;
->>>>>>> fix post db
 
     /*
 
