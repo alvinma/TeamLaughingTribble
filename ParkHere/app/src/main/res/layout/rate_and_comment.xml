@@ -36,7 +36,7 @@
         android:id="@+id/renterName"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:lines="1"
+        android:maxLines="1"
         android:layout_margin="10dp"
         android:background="@android:color/transparent"
         android:hint="Name"

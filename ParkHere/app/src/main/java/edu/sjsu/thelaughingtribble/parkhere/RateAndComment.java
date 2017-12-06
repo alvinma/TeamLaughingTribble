@@ -9,11 +9,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.StorageReference;
 
+import edu.sjsu.thelaughingtribble.parkhere.controllers.LoginActivity;
 import edu.sjsu.thelaughingtribble.parkhere.models.pojo.CommentAndRating;
 import edu.sjsu.thelaughingtribble.parkhere.models.pojo.Spot;
 
@@ -29,7 +31,8 @@ public class RateAndComment extends AppCompatActivity{
     EditText comment;
     EditText renterName;
     Button submitFeedback;
-    double grade;
+
+    double grade = 0.0;
     int nextCommentID = 0;
     int currCommentID = 0;
     long date = System.currentTimeMillis();
@@ -75,12 +78,14 @@ public class RateAndComment extends AppCompatActivity{
                 String dateString = dateFormat.format(date);
                 currentTime.setText(dateString);
 
-                //if (grade != null && renterName != null && comment != null && commentID != 0 && currentTime != null) {
-                CommentAndRating commentAndRating = null;
-                commentAndRating = new CommentAndRating(grade, renterName.getText().toString(), comment.getText().toString(), currentTime.getText().toString(), nextCommentID);
-                database.child("rating_comment/" + spotID + "/" + nextCommentID).setValue(commentAndRating);
-                //}
-                finish();
+                if (grade > 0 && renterName != null && comment != null) {
+                    CommentAndRating commentAndRating = null;
+                    commentAndRating = new CommentAndRating(grade, renterName.getText().toString(), comment.getText().toString(), currentTime.getText().toString(), nextCommentID);
+                    database.child("rating_comment/" + spotID + "/" + nextCommentID).setValue(commentAndRating);
+                    finish();
+                }
+                else
+                    Toast.makeText(RateAndComment.this, "Please fill out all fields including the rating.. ", Toast.LENGTH_LONG).show();
             }
         });
     }

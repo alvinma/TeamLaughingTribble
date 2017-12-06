@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.RatingBar;
+import android.widget.TextView;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -44,6 +45,8 @@ public class CommentView extends AppCompatActivity {
     ArrayList<CommentAndRating> commentAndRatings = new ArrayList<>();
 
     RatingBar rateview;
+    TextView rateCount;
+
     int counter = 0;
     String tempSpotID = "101508950611960214124_spot1";
 
@@ -53,6 +56,7 @@ public class CommentView extends AppCompatActivity {
         getSupportActionBar().hide();
         setContentView(R.layout.comment_view);
         rateview = (RatingBar) findViewById(R.id.spotRating);
+        rateCount = (TextView) findViewById(R.id.rateCount);
 
         init();
         initList();
@@ -111,6 +115,7 @@ public class CommentView extends AppCompatActivity {
                     rating += commentAndRating.getGrade();
                     counter++;
                     rateview.setRating((float)(rating/counter));
+                    rateCount.setText("(Raters: " + counter + ")");
                     mAdapter.notifyDataSetChanged();
                 }
             }
