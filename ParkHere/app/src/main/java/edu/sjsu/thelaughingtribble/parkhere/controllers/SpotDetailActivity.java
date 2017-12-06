@@ -110,6 +110,7 @@ public class SpotDetailActivity extends AppCompatActivity {
         user = (User) getIntent().getSerializableExtra(Constant.INTENT_EXTRA_USER);
         spot = (Spot) getIntent().getSerializableExtra(Constant.INTENT_EXTRA_SPOT);
         place = new Place(spot.getFirebasePlaceKey(), spot.getAddress());
+
         if (getIntent().hasExtra(Constant.POSTING)) {
             posting = getIntent().getExtras().getBoolean(Constant.POSTING);
         }
@@ -122,7 +123,7 @@ public class SpotDetailActivity extends AppCompatActivity {
             placeId = getIntent().getExtras().getString(Constant.PLACEID);
         }
     }
-
+  
     private void getPostWithSpotId(String postId, String spotId) {
         database.getReference("post/" + postId).addValueEventListener(new ValueEventListener() {
 

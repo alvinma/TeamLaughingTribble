@@ -26,6 +26,8 @@ import edu.sjsu.thelaughingtribble.parkhere.models.pojo.Spot;
 import edu.sjsu.thelaughingtribble.parkhere.models.pojo.User;
 import edu.sjsu.thelaughingtribble.parkhere.models.viewModels.AddASPotViewModel;
 
+import static android.R.attr.key;
+
 public class AddASpotActivity extends AppCompatActivity {
 
     private static final int GALLLERY_INTENT_CODE = 1;
@@ -44,6 +46,8 @@ public class AddASpotActivity extends AppCompatActivity {
     private String photo = null;
     private String renting;
     private String nextAvailable;
+
+    private static final int GALLLERY_INTENT_CODE = 1;
     private boolean edit = false;
 
     public static void startIntent(Context context, User user, Place place) {
@@ -63,6 +67,7 @@ public class AddASpotActivity extends AppCompatActivity {
         context.startActivity(intent);
     }
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,14 +77,10 @@ public class AddASpotActivity extends AppCompatActivity {
             addASPotUI = new AddASPotViewModel(this);
             addASPotUI.getActionBar().setDisplayHomeAsUpEnabled(false);
         }
-
         init();
-
-
     }
 
     private void submitNewSpot() {
-
         addASPotUI.getSubmit().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -114,9 +115,7 @@ public class AddASpotActivity extends AppCompatActivity {
                     }
 
                     database.child("spots/" + user.getUid() + "/" + place.getFirebaseKey() + "/" + key).setValue(spot);
-
                     MySpotsActivity.startIntent(AddASpotActivity.this, user, place);
-
                 }
             }
         });
@@ -150,10 +149,10 @@ public class AddASpotActivity extends AppCompatActivity {
                     renting = edit_data.getRenting();
                     nextAvailable = edit_data.getNextAvailable();
                     Spot spot = null;
+
                     // database.child("spots").child(user.getUid()).child(edit_data.getSpotId());
 
                     spot = new Spot(place.getAddress(), type, description, price, permitRequired, spotNumber, renting, nextAvailable, place.getFirebaseKey(), edit_data.getSpotId(), photo);
-
 
                     database.child("spots/" + user.getUid() + "/" + spot.getFirebasePlaceKey()).child(spot.getSpotId()).setValue(spot);
 
@@ -170,6 +169,7 @@ public class AddASpotActivity extends AppCompatActivity {
         getDataFromIntent();
         setUpUI();
 
+
         if (edit) {
             updateSpot();
         } else {
@@ -179,6 +179,7 @@ public class AddASpotActivity extends AppCompatActivity {
         addASPotUI.getCancel().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //finish()
                 MySpotsActivity.startIntent(v.getContext(), user, place);
             }
         });
@@ -288,7 +289,6 @@ public class AddASpotActivity extends AppCompatActivity {
             addASPotUI.getDescription().setText("");
             addASPotUI.getPrice().setText(String.valueOf(0.0));
             addASPotUI.getSpotNum().setText("");
-
         }
     }
 
@@ -341,9 +341,24 @@ public class AddASpotActivity extends AppCompatActivity {
         });
     }
 
+    public static void startIntent(Context context, User user, Place place) {
+        Intent intent = new Intent(context, AddASpotActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.putExtra(Constant.INTENT_EXTRA_PLACE, place);
+        intent.putExtra(Constant.INTENT_EXTRA_USER, user);
+        context.startActivity(intent);
+
     @Override
     public void onBackPressed() {
+    }
 
+    public static void startIntent(Context context, User user, Place place, Spot spot) {
+        Intent intent = new Intent(context, AddASpotActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.putExtra(Constant.INTENT_EXTRA_PLACE, place);
+        intent.putExtra(Constant.INTENT_EXTRA_USER, user);
+        intent.putExtra(Constant.INTENT_EXTRA_SPOT, spot);
+        context.startActivity(intent);
     }
 
     @Override
