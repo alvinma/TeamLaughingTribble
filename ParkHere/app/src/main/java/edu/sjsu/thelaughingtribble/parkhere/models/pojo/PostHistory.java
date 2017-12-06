@@ -19,10 +19,6 @@ public class PostHistory implements Serializable{
 
     public void PostHistory(){}
 
-    public void setHistory(ArrayList<Renting> history){
-        this.history = history;
-    }
-
     public void PostHistory(Spot spot, ArrayList<Renting> history){
         this.spot = spot;
         this.history = history;
