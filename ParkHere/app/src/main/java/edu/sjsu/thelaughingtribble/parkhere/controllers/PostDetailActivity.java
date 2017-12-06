@@ -40,13 +40,9 @@ import edu.sjsu.thelaughingtribble.parkhere.models.viewModels.SpotDetailViewMode
 
 import static android.R.attr.id;
 import static android.R.attr.key;
-<<<<<<< HEAD
 import static android.R.attr.start;
 import static edu.sjsu.thelaughingtribble.parkhere.Utils.Constant.POSTING;
 
-=======
-import static edu.sjsu.thelaughingtribble.parkhere.Utils.Constant.POSTING;
->>>>>>> parent of 0cfc810... Merge pull request #19 from alvinma/users/jennifer_n/main_branch
 
 public class PostDetailActivity extends AppCompatActivity {
 
@@ -83,7 +79,6 @@ public class PostDetailActivity extends AppCompatActivity {
         setUpUI();
 
     }
-<<<<<<< HEAD
   
     private boolean isDebugging(){
         boolean debugging = false;
@@ -113,21 +108,11 @@ public class PostDetailActivity extends AppCompatActivity {
             return;
         }
         else if(posting){
-=======
-    private void getDataFromIntent(){
-        posting = getIntent().getExtras().getBoolean(Constant.POSTING);
-        if(posting){
->>>>>>> parent of 0cfc810... Merge pull request #19 from alvinma/users/jennifer_n/main_branch
             user = (User) getIntent().getSerializableExtra(Constant.INTENT_EXTRA_USER);
             spot = (Spot) getIntent().getSerializableExtra(Constant.INTENT_EXTRA_SPOT);
             placeId = getIntent().getExtras().getString(Constant.PLACEID);
             title = getIntent().getExtras().getString(Constant.TITLE);
-<<<<<<< HEAD
         } else {
-=======
-
-        }else {
->>>>>>> parent of 0cfc810... Merge pull request #19 from alvinma/users/jennifer_n/main_branch
             user = (User) getIntent().getSerializableExtra(Constant.INTENT_EXTRA_USER);
             post = (Post) getIntent().getSerializableExtra(Constant.INTENT_EXTRA_POST);
             title = post.getTitle();
@@ -135,20 +120,14 @@ public class PostDetailActivity extends AppCompatActivity {
             placeId = post.getPlaceID();
         }
     }
-<<<<<<< HEAD
           
     private void submitPost() {
-=======
-
-    private void submitPost(){
->>>>>>> parent of 0cfc810... Merge pull request #19 from alvinma/users/jennifer_n/main_branch
         String postId = database.getReference().child("post").child(user.getUid()).push().getKey();
         post = new Post(placeId, spot.getSpotId(), user.getUid(), title);
         Log.i("owner id, ", post.getAuthorId());
         database.getReference().child("post/" + postId).setValue(post);
         MainActivity.startIntent(getBaseContext(), user);
     }
-<<<<<<< HEAD
 <<<<<<< HEAD
 
 
@@ -181,8 +160,6 @@ public class PostDetailActivity extends AppCompatActivity {
         //Go back to main
         MainActivity.startIntent(getBaseContext(), user);
     }
-=======
->>>>>>> parent of 0cfc810... Merge pull request #19 from alvinma/users/jennifer_n/main_branch
     private void getSpot(String placeId){
         reference = database.getReference("spots/" + user.getUid()+"/"+placeId);
         reference.addValueEventListener(new ValueEventListener() {
@@ -201,12 +178,8 @@ public class PostDetailActivity extends AppCompatActivity {
             }
         });
     }
-<<<<<<< HEAD
       
     private void setUpUI() {
-=======
-    private void setUpUI(){
->>>>>>> parent of 0cfc810... Merge pull request #19 from alvinma/users/jennifer_n/main_branch
         postDetailUI = new PostDetailActivityViewModel(this);
 
         postDetailUI.getTitle().setText(title);
@@ -215,7 +188,7 @@ public class PostDetailActivity extends AppCompatActivity {
         postDetailUI.getActionBar().setDisplayHomeAsUpEnabled(true);
         if (spot.getPhoto() != null) {
             Glide.with(this).load(spot.getPhoto()).into(postDetailUI.getSpotImage());
-        }else {
+        } else {
             postDetailUI.getSpotImage().setImageResource(R.drawable.not_available);
         }
         postDetailUI.getDescription().setText(spot.getDescription());
@@ -236,10 +209,6 @@ public class PostDetailActivity extends AppCompatActivity {
                     submitPost();
                 }
             });
-<<<<<<< HEAD
-=======
-
->>>>>>> parent of 0cfc810... Merge pull request #19 from alvinma/users/jennifer_n/main_branch
         }else {
             postDetailUI.getPostButton().setVisibility(View.GONE);
             postDetailUI.getBookButton().setVisibility(View.VISIBLE);
@@ -288,7 +257,6 @@ public class PostDetailActivity extends AppCompatActivity {
         context.startActivity(intent);
     }
 <<<<<<< HEAD
-<<<<<<< HEAD
 
     public static class DatePickerFragment extends DialogFragment
             implements DatePickerDialog.OnDateSetListener {
@@ -315,9 +283,6 @@ public class PostDetailActivity extends AppCompatActivity {
 
             postDetailUI.getSelectedDate().setText(dateFormat.format(date));
           
-=======
-
->>>>>>> parent of 0cfc810... Merge pull request #19 from alvinma/users/jennifer_n/main_branch
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
