@@ -68,8 +68,8 @@ public class NavigationViewModel extends ActivityCommonViewModel  {
                 /*Intent intent = new Intent(getContext(), NotificationActivity.class);
                 getContext().startActivity(intent);*/
                 if(getUser()!=null) {
-                    //NotificationActivity.startIntent(getContext(), getUser());    // alvin change
-                    CommentView.startIntent(getContext(), getUser());
+                    NotificationActivity.startIntent(getContext(), getUser());
+                    //CommentView.startIntent(getContext(), getUser());         // alvin change
                 }else {
                     Log.i("setNotificationIntent", "user null");
                 }

@@ -84,7 +84,7 @@ public class PostDetailActivity extends AppCompatActivity {
 
     }*/
 
-    private boolean isDebugging() {
+    private void isDebugging() {
         boolean debugging = false;
         try {
             debugging = getIntent().getExtras().getBoolean(Constant.DEBUGGING);
@@ -92,14 +92,13 @@ public class PostDetailActivity extends AppCompatActivity {
             //Value not set
         }
         //if (debugging) {
-            post = (Post) getIntent().getSerializableExtra(Constant.INTENT_EXTRA_POST);
-            user = (User) getIntent().getSerializableExtra(Constant.INTENT_EXTRA_USER);
+
             //renter = (Renter) user;
             renter = new Renter(user);
             spot = post.getSpot();
             placeId = post.getPlaceID();
             title = post.getTitle();
-            return true;
+            //return true;
         //}
         //return false;
     }
@@ -420,6 +419,10 @@ public class PostDetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.post_activity_detail);
+        /*post = (Post) getIntent().getSerializableExtra(Constant.INTENT_EXTRA_POST);
+        Log.i("postdetailactivity", "I see post: " + post.getSpot());
+        Log.i("postdetailactivity", "post_name: " + post.getSpot().getDescription());
+        user = (User) getIntent().getSerializableExtra(Constant.INTENT_EXTRA_USER);*/
         init();
 
     }
@@ -435,11 +438,8 @@ public class PostDetailActivity extends AppCompatActivity {
 
     private void getDataFromIntent() {
         posting = getIntent().getExtras().getBoolean(Constant.POSTING);
-        if (isDebugging()) {
-            //getting the info in the method
-            return;
-        }
-        else if (posting) {
+        //isDebugging();
+        if (posting) {
             user = (User) getIntent().getSerializableExtra(Constant.INTENT_EXTRA_USER);
             spot = (Spot) getIntent().getSerializableExtra(Constant.INTENT_EXTRA_SPOT);
             placeId = getIntent().getExtras().getString(Constant.PLACEID);
@@ -451,6 +451,7 @@ public class PostDetailActivity extends AppCompatActivity {
             title = post.getTitle();
             spot = post.getSpot();
             placeId = post.getPlaceID();
+            renter = new Renter(user);
         }
 
     }
@@ -491,7 +492,7 @@ public class PostDetailActivity extends AppCompatActivity {
             postDetailUI.getStartDate().setVisibility(View.GONE);
             postDetailUI.getEndDate().setVisibility(View.GONE);
             postDetailUI.getDate().setVisibility(View.GONE);
-
+            postDetailUI.getCommentsButton().setVisibility(View.GONE);
             postDetailUI.getPostButton().setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
