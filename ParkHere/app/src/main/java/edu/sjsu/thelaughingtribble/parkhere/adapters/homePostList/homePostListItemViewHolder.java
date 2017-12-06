@@ -2,18 +2,13 @@ package edu.sjsu.thelaughingtribble.parkhere.adapters.homePostList;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.design.widget.Snackbar;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import java.io.Serializable;
 
 import edu.sjsu.thelaughingtribble.parkhere.R;
 import edu.sjsu.thelaughingtribble.parkhere.Utils.Constant;
-import edu.sjsu.thelaughingtribble.parkhere.controllers.MyProfileActivity;
 import edu.sjsu.thelaughingtribble.parkhere.controllers.PostDetailActivity;
 import edu.sjsu.thelaughingtribble.parkhere.models.pojo.Post;
 import edu.sjsu.thelaughingtribble.parkhere.models.pojo.User;
@@ -34,9 +29,10 @@ public class homePostListItemViewHolder extends RecyclerView.ViewHolder implemen
     private TextView postDescription;
     private Context context;
     private TextView totalRate;
-  
     private Post post;
     private User user;
+
+
     /*
 
         view is the inflated xml layout
@@ -51,14 +47,13 @@ public class homePostListItemViewHolder extends RecyclerView.ViewHolder implemen
         this.postPrice = (TextView) homePostListItem.findViewById(R.id.post_price);
         this.postDescription = (TextView) homePostListItem.findViewById(R.id.post_description);
         this.totalRate = (TextView) homePostListItem.findViewById(R.id.total_rate);
-      
         homePostListItem.setOnClickListener(this);
     }
 
     public TextView getTotalRate() {
         return totalRate;
     }
-    
+
     public void setTotalRate(TextView totalRate) {
         this.totalRate = totalRate;
     }
