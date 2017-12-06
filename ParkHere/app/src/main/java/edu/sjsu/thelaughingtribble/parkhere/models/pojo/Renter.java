@@ -19,6 +19,10 @@ public class Renter extends User implements Serializable {
     // Default Constructor
     public Renter() {}
 
+    public Renter(User user){
+        super(user);
+    }
+
     public Renter(String userID, String firstName, String lastName, String email, String cellphone) {
         super(userID, firstName, lastName, email, cellphone);
         spots = new ArrayList<>();

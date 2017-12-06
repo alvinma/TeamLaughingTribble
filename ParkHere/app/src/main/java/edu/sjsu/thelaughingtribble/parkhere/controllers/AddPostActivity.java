@@ -2,11 +2,13 @@ package edu.sjsu.thelaughingtribble.parkhere.controllers;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
 import edu.sjsu.thelaughingtribble.parkhere.R;
 import edu.sjsu.thelaughingtribble.parkhere.Utils.Constant;
+import edu.sjsu.thelaughingtribble.parkhere.models.pojo.Place;
 import edu.sjsu.thelaughingtribble.parkhere.models.pojo.User;
 import edu.sjsu.thelaughingtribble.parkhere.models.viewModels.AddPostActivityViewModel;
 
@@ -14,6 +16,7 @@ public class AddPostActivity extends BaseActivity {
 
     private AddPostActivityViewModel addPostActivityUI;
     private User user;
+
     private String title = "";
 
     public static void startIntent(Context context, User user) {
@@ -34,7 +37,7 @@ public class AddPostActivity extends BaseActivity {
         getDataFromIntent();
         setupUI();
     }
-
+  
     private void getDataFromIntent() {
         user = (User) getIntent().getSerializableExtra(Constant.INTENT_EXTRA_USER);
     }
@@ -55,5 +58,11 @@ public class AddPostActivity extends BaseActivity {
                 MyPlacesActivity.startIntent(getBaseContext(), user, title, true);
             }
         });
+    }
+    public static void startIntent(Context context, User user) {
+        Intent intent = new Intent(context, AddPostActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.putExtra(Constant.INTENT_EXTRA_USER, user);
+        context.startActivity(intent);
     }
 }
