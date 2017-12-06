@@ -1,0 +1,27 @@
+<shortcuts xmlns:android="http://schemas.android.com/apk/res/android">
+    <shortcut
+        android:shortcutId="myProfile"
+        android:enabled="true"
+        android:icon="@drawable/notification"
+        android:shortcutShortLabel="@string/quickstart"
+        android:shortcutLongLabel="@string/quickstart_long"
+        android:shortcutDisabledMessage="@string/quickstart_disabled">
+        <intent
+            android:action="edu.sjsu.thelaughingtribble.parkhere.QUICKSTART"
+            android:targetPackage="edu.sjsu.thelaughingtribble.parkhere"
+            android:targetClass="edu.sjsu.thelaughingtribble.parkhere.controllers.MyProfileActivity" />
+    </shortcut>
+    <!-- Specify more shortcuts here. -->
+    <shortcut
+        android:shortcutId="addVehicle"
+        android:enabled="true"
+        android:icon="@drawable/plus"
+        android:shortcutShortLabel="@string/quickstart2"
+        android:shortcutLongLabel="@string/quickstart_long2"
+        android:shortcutDisabledMessage="@string/quickstart_disabled">
+        <intent
+            android:action="edu.sjsu.thelaughingtribble.parkhere.ADDVEHICLE"
+            android:targetPackage="edu.sjsu.thelaughingtribble.parkhere"
+            android:targetClass="edu.sjsu.thelaughingtribble.parkhere.controllers.AddAVehicle" />
+    </shortcut>
+</shortcuts>
