@@ -119,7 +119,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void initList() {
         mainActivityUiComponets.getHomePostList().setLayoutManager(mainActivityUiComponets.getLayoutManager());
-        mAdapter = new HomePostListAdapter(posts);
+        mAdapter = new HomePostListAdapter(posts, user);
         mainActivityUiComponets.getHomePostList().setAdapter(mAdapter);
 
     }

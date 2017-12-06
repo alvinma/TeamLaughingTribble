@@ -22,6 +22,7 @@ import com.google.firebase.database.ValueEventListener;
 import edu.sjsu.thelaughingtribble.parkhere.R;
 import edu.sjsu.thelaughingtribble.parkhere.Utils.Constant;
 import edu.sjsu.thelaughingtribble.parkhere.models.pojo.Place;
+import edu.sjsu.thelaughingtribble.parkhere.models.pojo.Post;
 import edu.sjsu.thelaughingtribble.parkhere.models.pojo.Spot;
 import edu.sjsu.thelaughingtribble.parkhere.models.pojo.User;
 import edu.sjsu.thelaughingtribble.parkhere.models.viewModels.SpotDetailViewModel;
@@ -121,12 +122,57 @@ public class SpotDetailActivity extends AppCompatActivity {
         }
     }
 
+    private void getPostWithSpotId(String postId,String spotId){
+        database.getReference("post/"+postId).addValueEventListener(new ValueEventListener() {
+
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Log.i("getPostWithSpotId", dataSnapshot.toString());
+                for (DataSnapshot item : dataSnapshot.getChildren()) {
+                    Post post = item.getValue(Post.class);
+                    // Log.i("del post", item.getKey());
+                    //Log.i("del post", post.getSpotId());
+                    getPostWithSpotId(item.getKey(), spot.getSpotId() );
+
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+    private void deletePostOnSpotDeletion(){
+        database.getReference("post").addValueEventListener(new ValueEventListener() {
+             @Override
+             public void onDataChange(DataSnapshot dataSnapshot) {
+                 for (DataSnapshot item : dataSnapshot.getChildren()) {
+                     Post post = item.getValue(Post.class);
+                     if(post.getSpotId()!=null && post.getSpotId().equals(spot.getSpotId())){
+                         Log.i("got the post", item.toString());
+                         Log.i("del post", post.getSpotId() + " " + post.getTitle());
+                         item.getRef().removeValue();
+                     }
+
+                 }
+
+
+             }
+
+             @Override
+             public void onCancelled(DatabaseError databaseError) {
+
+             }
+         });
+    }
     private void deleteSpot() {
         //delete
         Log.i("getSpotId", spot.getSpotId());
-        reference = database.getReference("spots/" + user.getUid()).child(spot.getSpotId());
+        reference = database.getReference("spots/" + user.getUid()+"/"+ spot.getFirebasePlaceKey()).child(spot.getSpotId());
         reference.removeValue();
 
+        deletePostOnSpotDeletion();
 
         database.getReference("spots/" + user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
