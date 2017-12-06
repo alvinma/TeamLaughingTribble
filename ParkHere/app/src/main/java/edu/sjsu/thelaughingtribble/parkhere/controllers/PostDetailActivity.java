@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 
 import com.bumptech.glide.Glide;
@@ -45,10 +46,7 @@ public class PostDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.post_activity_detail);
         init();
-        Log.i("title", title);
-        Log.i("placeid", placeId);
-        Log.i("posting", ""+posting);
-        Log.i("spot", spot.getSpotId());
+
     }
 
     private void init(){
@@ -69,6 +67,8 @@ public class PostDetailActivity extends AppCompatActivity {
             user = (User) getIntent().getSerializableExtra(Constant.INTENT_EXTRA_USER);
             post = (Post) getIntent().getSerializableExtra(Constant.INTENT_EXTRA_POST);
             title = post.getTitle();
+            spot = post.getSpot();
+            placeId = post.getPlaceID();
         }
 
     }
@@ -104,8 +104,11 @@ public class PostDetailActivity extends AppCompatActivity {
         postDetailUI.getTitle().setText(title);
         postDetailUI.getAuthor().setText(user.getUserID());
         postDetailUI.getDate().setText(Utilities.getTodayDate());
+        postDetailUI.getActionBar().setDisplayHomeAsUpEnabled(true);
         if (spot.getPhoto() != null) {
             Glide.with(this).load(spot.getPhoto()).into(postDetailUI.getSpotImage());
+        }else {
+            postDetailUI.getSpotImage().setImageResource(R.drawable.not_available);
         }
         postDetailUI.getDescription().setText(spot.getDescription());
         postDetailUI.getPermit().setText(spot.getPermitRequired());
@@ -151,5 +154,16 @@ public class PostDetailActivity extends AppCompatActivity {
         intent.putExtra(Constant.INTENT_EXTRA_POST, post);
         intent.putExtra(Constant.POSTING, false);
         context.startActivity(intent);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                MainActivity.startIntent(this, user);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }
