@@ -53,6 +53,10 @@ public class CommentView extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        spot = (Spot) getIntent().getSerializableExtra(Constant.INTENT_EXTRA_SPOT);
+        tempSpotID = spot.getSpotId();
+
         getSupportActionBar().hide();
         setContentView(R.layout.comment_view);
         rateview = (RatingBar) findViewById(R.id.spotRating);

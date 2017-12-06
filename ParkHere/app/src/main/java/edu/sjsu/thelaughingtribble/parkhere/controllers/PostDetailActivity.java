@@ -26,6 +26,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
+import edu.sjsu.thelaughingtribble.parkhere.CommentView;
 import edu.sjsu.thelaughingtribble.parkhere.R;
 import edu.sjsu.thelaughingtribble.parkhere.RateAndComment;
 import edu.sjsu.thelaughingtribble.parkhere.Utils.Constant;
@@ -130,14 +131,12 @@ public class PostDetailActivity extends AppCompatActivity {
 
     public void viewComments(View view) {
         Toast.makeText(view.getContext(), "Loading Comments...", Toast.LENGTH_SHORT).show();
+        //TODO: remove if() & add Alvins Comment Class
+        Intent intent = new Intent(view.getContext(), CommentView.class);
+        intent.putExtra(Constant.INTENT_EXTRA_SPOT, spot);
+        intent.putExtra(Constant.INTENT_EXTRA_USER, user);
+        view.getContext().startActivity(intent);
 
-        if (false) {
-            //TODO: remove if() & add Alvins Comment Class
-            Intent intent = new Intent(view.getContext(), RateAndComment.class);
-            intent.putExtra(Constant.INTENT_EXTRA_SPOT, spot);
-            intent.putExtra(Constant.INTENT_EXTRA_USER, user);
-            view.getContext().startActivity(intent);
-        }
     }
 
     //Edited user ->renter
