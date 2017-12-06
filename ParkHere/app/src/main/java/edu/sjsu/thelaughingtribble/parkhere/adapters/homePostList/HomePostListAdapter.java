@@ -1,6 +1,7 @@
 package edu.sjsu.thelaughingtribble.parkhere.adapters.homePostList;
 
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import java.util.ArrayList;
 
 import edu.sjsu.thelaughingtribble.parkhere.R;
 import edu.sjsu.thelaughingtribble.parkhere.models.pojo.Post;
+import edu.sjsu.thelaughingtribble.parkhere.models.pojo.User;
 
 /**
  * Created by jennifernghinguyen on 10/31/17.
@@ -20,9 +22,12 @@ public class HomePostListAdapter extends RecyclerView.Adapter<homePostListItemVi
 
     private ArrayList<Post> posts = new ArrayList<>();
     private homePostListItemViewHolder homePostListUI;
+    private User user;
 
-    public HomePostListAdapter(ArrayList<Post> posts) {
+
+    public HomePostListAdapter(ArrayList<Post> posts, User user) {
         this.posts = posts;
+        this.user = user;
 
     }
 
@@ -36,13 +41,15 @@ public class HomePostListAdapter extends RecyclerView.Adapter<homePostListItemVi
     @Override
     public void onBindViewHolder(homePostListItemViewHolder holder, int position) {
         Post currentPost = posts.get(position);
-
+        Log.i("currentPost title",  currentPost.getTitle());
+        homePostListUI.setUser(user);
+        homePostListUI.setPost(currentPost);
         homePostListUI.getDatePosted().setText(currentPost.getDatePosted());
         homePostListUI.getPostTitle().setText(currentPost.getTitle());
-        homePostListUI.getPostOwner().setText(currentPost.getOwner().getFullName());
-        homePostListUI.getPostPrice().setText(String.valueOf("$"+currentPost.getSpot().getPrice()));
-        homePostListUI.getPostTitle().setText(String.valueOf(currentPost.getTotalGrade()));
+        homePostListUI.getPostOwner().setText(currentPost.getOwner().getUserID());
+        homePostListUI.getPostPrice().setText(String.valueOf("$ "+currentPost.getSpot().getPrice()));
         homePostListUI.getPostDescription().setText(currentPost.getSpot().getDescription());
+        homePostListUI.getTotalRate().setText(String.valueOf(currentPost.getTotalGrade()));
 
         if (currentPost.getSpot().getPhoto() != null) {
             Glide.with(homePostListUI.getContext()).load(currentPost.getSpot().getPhoto()).into(homePostListUI.getPostImage());

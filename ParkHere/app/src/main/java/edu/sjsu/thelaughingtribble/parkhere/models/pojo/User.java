@@ -19,10 +19,15 @@ public class User implements Serializable {
     private String lastName;
     private String email;
     private String cellphone;
+    private String fullName;
     private ArrayList<Vehicle> vehicles;
 
     public User(){
         // Default constructor required for calls to DataSnapshot.getValue(User.class)
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 
     public User(String userID, String firstName, String lastName, String email, String cellphone) {
@@ -34,13 +39,13 @@ public class User implements Serializable {
         this.vehicles = new ArrayList<>();
     }
 
-    public User(String userID, String firstName, String lastName, String email) {
+    /*public User(String userID, String firstName, String lastName, String email) {
         this.userID = userID;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.vehicles = new ArrayList<>();
-    }
+    }*/
 
     public User(String userID, String firstName, String lastName, String email, String cellphone, ArrayList<Vehicle> vehicles) {
         this.userID = userID;
@@ -80,6 +85,12 @@ public class User implements Serializable {
         this.uid = uid;
         this.userID = userID;
         this.email = email;
+    }
+    public User(String uid, String userID, String email, String fullName) {
+        this.uid = uid;
+        this.userID = userID;
+        this.email = email;
+        this.fullName = fullName;
     }
 
     public String getUid() {
