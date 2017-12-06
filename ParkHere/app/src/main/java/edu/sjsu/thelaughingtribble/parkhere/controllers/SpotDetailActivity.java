@@ -47,7 +47,6 @@ public class SpotDetailActivity extends AppCompatActivity {
         intent.putExtra(Constant.INTENT_EXTRA_SPOT, spot);
         context.startActivity(intent);
     }
-
     public static void startIntent(Context context, User user, Spot spot, String title, String placeId, boolean posting) {
         Log.i("startIntent detail spot", "click");
         Intent intent = new Intent(context, SpotDetailActivity.class);
@@ -87,7 +86,7 @@ public class SpotDetailActivity extends AppCompatActivity {
         spotDetailUI.getRentingText().setText(spot.getRenting());
         spotDetailUI.getSpotNumberText().setText(spot.getSpotNumber());
 
-        if (posting) {
+        if(posting){
             spotDetailUI.getActionBar().setTitle("Select this spot");
             spotDetailUI.getActionBar().setDisplayHomeAsUpEnabled(true);
             spotDetailUI.getSelect().setVisibility(View.VISIBLE);
@@ -97,7 +96,7 @@ public class SpotDetailActivity extends AppCompatActivity {
                     PostDetailActivity.startIntent(getBaseContext(), title, user, spot, placeId, posting);
                 }
             });
-        } else {
+        }else {
             spotDetailUI.getActionBar().setTitle("");
             spotDetailUI.getActionBar().setDisplayHomeAsUpEnabled(true);
             spotDetailUI.getSelect().setVisibility(View.GONE);
@@ -110,22 +109,33 @@ public class SpotDetailActivity extends AppCompatActivity {
         user = (User) getIntent().getSerializableExtra(Constant.INTENT_EXTRA_USER);
         spot = (Spot) getIntent().getSerializableExtra(Constant.INTENT_EXTRA_SPOT);
         place = new Place(spot.getFirebasePlaceKey(), spot.getAddress());
+<<<<<<< HEAD
 
         if (getIntent().hasExtra(Constant.POSTING)) {
             posting = getIntent().getExtras().getBoolean(Constant.POSTING);
+=======
+        if(getIntent().hasExtra(Constant.POSTING)){
+            posting  = getIntent().getExtras().getBoolean(Constant.POSTING);
+>>>>>>> parent of 0cfc810... Merge pull request #19 from alvinma/users/jennifer_n/main_branch
         }
 
-        if (getIntent().hasExtra(Constant.TITLE)) {
-            title = getIntent().getExtras().getString(Constant.TITLE);
+        if(getIntent().hasExtra(Constant.TITLE)){
+                title =  getIntent().getExtras().getString(Constant.TITLE);
         }
 
-        if (getIntent().hasExtra(Constant.PLACEID)) {
-            placeId = getIntent().getExtras().getString(Constant.PLACEID);
+        if(getIntent().hasExtra(Constant.PLACEID)){
+            placeId =   getIntent().getExtras().getString(Constant.PLACEID);
         }
     }
+<<<<<<< HEAD
   
     private void getPostWithSpotId(String postId, String spotId) {
         database.getReference("post/" + postId).addValueEventListener(new ValueEventListener() {
+=======
+
+    private void getPostWithSpotId(String postId,String spotId){
+        database.getReference("post/"+postId).addValueEventListener(new ValueEventListener() {
+>>>>>>> parent of 0cfc810... Merge pull request #19 from alvinma/users/jennifer_n/main_branch
 
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -134,7 +144,7 @@ public class SpotDetailActivity extends AppCompatActivity {
                     Post post = item.getValue(Post.class);
                     // Log.i("del post", item.getKey());
                     //Log.i("del post", post.getSpotId());
-                    getPostWithSpotId(item.getKey(), spot.getSpotId());
+                    getPostWithSpotId(item.getKey(), spot.getSpotId() );
 
                 }
             }
@@ -145,35 +155,33 @@ public class SpotDetailActivity extends AppCompatActivity {
             }
         });
     }
-
-    private void deletePostOnSpotDeletion() {
+    private void deletePostOnSpotDeletion(){
         database.getReference("post").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot item : dataSnapshot.getChildren()) {
-                    Post post = item.getValue(Post.class);
-                    if (post.getSpotId() != null && post.getSpotId().equals(spot.getSpotId())) {
-                        Log.i("got the post", item.toString());
-                        Log.i("del post", post.getSpotId() + " " + post.getTitle());
-                        item.getRef().removeValue();
-                    }
+             @Override
+             public void onDataChange(DataSnapshot dataSnapshot) {
+                 for (DataSnapshot item : dataSnapshot.getChildren()) {
+                     Post post = item.getValue(Post.class);
+                     if(post.getSpotId()!=null && post.getSpotId().equals(spot.getSpotId())){
+                         Log.i("got the post", item.toString());
+                         Log.i("del post", post.getSpotId() + " " + post.getTitle());
+                         item.getRef().removeValue();
+                     }
 
-                }
+                 }
 
 
-            }
+             }
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
+             @Override
+             public void onCancelled(DatabaseError databaseError) {
 
-            }
-        });
+             }
+         });
     }
-
     private void deleteSpot() {
         //delete
         Log.i("getSpotId", spot.getSpotId());
-        reference = database.getReference("spots/" + user.getUid() + "/" + spot.getFirebasePlaceKey()).child(spot.getSpotId());
+        reference = database.getReference("spots/" + user.getUid()+"/"+ spot.getFirebasePlaceKey()).child(spot.getSpotId());
         reference.removeValue();
 
         deletePostOnSpotDeletion();
@@ -183,7 +191,7 @@ public class SpotDetailActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (!dataSnapshot.hasChild(spot.getSpotId())) {
                     showSuccessfullMessage();
-                } else {
+                }else {
                     showFailedMessage();
                 }
             }
@@ -228,7 +236,6 @@ public class SpotDetailActivity extends AppCompatActivity {
         dialog.setTitle(Constant.ERROR);
         dialog.show();
     }
-
     private void confirmDelete() {
         AlertDialog.Builder builder = new AlertDialog.Builder(SpotDetailActivity.this);
         builder.setMessage(Constant.DELETE_DIALOG_MESS)

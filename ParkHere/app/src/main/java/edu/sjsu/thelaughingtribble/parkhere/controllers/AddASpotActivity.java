@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -30,14 +31,15 @@ import static android.R.attr.key;
 
 public class AddASpotActivity extends AppCompatActivity {
 
-    private static final int GALLLERY_INTENT_CODE = 1;
     private AddASPotViewModel addASPotUI;
     private Place place = null;
     private Spot edit_data;
+
     private User user;
     private Uri uri;
     private StorageReference firebaseStorage;
     private DatabaseReference database;
+
     private String type;
     private String description;
     private double price = 0;
@@ -46,6 +48,7 @@ public class AddASpotActivity extends AppCompatActivity {
     private String photo = null;
     private String renting;
     private String nextAvailable;
+<<<<<<< HEAD
 
     private static final int GALLLERY_INTENT_CODE = 1;
     private boolean edit = false;
@@ -68,6 +71,11 @@ public class AddASpotActivity extends AppCompatActivity {
     }
 
 
+=======
+    private static final int GALLLERY_INTENT_CODE = 1;
+    private boolean edit = false;
+
+>>>>>>> parent of 0cfc810... Merge pull request #19 from alvinma/users/jennifer_n/main_branch
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,10 +83,11 @@ public class AddASpotActivity extends AppCompatActivity {
 
         if (addASPotUI == null) {
             addASPotUI = new AddASPotViewModel(this);
-            addASPotUI.getActionBar().setDisplayHomeAsUpEnabled(false);
+            addASPotUI.getActionBar().setDisplayHomeAsUpEnabled(true);
         }
         init();
     }
+
 
     private void submitNewSpot() {
         addASPotUI.getSubmit().setOnClickListener(new View.OnClickListener() {
@@ -114,7 +123,12 @@ public class AddASpotActivity extends AppCompatActivity {
                         spot = new Spot(place.getAddress(), type, description, price, permitRequired, spotNumber, renting, nextAvailable, place.getFirebaseKey(), key, photo);
                     }
 
+<<<<<<< HEAD
                     database.child("spots/" + user.getUid() + "/" + place.getFirebaseKey() + "/" + key).setValue(spot);
+=======
+                    database.child("spots/" + user.getUid() + "/" + place.getFirebaseKey()+"/"+ key).setValue(spot);
+
+>>>>>>> parent of 0cfc810... Merge pull request #19 from alvinma/users/jennifer_n/main_branch
                     MySpotsActivity.startIntent(AddASpotActivity.this, user, place);
                 }
             }
@@ -144,17 +158,26 @@ public class AddASpotActivity extends AppCompatActivity {
                     addASPotUI.getDescription().setError(Constant.REQUIRE_TEXT);
                 }
 
-                if (place.getAddress() != null && type != null && description != null && price != 0 && permitRequired != null && spotNumber != null && place.getFirebaseKey() != null && edit_data.getSpotId() != null) {
+                if (place.getAddress() != null && type != null && description != null && price != 0 && permitRequired != null && spotNumber != null && place.getFirebaseKey() != null && edit_data.getSpotId()!=null) {
 
                     renting = edit_data.getRenting();
                     nextAvailable = edit_data.getNextAvailable();
                     Spot spot = null;
+<<<<<<< HEAD
 
                     // database.child("spots").child(user.getUid()).child(edit_data.getSpotId());
 
                     spot = new Spot(place.getAddress(), type, description, price, permitRequired, spotNumber, renting, nextAvailable, place.getFirebaseKey(), edit_data.getSpotId(), photo);
 
                     database.child("spots/" + user.getUid() + "/" + spot.getFirebasePlaceKey()).child(spot.getSpotId()).setValue(spot);
+=======
+                   // database.child("spots").child(user.getUid()).child(edit_data.getSpotId());
+
+                    spot = new Spot(place.getAddress(), type, description, price, permitRequired, spotNumber, renting, nextAvailable, place.getFirebaseKey(), edit_data.getSpotId(), photo);
+
+
+                    database.child("spots/" + user.getUid()+"/"+ spot.getFirebasePlaceKey()).child(spot.getSpotId()).setValue(spot);
+>>>>>>> parent of 0cfc810... Merge pull request #19 from alvinma/users/jennifer_n/main_branch
 
                     MySpotsActivity.startIntent(AddASpotActivity.this, user, place);
 
@@ -169,18 +192,26 @@ public class AddASpotActivity extends AppCompatActivity {
         getDataFromIntent();
         setUpUI();
 
+<<<<<<< HEAD
 
         if (edit) {
+=======
+        if(edit){
+>>>>>>> parent of 0cfc810... Merge pull request #19 from alvinma/users/jennifer_n/main_branch
             updateSpot();
-        } else {
+        }else {
             submitNewSpot();
         }
 
         addASPotUI.getCancel().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+<<<<<<< HEAD
                 //finish()
                 MySpotsActivity.startIntent(v.getContext(), user, place);
+=======
+                finish();
+>>>>>>> parent of 0cfc810... Merge pull request #19 from alvinma/users/jennifer_n/main_branch
             }
         });
 
@@ -283,7 +314,7 @@ public class AddASpotActivity extends AppCompatActivity {
             addASPotUI.getSpotNum().setText(edit_data.getSpotNumber());
             addASPotUI.getType().setSelection(getPositionType(edit_data.getType()));
             addASPotUI.getPermitRequired().setSelection(getPositionPermit(edit_data.getPermitRequired()));
-        } else {
+        }else {
             addASPotUI.getActionBar().setTitle("Add a Spot");
             addASPotUI.getAddress().setText(place.getAddress());
             addASPotUI.getDescription().setText("");
@@ -310,7 +341,6 @@ public class AddASpotActivity extends AppCompatActivity {
         }
         return po;
     }
-
     private int getPositionPermit(String permit) {
         int po = 0;
         switch (permit.trim()) {
@@ -347,9 +377,12 @@ public class AddASpotActivity extends AppCompatActivity {
         intent.putExtra(Constant.INTENT_EXTRA_PLACE, place);
         intent.putExtra(Constant.INTENT_EXTRA_USER, user);
         context.startActivity(intent);
+<<<<<<< HEAD
 
     @Override
     public void onBackPressed() {
+=======
+>>>>>>> parent of 0cfc810... Merge pull request #19 from alvinma/users/jennifer_n/main_branch
     }
 
     public static void startIntent(Context context, User user, Place place, Spot spot) {
@@ -365,7 +398,7 @@ public class AddASpotActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                MySpotsActivity.startIntent(this, user, place);
+                this.finish();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
