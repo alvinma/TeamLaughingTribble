@@ -44,6 +44,13 @@
 
     </RelativeLayout>
 
+    <TextView
+        android:id="@+id/rateCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="(Raters: 0)"
+        android:layout_centerHorizontal="true"/>
+
     <android.support.design.widget.CoordinatorLayout
 
 
