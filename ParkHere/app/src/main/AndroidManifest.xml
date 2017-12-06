@@ -44,15 +44,6 @@
 
         <activity android:name=".controllers.AddASpotActivity" />
         <activity android:name=".controllers.AddAPlace" />
-        <activity
-            android:name=".controllers.PostInformationActivity"
-            android:label="@string/title_activity_post_information"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".controllers.BookingActivity"
-            android:label="@string/title_activity_booking"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
         <activity android:name=".controllers.SpotDetailActivity" />
         <activity android:name=".controllers.PostDetailActivity" />
         <activity android:name=".controllers.AddPostActivity"></activity>
