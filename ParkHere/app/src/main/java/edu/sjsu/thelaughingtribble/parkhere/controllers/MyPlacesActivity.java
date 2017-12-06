@@ -32,6 +32,20 @@ public class MyPlacesActivity extends BaseActivity {
     private boolean posting = false;
     private String title = "";
 
+    public static void startIntent(Context context, User user) {
+        Intent intent = new Intent(context, MyPlacesActivity.class);
+        intent.putExtra(Constant.INTENT_EXTRA_USER, user);
+        context.startActivity(intent);
+    }
+
+    public static void startIntent(Context context, User user, String title, boolean posting) {
+        Intent intent = new Intent(context, MyPlacesActivity.class);
+        intent.putExtra(Constant.INTENT_EXTRA_USER, user);
+        intent.putExtra(Constant.POSTING, posting);
+        intent.putExtra(Constant.TITLE, title);
+        context.startActivity(intent);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -92,7 +106,7 @@ public class MyPlacesActivity extends BaseActivity {
             title = getIntent().getExtras().getString(Constant.TITLE);
         }
     }
-  
+
     @Override
     protected void onStart() {
         super.onStart();
@@ -133,18 +147,5 @@ public class MyPlacesActivity extends BaseActivity {
         });
 
     }
-          
-    public static void startIntent(Context context, User user) {
-        Intent intent = new Intent(context, MyPlacesActivity.class);
-        intent.putExtra(Constant.INTENT_EXTRA_USER, user);
-        context.startActivity(intent);
-    }
 
-    public static void startIntent(Context context, User user, String title, boolean posting) {
-        Intent intent = new Intent(context, MyPlacesActivity.class);
-        intent.putExtra(Constant.INTENT_EXTRA_USER, user);
-        intent.putExtra(Constant.POSTING, posting);
-        intent.putExtra(Constant.TITLE, title);
-        context.startActivity(intent);
-    }
 }
