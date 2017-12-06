@@ -112,19 +112,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="70dp"
-                android:layout_marginBottom="70dp"
+                android:layout_marginBottom="120dp"
                 android:scrollbars="vertical" />
-
-            <Button
-                android:id="@+id/addComment"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:onClick="addComment"
-                android:layout_alignBottom="@+id/commentList"
-                android:layout_alignParentStart="true"
-                android:background="@color/colorPrimaryDark"
-                android:textColor="@color/white"
-                android:text="Add Comment"/>
 
             <!--android.support.design.widget.FloatingActionButton
                 android:id="@+id/Spot_Submission"
@@ -137,5 +126,16 @@
                 android:src="@drawable/plus"
                 app:fabSize="normal" /-->
         </RelativeLayout>
+
+        <Button
+            android:id="@+id/addComment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="addComment"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="70dp"
+            android:background="@color/colorPrimaryDark"
+            android:textColor="@color/white"
+            android:text="Add Comment"/>
     </android.support.design.widget.CoordinatorLayout>
 </RelativeLayout>
