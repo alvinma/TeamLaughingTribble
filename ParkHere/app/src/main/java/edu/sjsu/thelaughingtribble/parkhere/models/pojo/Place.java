@@ -12,8 +12,8 @@ import java.util.Map;
  */
 @IgnoreExtraProperties
 public class Place implements Serializable {
-    private String address;
-    private String firebaseKey;
+    private String address = "123 Address Street. San Jose";
+    private String firebaseKey = "firebaseKey";
 
     // Default Constructor
     public Place() {}
@@ -47,6 +47,7 @@ public class Place implements Serializable {
     public Map<String, Object> toMap() {
         HashMap<String, Object> result = new HashMap<>();
         result.put("address", address);
+        result.put("firebaseKey", firebaseKey);
         return result;
     }
 }

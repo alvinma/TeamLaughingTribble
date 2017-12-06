@@ -1,14 +1,22 @@
 package edu.sjsu.thelaughingtribble.parkhere;
 
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import edu.sjsu.thelaughingtribble.parkhere.Utils.Constant;
 import edu.sjsu.thelaughingtribble.parkhere.controllers.MainActivity;
+import edu.sjsu.thelaughingtribble.parkhere.controllers.MySpotsActivity;
+import edu.sjsu.thelaughingtribble.parkhere.models.pojo.Place;
+import edu.sjsu.thelaughingtribble.parkhere.models.pojo.User;
 
 public class ViewObjectInfo extends AppCompatActivity {
 
@@ -44,12 +52,28 @@ public class ViewObjectInfo extends AppCompatActivity {
         purchaseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-
+                testToastFunction();
                 finish();
             }
         });
 
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        testToastFunction();
+    }
+
+//    public static void startIntent(Context context) {
+//        Intent intent = new Intent(context, PostInformationActivity.class);
+//        context.startActivity(intent);
+//    }
+
+    //Call this function to test the view post information
+    //testing: Runs whenever the user clicks on the post to view more details
+    public void testToastFunction(){
+        Toast.makeText(getBaseContext(),"ViewObjectInfo:::!!!!!", Toast.LENGTH_SHORT).show();
     }
 
 }

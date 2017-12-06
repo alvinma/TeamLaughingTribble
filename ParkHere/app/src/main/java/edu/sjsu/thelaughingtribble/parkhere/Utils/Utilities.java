@@ -17,6 +17,21 @@ public final class Utilities {
         return dateFormat.format(new Date());
     }
 
+    //Converts the date from "StringFormat" to "Date" objects
+    public static Date convertStringDate(String dateString){
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd MM, yyyy HH:mm");
+        Date date;
+        try {
+            date = dateFormat.parse(dateString);
+        }catch (Exception ex){
+            date = new Date();
+            Calendar c = Calendar.getInstance();
+            c.setTime(date);
+            date = c.getTime();
+            System.out.print("Handled EXCEPTION");
+        }
+        return date;
+    }
     public static String getNextDateAvailable() {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd MM, yyyy HH:mm");
         Date date = new Date();

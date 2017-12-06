@@ -17,7 +17,7 @@ public class Renting implements Serializable {
     private Owner owner;
     private String startDate;
     private String endDate;
-
+    private String firebaseKey;
     // Default Constructor
     public Renting(){}
 
@@ -69,6 +69,14 @@ public class Renting implements Serializable {
         this.endDate = endDate;
     }
 
+    public void setFirebaseKey(String firebaseKey){
+        this.firebaseKey = firebaseKey;
+    }
+
+    public String getFirebaseKey(){
+        return this.firebaseKey;
+    }
+
     @Exclude
     public Map<String, Object> toMap() {
         HashMap<String, Object> result = new HashMap<>();
@@ -77,6 +85,7 @@ public class Renting implements Serializable {
         result.put("owner", owner);
         result.put("startDate", startDate);
         result.put("endDate", endDate);
+        result.put("firebaseKey", firebaseKey);
 
         return result;
     }

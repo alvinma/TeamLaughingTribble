@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -43,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView.LayoutManager mLayoutManager;
     private FirebaseDatabase mDatabase;
     private DatabaseReference mReference;
+    private static final String TAG = "MainActivity";
     private User user;
 
     public static void startIntent(Context context, User user) {
@@ -59,9 +61,20 @@ public class MainActivity extends AppCompatActivity {
 
 
         init();
-        initList();
         getParkingList();
+        initList();
 
+        Log.i("post size",""+ posts.size());
+        for(Post s: posts){
+            Log.i("post", s.getSpotId());
+            Log.i("post", s.getOwnerId());
+            Log.i("post", s.getTitle());
+        }
+
+        if(posts.size()>0){
+            initList();
+            getParkingList();
+        }
 
         mainActivityUiComponets.getSpotSubmission().setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
                 AddPostActivity.startIntent(getBaseContext(), user);
             }
         });
-
+    }
     }
 
     private void getOwner(final String title, final String ownerId, final String placeId, final String spotId, final String datePosted, final double totalGrade) {
@@ -118,11 +131,13 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    private void getSpot(String spotId){
+
+    }
     private void initList() {
         mainActivityUiComponets.getHomePostList().setLayoutManager(mainActivityUiComponets.getLayoutManager());
         mAdapter = new HomePostListAdapter(posts, user);
         mainActivityUiComponets.getHomePostList().setAdapter(mAdapter);
-
     }
 
     private void init() {
@@ -141,6 +156,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+        //Current solution calls getParkingList() @onCreate
         //getParkingList();
     }
 
@@ -168,14 +184,18 @@ public class MainActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot item : dataSnapshot.getChildren()) {
                     Post post = item.getValue(Post.class);
-
                     getOwner(post.getTitle(), post.getAuthorId(), post.getPlaceID(), post.getSpotId(), post.getDatePosted(), post.getTotalGrade());
                 }
+                //Moved the setPosts(posts) outside the loop.
+                //logic issue where it will override the post ArrayList if its left in the for loop
+                setPosts(posts);
+                mAdapter.notifyDataSetChanged();
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
                 Log.d(TAG, "postTransaction:onComplete:" + databaseError);
+                Toast.makeText(getApplicationContext(), "ERROR: DatabaseError !!!!!", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -196,5 +216,10 @@ public class MainActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+    public static void startIntent(Context context, User user) {
+        Intent intent = new Intent(context, MainActivity.class);
+        intent.putExtra(Constant.INTENT_EXTRA_USER, user);
+        context.startActivity(intent);
     }
 }
