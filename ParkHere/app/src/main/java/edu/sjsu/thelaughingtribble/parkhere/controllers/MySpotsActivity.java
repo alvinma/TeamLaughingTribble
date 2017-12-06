@@ -26,33 +26,15 @@ import edu.sjsu.thelaughingtribble.parkhere.models.pojo.User;
 import edu.sjsu.thelaughingtribble.parkhere.models.viewModels.MySpotsViewModel;
 
 public class MySpotsActivity extends AppCompatActivity {
-    Place place = null;
-    User user;
     private MySpotsViewModel mySpotsActivityUIComponents;
     private RecyclerView.Adapter adapter;
     private ArrayList<Spot> spots = new ArrayList<>();
+    Place place = null;
+    User user;
     private FirebaseDatabase database;
     private DatabaseReference reference;
     private boolean posting = false;
     private String title = "";
-
-    public static void startIntent(Context context, User user, Place place) {
-        Intent intent = new Intent(context, MySpotsActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        intent.putExtra(Constant.INTENT_EXTRA_PLACE, place);
-        intent.putExtra(Constant.INTENT_EXTRA_USER, user);
-        context.startActivity(intent);
-    }
-
-    public static void startIntent(Context context, User user, Place place, String title, boolean posting) {
-        Intent intent = new Intent(context, MySpotsActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        intent.putExtra(Constant.INTENT_EXTRA_PLACE, place);
-        intent.putExtra(Constant.INTENT_EXTRA_USER, user);
-        intent.putExtra(Constant.TITLE, title);
-        intent.putExtra(Constant.POSTING, posting);
-        context.startActivity(intent);
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,14 +44,14 @@ public class MySpotsActivity extends AppCompatActivity {
         putExtra();
         database = FirebaseDatabase.getInstance();
         //spots.add(new Spot(place.getAddress(), "monthly", "park on driveway on the left", 50, "no", "2", "no", Utilities.getTodayDate()));
-        setUpUI();
+       setUpUI();
 
         mySpotsActivityUIComponents.getSpotList().setLayoutManager(mySpotsActivityUIComponents.getLayoutManager());
 
         getAllSpot(user.getUid());
-        if (posting) {
+        if(posting) {
             adapter = new SpotListAdapter(spots, user, title, place.getFirebaseKey(), posting);
-        } else {
+        }else {
             adapter = new SpotListAdapter(spots, user);
         }
         mySpotsActivityUIComponents.getSpotList().setAdapter(adapter);
@@ -80,18 +62,25 @@ public class MySpotsActivity extends AppCompatActivity {
                 AddASpotActivity.startIntent(getApplicationContext(), user, place);
             }
         });
+<<<<<<< HEAD
+=======
+
+        Log.i("title", title);
+        Log.i("placeid", place.getFirebaseKey());
+        Log.i("posting", " "+posting);
+>>>>>>> parent of 0cfc810... Merge pull request #19 from alvinma/users/jennifer_n/main_branch
     }
 
-    private void setUpUI() {
+    private void setUpUI(){
         if (mySpotsActivityUIComponents == null) {
             mySpotsActivityUIComponents = new MySpotsViewModel(this);
             mySpotsActivityUIComponents.setUser(user);
         }
-        if (posting) {
+        if(posting){
             mySpotsActivityUIComponents.getActionBar().setDisplayHomeAsUpEnabled(true);
             mySpotsActivityUIComponents.getActionBar().setTitle("Choose a spot");
 
-        } else {
+        }else {
             mySpotsActivityUIComponents.getActionBar().setDisplayHomeAsUpEnabled(true);
             mySpotsActivityUIComponents.getActionBar().setTitle("My Spots");
         }
@@ -101,15 +90,26 @@ public class MySpotsActivity extends AppCompatActivity {
         place = (Place) getIntent().getSerializableExtra(Constant.INTENT_EXTRA_PLACE);
         user = (User) getIntent().getSerializableExtra(Constant.INTENT_EXTRA_USER);
 
-        if (getIntent().hasExtra(Constant.POSTING)) {
+        if(getIntent().hasExtra(Constant.POSTING)){
             posting = getIntent().getExtras().getBoolean(Constant.POSTING);
         }
 
-        if (getIntent().hasExtra(Constant.TITLE)) {
+        if(getIntent().hasExtra(Constant.TITLE)){
             title = getIntent().getExtras().getString(Constant.TITLE);
         }
     }
 
+<<<<<<< HEAD
+=======
+    public static void startIntent(Context context, User user, Place place) {
+        Intent intent = new Intent(context, MySpotsActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.putExtra(Constant.INTENT_EXTRA_PLACE, place);
+        intent.putExtra(Constant.INTENT_EXTRA_USER, user);
+        context.startActivity(intent);
+    }
+
+>>>>>>> parent of 0cfc810... Merge pull request #19 from alvinma/users/jennifer_n/main_branch
     public static void startIntent(Context context, User user, Place place, String title, boolean posting) {
         Intent intent = new Intent(context, MySpotsActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -129,7 +129,7 @@ public class MySpotsActivity extends AppCompatActivity {
 
     private void getAllSpot(String uid) {
         spots.clear();
-        reference = database.getReference("spots/" + uid + "/" + place.getFirebaseKey());
+        reference = database.getReference("spots/"+uid+"/" + place.getFirebaseKey());
 
         reference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -153,7 +153,7 @@ public class MySpotsActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                MyPlacesActivity.startIntent(this, user);
+                this.finish();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

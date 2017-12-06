@@ -24,7 +24,13 @@ import edu.sjsu.thelaughingtribble.parkhere.models.pojo.Vehicle;
 import edu.sjsu.thelaughingtribble.parkhere.models.viewModels.AddAVehicleViewModel;
 
 public class AddAVehicle extends AppCompatActivity {
+    private AddAVehicleViewModel addAVehicleUIComponents;
+    private StorageReference firebaseStorage;
+    private DatabaseReference database;
+    private Uri uri;
+    private User user;
     private static final int GALLLERY_INTENT_CODE = 1;
+
     String brand = null;
     String make = null;
     String year = null;
@@ -32,19 +38,6 @@ public class AddAVehicle extends AppCompatActivity {
     String vin = null;
     String photo = null;
     String plateNumber = null;
-    private AddAVehicleViewModel addAVehicleUIComponents;
-    private StorageReference firebaseStorage;
-    private DatabaseReference database;
-    private Uri uri;
-    private User user;
-
-    public static void startIntent(Context context, User user) {
-        Log.i("intent to add spot ", user.getUid() + " " + user.getEmail());
-        Intent intent = new Intent(context, AddAVehicle.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        intent.putExtra(Constant.INTENT_EXTRA_USER, user);
-        context.startActivity(intent);
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +51,6 @@ public class AddAVehicle extends AppCompatActivity {
         database = FirebaseDatabase.getInstance().getReference();
         addAVehicleUIComponents = new AddAVehicleViewModel(this);
         addAVehicleUIComponents.getActionBar().setTitle("Add a Vehicle");
-        addAVehicleUIComponents.getActionBar().setDisplayHomeAsUpEnabled(true);
         addAVehicleUIComponents.getCancelTextView().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -133,6 +125,16 @@ public class AddAVehicle extends AppCompatActivity {
         });
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                this.finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
 
     private void setUploadImageListener() {
         addAVehicleUIComponents.getUploadLayout().setOnClickListener(new View.OnClickListener() {
@@ -182,23 +184,16 @@ public class AddAVehicle extends AppCompatActivity {
         });
     }
 
-    @Override
-    public void onBackPressed() {
-
-    }
     private void getDataFromIntent() {
         user = (User) getIntent().getSerializableExtra(Constant.INTENT_EXTRA_USER);
         addAVehicleUIComponents.setUser(user);
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-               MyVehiclesActivity.startIntent(this, user);
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
+    public static void startIntent(Context context, User user) {
+        Log.i("intent to add spot ", user.getUid() + " " + user.getEmail());
+        Intent intent = new Intent(context, AddAVehicle.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.putExtra(Constant.INTENT_EXTRA_USER, user);
+        context.startActivity(intent);
     }
 }

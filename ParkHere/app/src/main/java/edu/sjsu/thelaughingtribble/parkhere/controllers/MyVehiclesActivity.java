@@ -32,13 +32,6 @@ public class MyVehiclesActivity extends AppCompatActivity {
     private FirebaseDatabase database;
     private DatabaseReference reference;
 
-    public static void startIntent(Context context, User user) {
-        Intent intent = new Intent(context, MyVehiclesActivity.class);
-        Log.i("my vehicle startIntent", user.getUid() + " " + user.getEmail());
-        intent.putExtra(Constant.INTENT_EXTRA_USER, user);
-        context.startActivity(intent);
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,11 +68,18 @@ public class MyVehiclesActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                ProfileActivity.startIntent(this, user);
+                this.finish();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    public static void startIntent(Context context, User user) {
+        Intent intent = new Intent(context, MyVehiclesActivity.class);
+        Log.i("my vehicle startIntent", user.getUid() + " " + user.getEmail());
+        intent.putExtra(Constant.INTENT_EXTRA_USER, user);
+        context.startActivity(intent);
     }
 
     public ArrayList<Vehicle> getVehicles() {
