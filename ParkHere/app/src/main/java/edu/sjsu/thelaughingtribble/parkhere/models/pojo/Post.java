@@ -1,5 +1,7 @@
 package edu.sjsu.thelaughingtribble.parkhere.models.pojo;
 
+import android.util.Log;
+
 import com.google.firebase.database.Exclude;
 import com.google.firebase.database.IgnoreExtraProperties;
 
@@ -22,6 +24,7 @@ public class Post implements Serializable {
     private String placeID;
     private String spotId;
     private String ownerId;
+    private String authorId;
     private Spot spot;
     private Owner owner;
     private ArrayList<CommentAndRating> commentAndRatings;
@@ -60,14 +63,47 @@ public class Post implements Serializable {
     }
 
     //new post
-    public Post(String title, Spot spot, Owner owner, String datePosted) {
+    public Post(String title, Spot spot, Owner owner, String datePosted, double totalGrade) {
         this.title = title;
         this.spot = spot;
         this.owner = owner;
         this.datePosted = datePosted;
-        commentAndRatings = new ArrayList<>();
-        totalGrade = Constant.DEFAULT_RATING_GRADE;
+        this.totalGrade = totalGrade;
     }
+
+    public String getAuthorId() {
+        return authorId;
+    }
+
+    public void setAuthorId(String authorId) {
+        this.authorId = authorId;
+    }
+
+    public Owner getOwner() {
+        return owner;
+    }
+
+    public void setOwner(Owner owner) {
+        this.owner = owner;
+    }
+
+    public String getDateExpired() {
+        return dateExpired;
+    }
+
+    public void setDateExpired(String dateExpired) {
+        this.dateExpired = dateExpired;
+    }
+
+    public String getPlaceID() {
+        return placeID;
+    }
+
+    public void setPlaceID(String placeID) {
+        this.placeID = placeID;
+    }
+
+
 
     public String getTitle() {
         return title;
@@ -101,6 +137,7 @@ public class Post implements Serializable {
     public void setOwnerId(String ownerId) {
         ownerId = ownerId;
     }
+  
     public String getDatePosted() {
         return datePosted;
     }
@@ -117,13 +154,6 @@ public class Post implements Serializable {
         this.spot = spot;
     }
 
-    public Owner getOwner() {
-        return owner;
-    }
-
-    public void setOwner(Owner owner) {
-        this.owner = owner;
-    }
 
     public ArrayList<CommentAndRating> getCommentAndRatings() {
         return commentAndRatings;
@@ -141,26 +171,26 @@ public class Post implements Serializable {
         this.totalGrade = totalGrade;
     }
 
-    public double getAveragetotalGrade(ArrayList<CommentAndRating> commentAndRatings){
+    public double getAveragetotalGrade(ArrayList<CommentAndRating> commentAndRatings) {
         double totalGrade = 0;
         int size = commentAndRatings.size();
-        for(CommentAndRating c: commentAndRatings){
+        for (CommentAndRating c : commentAndRatings) {
             totalGrade += c.getGrade();
         }
 
-        return totalGrade/ (double) size;
+        return totalGrade / (double) size;
     }
 
     @Exclude
     public Map<String, Object> toMap() {
         HashMap<String, Object> result = new HashMap<>();
-        result.put("spot", spot);
-        result.put("owner", owner);
-        result.put("totalGrade", totalGrade);
-        result.put("commentAndRatings", commentAndRatings);
+        result.put("dateExpired", dateExpired);
         result.put("datePosted", datePosted);
+        result.put("ownerId", authorId);
+        result.put("placeID", placeID);
+        result.put("spotId", spotId);
         result.put("title", title);
-
+        result.put("totalGrade", totalGrade);
         return result;
     }
 }

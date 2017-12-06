@@ -16,7 +16,16 @@ public class AddPostActivity extends BaseActivity {
 
     private AddPostActivityViewModel addPostActivityUI;
     private User user;
-    private String title="";
+
+    private String title = "";
+
+    public static void startIntent(Context context, User user) {
+        Intent intent = new Intent(context, AddPostActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.putExtra(Constant.INTENT_EXTRA_USER, user);
+        context.startActivity(intent);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,15 +33,16 @@ public class AddPostActivity extends BaseActivity {
         init();
     }
 
-    private void init(){
+    private void init() {
         getDataFromIntent();
         setupUI();
     }
-
-    private void getDataFromIntent(){
+  
+    private void getDataFromIntent() {
         user = (User) getIntent().getSerializableExtra(Constant.INTENT_EXTRA_USER);
     }
-    private void setupUI(){
+
+    private void setupUI() {
         addPostActivityUI = new AddPostActivityViewModel(this);
         addPostActivityUI.getCancel().setOnClickListener(new View.OnClickListener() {
             @Override

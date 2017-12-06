@@ -6,8 +6,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
 import edu.sjsu.thelaughingtribble.parkhere.R;
 
 /**

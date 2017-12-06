@@ -31,8 +31,10 @@ public class HomePostListAdapter extends RecyclerView.Adapter<homePostListItemVi
     private homePostListItemViewHolder homePostListUI;
     private User user;
 
-    public HomePostListAdapter(ArrayList<Post> posts) {
+
+    public HomePostListAdapter(ArrayList<Post> posts, User user) {
         this.posts = posts;
+        this.user = user;
 
     }
 
@@ -73,6 +75,7 @@ public class HomePostListAdapter extends RecyclerView.Adapter<homePostListItemVi
         homePostListUI.getPostPrice().setText(String.valueOf("$"+currentPost.getSpot().getPrice()));
         homePostListUI.getPostTitle().setText(String.valueOf(currentPost.getTotalGrade()));
         homePostListUI.getPostDescription().setText(currentPost.getSpot().getDescription());
+        homePostListUI.getTotalRate().setText(String.valueOf(currentPost.getTotalGrade()));
 
         if (currentPost.getSpot().getPhoto() != null) {
             Glide.with(homePostListUI.getContext()).load(currentPost.getSpot().getPhoto()).into(homePostListUI.getPostImage());

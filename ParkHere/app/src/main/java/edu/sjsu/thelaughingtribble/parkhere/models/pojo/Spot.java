@@ -18,7 +18,6 @@ public class Spot extends Place implements Serializable {
     private String type;
     private String description;
     private double price;
-
     private String permitRequired = "false";
     private String spotNumber;
     private String photo;
@@ -28,8 +27,8 @@ public class Spot extends Place implements Serializable {
     private ArrayList<DateFormat> bookedTimes;
 
     private String firebasePlaceKey;
-    private String spotId = "DEFAULT";
-
+    private String spotId;
+  
     //Sample Photos:
     //"https://previews.123rf.com/images/mack2happy/mack2happy1106/mack2happy110600045/9809346-parking-lot-Stock-Photo.jpg"
     //"https://static.pexels.com/photos/2996/parking-parking-lot-underground-garage.jpg"

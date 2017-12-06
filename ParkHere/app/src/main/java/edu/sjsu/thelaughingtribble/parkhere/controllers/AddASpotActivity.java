@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -31,15 +30,14 @@ import static android.R.attr.key;
 
 public class AddASpotActivity extends AppCompatActivity {
 
+    private static final int GALLLERY_INTENT_CODE = 1;
     private AddASPotViewModel addASPotUI;
     private Place place = null;
     private Spot edit_data;
-
     private User user;
     private Uri uri;
     private StorageReference firebaseStorage;
     private DatabaseReference database;
-
     private String type;
     private String description;
     private double price = 0;
@@ -48,8 +46,27 @@ public class AddASpotActivity extends AppCompatActivity {
     private String photo = null;
     private String renting;
     private String nextAvailable;
+
     private static final int GALLLERY_INTENT_CODE = 1;
     private boolean edit = false;
+
+    public static void startIntent(Context context, User user, Place place) {
+        Intent intent = new Intent(context, AddASpotActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.putExtra(Constant.INTENT_EXTRA_PLACE, place);
+        intent.putExtra(Constant.INTENT_EXTRA_USER, user);
+        context.startActivity(intent);
+    }
+
+    public static void startIntent(Context context, User user, Place place, Spot spot) {
+        Intent intent = new Intent(context, AddASpotActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.putExtra(Constant.INTENT_EXTRA_PLACE, place);
+        intent.putExtra(Constant.INTENT_EXTRA_USER, user);
+        intent.putExtra(Constant.INTENT_EXTRA_SPOT, spot);
+        context.startActivity(intent);
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,17 +75,12 @@ public class AddASpotActivity extends AppCompatActivity {
 
         if (addASPotUI == null) {
             addASPotUI = new AddASPotViewModel(this);
-            addASPotUI.getActionBar().setDisplayHomeAsUpEnabled(true);
+            addASPotUI.getActionBar().setDisplayHomeAsUpEnabled(false);
         }
-
         init();
-
-
     }
 
-
     private void submitNewSpot() {
-
         addASPotUI.getSubmit().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -102,10 +114,8 @@ public class AddASpotActivity extends AppCompatActivity {
                         spot = new Spot(place.getAddress(), type, description, price, permitRequired, spotNumber, renting, nextAvailable, place.getFirebaseKey(), key, photo);
                     }
 
-                    database.child("spots/" + user.getUid() + "/" + place.getFirebaseKey()+"/"+ key).setValue(spot);
-
+                    database.child("spots/" + user.getUid() + "/" + place.getFirebaseKey() + "/" + key).setValue(spot);
                     MySpotsActivity.startIntent(AddASpotActivity.this, user, place);
-
                 }
             }
         });
@@ -134,17 +144,17 @@ public class AddASpotActivity extends AppCompatActivity {
                     addASPotUI.getDescription().setError(Constant.REQUIRE_TEXT);
                 }
 
-                if (place.getAddress() != null && type != null && description != null && price != 0 && permitRequired != null && spotNumber != null && place.getFirebaseKey() != null && edit_data.getSpotId()!=null) {
+                if (place.getAddress() != null && type != null && description != null && price != 0 && permitRequired != null && spotNumber != null && place.getFirebaseKey() != null && edit_data.getSpotId() != null) {
 
                     renting = edit_data.getRenting();
                     nextAvailable = edit_data.getNextAvailable();
                     Spot spot = null;
-                   // database.child("spots").child(user.getUid()).child(edit_data.getSpotId());
+
+                    // database.child("spots").child(user.getUid()).child(edit_data.getSpotId());
 
                     spot = new Spot(place.getAddress(), type, description, price, permitRequired, spotNumber, renting, nextAvailable, place.getFirebaseKey(), edit_data.getSpotId(), photo);
 
-
-                    database.child("spots/" + user.getUid() + "/" + place.getFirebaseKey()+"/"+ key).setValue(spot);
+                    database.child("spots/" + user.getUid() + "/" + spot.getFirebasePlaceKey()).child(spot.getSpotId()).setValue(spot);
 
                     MySpotsActivity.startIntent(AddASpotActivity.this, user, place);
 
@@ -159,16 +169,18 @@ public class AddASpotActivity extends AppCompatActivity {
         getDataFromIntent();
         setUpUI();
 
-        if(edit){
+
+        if (edit) {
             updateSpot();
-        }else {
+        } else {
             submitNewSpot();
         }
 
         addASPotUI.getCancel().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                //finish()
+                MySpotsActivity.startIntent(v.getContext(), user, place);
             }
         });
 
@@ -271,13 +283,12 @@ public class AddASpotActivity extends AppCompatActivity {
             addASPotUI.getSpotNum().setText(edit_data.getSpotNumber());
             addASPotUI.getType().setSelection(getPositionType(edit_data.getType()));
             addASPotUI.getPermitRequired().setSelection(getPositionPermit(edit_data.getPermitRequired()));
-        }else {
+        } else {
             addASPotUI.getActionBar().setTitle("Add a Spot");
             addASPotUI.getAddress().setText(place.getAddress());
             addASPotUI.getDescription().setText("");
             addASPotUI.getPrice().setText(String.valueOf(0.0));
             addASPotUI.getSpotNum().setText("");
-
         }
     }
 
@@ -299,6 +310,7 @@ public class AddASpotActivity extends AppCompatActivity {
         }
         return po;
     }
+
     private int getPositionPermit(String permit) {
         int po = 0;
         switch (permit.trim()) {
@@ -335,6 +347,9 @@ public class AddASpotActivity extends AppCompatActivity {
         intent.putExtra(Constant.INTENT_EXTRA_PLACE, place);
         intent.putExtra(Constant.INTENT_EXTRA_USER, user);
         context.startActivity(intent);
+
+    @Override
+    public void onBackPressed() {
     }
 
     public static void startIntent(Context context, User user, Place place, Spot spot) {
@@ -350,7 +365,7 @@ public class AddASpotActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                this.finish();
+                MySpotsActivity.startIntent(this, user, place);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

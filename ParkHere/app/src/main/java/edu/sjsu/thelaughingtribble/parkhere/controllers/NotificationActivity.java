@@ -18,6 +18,12 @@ public class NotificationActivity extends AppCompatActivity {
     private NavigationViewModel menuUIComponents;
     private User user;
 
+    public static void startIntent(Context context, User user) {
+        Intent intent = new Intent(context, NotificationActivity.class);
+        intent.putExtra(Constant.INTENT_EXTRA_USER, user);
+        context.startActivity(intent);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,6 +31,7 @@ public class NotificationActivity extends AppCompatActivity {
         init();
         notificationActivityUIComponents.setToast("Not available");
         notificationActivityUIComponents.getActionBar().setTitle("Notification");
+        notificationActivityUIComponents.getActionBar().setDisplayHomeAsUpEnabled(false);
 
     }
 
@@ -43,16 +50,10 @@ public class NotificationActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                this.finish();
+
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
-    }
-
-    public static void startIntent(Context context, User user) {
-        Intent intent = new Intent(context, NotificationActivity.class);
-        intent.putExtra(Constant.INTENT_EXTRA_USER, user);
-        context.startActivity(intent);
     }
 }

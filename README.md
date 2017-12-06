@@ -26,6 +26,7 @@ Android Emulator v. 26.1.4
 Android SDK Tools v. 26.1.1
 Google Play services v. 46
 Intel x86 Emulator Accelerator (HAXM installer) v. 6.2.1
+Please make sure your android API level is at least 25 to support the shortcut features.
 
 After the installations, import the ParkHere application into Android Studio. This will allow the IDE to compile and run the project for you when you hit the “run app” drop down selection under the “run” tab. This will prompt an application window, allowing you to choose a phone type to emulate the application on.
 

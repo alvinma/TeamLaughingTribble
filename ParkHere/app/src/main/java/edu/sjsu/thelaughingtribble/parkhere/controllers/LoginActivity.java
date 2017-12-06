@@ -27,17 +27,29 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
 
     private static final String TAG = "SignInActivity";
-
+    LoginViewModel loginUiComponents;
     private DatabaseReference mDatabase;
     private FirebaseAuth mAuth;
-
     private EditText mEmailField;
     private EditText mPasswordField;
     private Button mSignInButton;
     private Button mSignUpButton;
     private User mUser;
 
-    LoginViewModel loginUiComponents;
+    public static FirebaseAuth signOut(FirebaseAuth mAuth) {
+        if (mAuth != null && mAuth.getCurrentUser() != null) {
+            mAuth.signOut();
+            mAuth = null;
+        }
+
+        return mAuth;
+
+    }
+
+   /* public void login(){
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+    }*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,11 +79,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
             }
         });*/
     }
-
-   /* public void login(){
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
-    }*/
 
     @Override
     public void onStart() {
@@ -120,7 +127,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
         return mAuth;
     }
-
+  
     private void signUp() {
         Log.d(TAG, "signUp");
         if (!validateForm()) {
@@ -169,6 +176,10 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         }
     }*/
 
+    @Override
+    public void onBackPressed() {
+
+    }
     private boolean validateForm() {
         boolean result = true;
         if (TextUtils.isEmpty(mEmailField.getText().toString())) {

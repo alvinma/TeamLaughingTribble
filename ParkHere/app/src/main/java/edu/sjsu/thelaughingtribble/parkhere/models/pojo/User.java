@@ -13,13 +13,14 @@ import java.util.Map;
  */
 @IgnoreExtraProperties
 public class User implements Serializable {
-    private String uid = "D_uid";
-    private String userID = "D_userID";
-    private String firstName = "FirstName";
-    private String lastName = "LastName";
-    private String email = "email@email.com";
-    private String cellphone = "(408)555-1234";
-    private ArrayList<Vehicle> vehicles = new ArrayList<Vehicle>();
+    private String uid;
+    private String userID;
+    private String firstName;
+    private String lastName;
+    private String email;
+    private String cellphone;
+    private String fullName;
+    private ArrayList<Vehicle> vehicles;
 
     public User(){
         // Default constructor required for calls to DataSnapshot.getValue(User.class)
@@ -32,6 +33,9 @@ public class User implements Serializable {
         this.email = user.getEmail();
         this.cellphone = user.getCellphone();
         this.vehicles = user.getVehicles();
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 
     public User(String userID, String firstName, String lastName, String email, String cellphone) {
@@ -43,13 +47,13 @@ public class User implements Serializable {
         this.vehicles = new ArrayList<>();
     }
 
-    public User(String userID, String firstName, String lastName, String email) {
+    /*public User(String userID, String firstName, String lastName, String email) {
         this.userID = userID;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.vehicles = new ArrayList<>();
-    }
+    }*/
 
     public User(String userID, String firstName, String lastName, String email, String cellphone, ArrayList<Vehicle> vehicles) {
         this.userID = userID;
@@ -89,6 +93,12 @@ public class User implements Serializable {
         this.uid = uid;
         this.userID = userID;
         this.email = email;
+    }
+    public User(String uid, String userID, String email, String fullName) {
+        this.uid = uid;
+        this.userID = userID;
+        this.email = email;
+        this.fullName = fullName;
     }
 
     public String getUid() {
