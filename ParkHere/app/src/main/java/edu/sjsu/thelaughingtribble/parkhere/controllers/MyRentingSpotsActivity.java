@@ -16,13 +16,6 @@ public class MyRentingSpotsActivity extends AppCompatActivity {
     MyRentingSpotsActivityViewModel myRentingSpotsActivityUIComponents;
     private User user;
 
-    public static void startIntent(Context context, User user) {
-        Intent intent = new Intent(context, MyRentingSpotsActivity.class);
-        Log.i("my places startIntent", user.getUid() + " " + user.getEmail());
-        intent.putExtra(Constant.INTENT_EXTRA_USER, user);
-        context.startActivity(intent);
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,10 +33,17 @@ public class MyRentingSpotsActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                ProfileActivity.startIntent(this, user);
+                this.finish();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    public static void startIntent(Context context, User user) {
+        Intent intent = new Intent(context, MyRentingSpotsActivity.class);
+        Log.i("my places startIntent", user.getUid() + " " + user.getEmail());
+        intent.putExtra(Constant.INTENT_EXTRA_USER, user);
+        context.startActivity(intent);
     }
 }
