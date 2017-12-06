@@ -20,6 +20,8 @@
     <string name="book">Book</string>
     <string name="enter_title">Enter title</string>
     <string name="next">NEXT</string>
+    <string name="rating">Rating: </string>
+    <string name="five">/5.0</string>
     <!--inn profile layout-->
     <string name="myplaces">My Places</string>
     <string name="myprofile">My Profiles</string>

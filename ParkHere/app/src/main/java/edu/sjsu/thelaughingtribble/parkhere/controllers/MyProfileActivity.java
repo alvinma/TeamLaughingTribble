@@ -20,6 +20,13 @@ public class MyProfileActivity extends AppCompatActivity {
 
     MyProfileActivityViewModel myProfileActivityUIComponents;
     private User user;
+
+    public static void startIntent(Context context, User user) {
+        Intent intent = new Intent(context, MyProfileActivity.class);
+        Log.i("myprofile startIntent", user.getUid() + " " + user.getEmail());
+        intent.putExtra(Constant.INTENT_EXTRA_USER, user);
+        context.startActivity(intent);
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -99,7 +106,6 @@ public class MyProfileActivity extends AppCompatActivity {
         });
     }
 
-
     private void editAction(FloatingActionButton edit) {
         edit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -107,12 +113,5 @@ public class MyProfileActivity extends AppCompatActivity {
                 editMode(true);
             }
         });
-    }
-
-    public static void startIntent(Context context, User user) {
-        Intent intent = new Intent(context, MyProfileActivity.class);
-        Log.i("myprofile startIntent", user.getUid() + " " + user.getEmail());
-        intent.putExtra(Constant.INTENT_EXTRA_USER, user);
-        context.startActivity(intent);
     }
 }
