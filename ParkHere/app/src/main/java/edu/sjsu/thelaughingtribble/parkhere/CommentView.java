@@ -27,8 +27,6 @@ import edu.sjsu.thelaughingtribble.parkhere.models.viewModels.NavigationViewMode
 
 public class CommentView extends AppCompatActivity {
 
-    public static ArrayList<Integer> tempDB = new ArrayList<Integer>();
-    public static List<ParkingPostObject> tempObjectDB = new ArrayList<ParkingPostObject>();
     private NavigationViewModel menuUIComponents;
     private CommentViewModel mainActivityUiComponets;
 
@@ -46,6 +44,8 @@ public class CommentView extends AppCompatActivity {
     ArrayList<CommentAndRating> commentAndRatings = new ArrayList<>();
 
     RatingBar rateview;
+    int counter = 0;
+    String tempSpotID = "101508950611960214124_spot1";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,14 +57,6 @@ public class CommentView extends AppCompatActivity {
         init();
         initList();
         getParkingList();
-        /*mainActivityUiComponets.getSpotSubmission().setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                registerParking();
-            }
-        });*/
-
-
     }
 
     private void initList() {
@@ -103,22 +95,23 @@ public class CommentView extends AppCompatActivity {
 
     private void getParkingList() {
         commentAndRatings.clear();
-        mReference = mDatabase.getReference("rating_comment/101508950611960214124_spot1");
+        mReference = mDatabase.getReference("rating_comment/" + tempSpotID);
 
         // Attach a listener to read the data at our posts reference
         mReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                commentAndRatings.clear();
                 double rating = 0.0;
-                int counter = 0;
+                counter = 0;
                 for (DataSnapshot item : dataSnapshot.getChildren()) {
                     CommentAndRating commentAndRating = item.getValue(CommentAndRating.class);
                     commentAndRatings.add(commentAndRating);
                     setCommentAndRatings(commentAndRatings);
-                    mAdapter.notifyDataSetChanged();
                     rating += commentAndRating.getGrade();
                     counter++;
                     rateview.setRating((float)(rating/counter));
+                    mAdapter.notifyDataSetChanged();
                 }
             }
 
@@ -160,6 +153,8 @@ public class CommentView extends AppCompatActivity {
 
     public void addComment(View view){
         Intent intent = new Intent(this, RateAndComment.class);
+        intent.putExtra("CommentCount", counter);
+        intent.putExtra("SpotID", tempSpotID);
         startActivity(intent);
     }
 }
