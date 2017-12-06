@@ -16,7 +16,6 @@ import java.util.ArrayList;
 import edu.sjsu.thelaughingtribble.parkhere.R;
 import edu.sjsu.thelaughingtribble.parkhere.Utils.Constant;
 import edu.sjsu.thelaughingtribble.parkhere.controllers.PostDetailActivity;
-import edu.sjsu.thelaughingtribble.parkhere.controllers.PostInformationActivity;
 import edu.sjsu.thelaughingtribble.parkhere.models.pojo.Owner;
 import edu.sjsu.thelaughingtribble.parkhere.models.pojo.Post;
 import edu.sjsu.thelaughingtribble.parkhere.models.pojo.Spot;

@@ -1,6 +1,8 @@
 package edu.sjsu.thelaughingtribble.parkhere.controllers;
 
 import android.app.DatePickerDialog;
+import android.app.Dialog;
+import android.app.DialogFragment;
 import android.content.Intent;
 import android.icu.util.Calendar;
 import android.os.Bundle;
@@ -41,6 +43,7 @@ public class BookingActivity extends AppCompatActivity {
 
     private FirebaseDatabase mDatabase;
     private DatabaseReference mReference;
+    private Renter renter;
     private User user;
     private Post post;
     private Button purchaseButton;
@@ -51,11 +54,12 @@ public class BookingActivity extends AppCompatActivity {
     private TextView datePosted;
     private TextView postPrice;
     private TextView postDescription;
-    private TextView startDate;
-    private TextView endDate;
+    private static TextView startDate;
+    private static TextView endDate;
 
     PostHistory postHistory;
     private Boolean FLAG_DATES_PICKED = false;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,7 +79,10 @@ public class BookingActivity extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             try {
-                post = (Post) extras.getSerializable("Post.class");
+                post = (Post) extras.getSerializable(Constant.INTENT_EXTRA_POST);
+                renter = (Renter) extras.getSerializable(Constant.INTENT_EXTRA_USER);
+                user = (User) getIntent().getSerializableExtra(Constant.INTENT_EXTRA_USER);
+                renter = new Renter(user);
             }
             catch(Exception ex){
                 Toast.makeText(getBaseContext(), "Error Getting class..", Toast.LENGTH_SHORT);
@@ -104,7 +111,8 @@ public class BookingActivity extends AppCompatActivity {
         Date endDate_f = Utilities.convertStringDate(endDate);
 
         //startDate is later than endDate
-        if(startDate_f.compareTo(endDate_f) > 0){
+        if(startDate_f.after(endDate_f)){
+            Toast.makeText(getBaseContext(), "'Start Date' cannot be AFTER 'End Date'", Toast.LENGTH_LONG).show();
             return false;
         }
 
@@ -117,23 +125,16 @@ public class BookingActivity extends AppCompatActivity {
 
             //TODO: haven't testing this function but the logic is there
             //startDate is earlier than booked_Start
-            if(startDate_f.compareTo(booked_start) < 0){
+            if(startDate_f.before(booked_start)){
                 //endDate is later than booked_start
-                if(endDate_f.compareTo(booked_start) > 0){
+                if(endDate_f.after(booked_start)){
                     return false;
                 }
             }else{
-                if(startDate_f.compareTo(booked_end) < 0){
+                if(startDate_f.after(booked_end)){
                     return false;
                 }
             }
-
-            //booked_start=====booked_end
-            //b_s, s+d, s+e, b_e
-            //b_s, s+d, b_e, s+e
-
-            //s+d, b_s, b_e, s+e
-            //s+d, b_s, s+e, b_e
         }
         return true;
     }
@@ -214,10 +215,8 @@ public class BookingActivity extends AppCompatActivity {
                 String bookingID = booking.getFirebaseKey();
                 mReference.child("postHistory/" + spotID + "/" + bookingID).setValue(booking);
 
-                //TODO:
-                //  -What gets affected with the booking of a post
-                //  +seeker
-                //  +owner
+                //Go back to main
+                MainActivity.startIntent(getBaseContext(), user);
             }
         });
     }

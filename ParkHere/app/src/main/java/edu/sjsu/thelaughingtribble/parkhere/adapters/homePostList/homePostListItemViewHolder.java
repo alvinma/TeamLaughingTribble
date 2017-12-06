@@ -14,7 +14,6 @@ import java.io.Serializable;
 import edu.sjsu.thelaughingtribble.parkhere.R;
 import edu.sjsu.thelaughingtribble.parkhere.Utils.Constant;
 import edu.sjsu.thelaughingtribble.parkhere.controllers.MyProfileActivity;
-import edu.sjsu.thelaughingtribble.parkhere.controllers.PostInformationActivity;
 import edu.sjsu.thelaughingtribble.parkhere.models.pojo.User;
 
 /**
