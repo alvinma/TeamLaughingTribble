@@ -80,7 +80,6 @@ public class MySpotsActivity extends AppCompatActivity {
                 AddASpotActivity.startIntent(getApplicationContext(), user, place);
             }
         });
-
     }
 
     private void setUpUI() {
@@ -111,6 +110,15 @@ public class MySpotsActivity extends AppCompatActivity {
         }
     }
 
+    public static void startIntent(Context context, User user, Place place, String title, boolean posting) {
+        Intent intent = new Intent(context, MySpotsActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.putExtra(Constant.INTENT_EXTRA_PLACE, place);
+        intent.putExtra(Constant.INTENT_EXTRA_USER, user);
+        intent.putExtra(Constant.TITLE, title);
+        intent.putExtra(Constant.POSTING, posting);
+        context.startActivity(intent);
+    }
     public ArrayList<Spot> getSpots() {
         return spots;
     }

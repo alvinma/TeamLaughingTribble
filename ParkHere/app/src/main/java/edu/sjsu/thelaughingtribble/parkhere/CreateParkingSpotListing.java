@@ -156,6 +156,7 @@ public class CreateParkingSpotListing extends BaseActivity {
         String nextAvaliable = "11-02-17";
         String defaultTitle = "SUV Parking";
         Spot spot = new Spot(location, type, description, price, permitRequired, spotNumber, renting, nextAvaliable, "123","sa",  "example key");
+        Post post = new Post(defaultTitle, spot, user, Utilities.getTodayDate());
         Post post = new Post(defaultTitle, "asd", "asda", Utilities.getTodayDate());
         Map<String, Object> postValues = post.toMap();
 

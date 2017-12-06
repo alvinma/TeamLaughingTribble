@@ -119,6 +119,15 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                 });
     }
 
+    public static FirebaseAuth signOut(FirebaseAuth mAuth) {
+        if (mAuth != null && mAuth.getCurrentUser() != null) {
+            mAuth.signOut();
+            mAuth = null;
+        }
+
+        return mAuth;
+    }
+  
     private void signUp() {
         Log.d(TAG, "signUp");
         if (!validateForm()) {
@@ -146,6 +155,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                 });
     }
 
+    //TODO: Add a 'Create NEW user ', activity. Adding in the Name, phone number, address...
     private void onAuthSuccess(FirebaseUser user) {
         String username = Utilities.usernameFromEmail(user.getEmail());
 
