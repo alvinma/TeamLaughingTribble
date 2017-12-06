@@ -32,6 +32,7 @@ import static android.R.attr.key;
 public class AddASpotActivity extends AppCompatActivity {
 
     private static final int GALLLERY_INTENT_CODE = 1;
+
     private AddASPotViewModel addASPotUI;
     private Place place = null;
     private Spot edit_data;
@@ -345,9 +346,7 @@ public class AddASpotActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onBackPressed() {
-
-    }
+    public void onBackPressed() {}
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

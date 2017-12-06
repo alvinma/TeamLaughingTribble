@@ -27,7 +27,6 @@ public class MyProfileActivity extends AppCompatActivity {
         intent.putExtra(Constant.INTENT_EXTRA_USER, user);
         context.startActivity(intent);
     }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

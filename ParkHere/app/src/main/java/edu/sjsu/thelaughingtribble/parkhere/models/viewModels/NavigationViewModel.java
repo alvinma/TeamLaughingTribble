@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 
+import edu.sjsu.thelaughingtribble.parkhere.CommentView;
 import edu.sjsu.thelaughingtribble.parkhere.R;
 import edu.sjsu.thelaughingtribble.parkhere.controllers.MainActivity;
 import edu.sjsu.thelaughingtribble.parkhere.controllers.NotificationActivity;
@@ -67,7 +68,8 @@ public class NavigationViewModel extends ActivityCommonViewModel  {
                 /*Intent intent = new Intent(getContext(), NotificationActivity.class);
                 getContext().startActivity(intent);*/
                 if(getUser()!=null) {
-                    NotificationActivity.startIntent(getContext(), getUser());
+                    //NotificationActivity.startIntent(getContext(), getUser());    // alvin change
+                    CommentView.startIntent(getContext(), getUser());
                 }else {
                     Log.i("setNotificationIntent", "user null");
                 }
