@@ -5,14 +5,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
-
 import java.util.ArrayList;
 
-import edu.sjsu.thelaughingtribble.parkhere.Utils.Constant;
 import edu.sjsu.thelaughingtribble.parkhere.models.pojo.CommentAndRating;
 
 public class CommentViewAdapter extends RecyclerView.Adapter<commentViewListItemViewHolder> {
@@ -35,13 +29,19 @@ public class CommentViewAdapter extends RecyclerView.Adapter<commentViewListItem
         CommentAndRating currentPost = commentAndRatings.get(position);
 
         commentUI.getDatePosted().setText(currentPost.getDate());
-        //commentUI.getPostTitle().setText(String.valueOf(currentPost.getTotalGrade()));
-        commentUI.getPostOwner().setText(currentPost.getRenter());
-        commentUI.getPostDescription().setText(currentPost.getComment());
+        //commentUI.getCommentTitle().setText(String.valueOf(currentPost.getTotalGrade()));
+        commentUI.getRenterName().setText(currentPost.getRenter());
+        commentUI.getComment().setText(currentPost.getComment());
     }
 
     @Override
     public int getItemCount() {
         return commentAndRatings.size();
+    }
+
+    @Override
+    public int getItemViewType(int position)
+    {
+        return position;
     }
 }
