@@ -3,7 +3,6 @@ package edu.sjsu.thelaughingtribble.parkhere.controllers;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.MenuItem;
@@ -33,6 +32,20 @@ public class MyPlacesActivity extends BaseActivity {
     private boolean posting = false;
     private String title = "";
 
+    public static void startIntent(Context context, User user) {
+        Intent intent = new Intent(context, MyPlacesActivity.class);
+        intent.putExtra(Constant.INTENT_EXTRA_USER, user);
+        context.startActivity(intent);
+    }
+
+    public static void startIntent(Context context, User user, String title, boolean posting) {
+        Intent intent = new Intent(context, MyPlacesActivity.class);
+        intent.putExtra(Constant.INTENT_EXTRA_USER, user);
+        intent.putExtra(Constant.POSTING, posting);
+        intent.putExtra(Constant.TITLE, title);
+        context.startActivity(intent);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,9 +60,9 @@ public class MyPlacesActivity extends BaseActivity {
 
         myPlacesActivityUIComponents.getPlaceList().setLayoutManager(myPlacesActivityUIComponents.getLayoutManager());
 
-        if(posting){
+        if (posting) {
             adapter = new PlaceListAdapter(places, user, title, posting);
-        }else {
+        } else {
             adapter = new PlaceListAdapter(places, user);
         }
         myPlacesActivityUIComponents.getPlaceList().setAdapter(adapter);
@@ -61,33 +74,39 @@ public class MyPlacesActivity extends BaseActivity {
         return places;
     }
 
-    public void setupUI(){
+    public void setPlaces(ArrayList<Place> places) {
+        this.places = places;
+    }
+
+    public void setupUI() {
         myPlacesActivityUIComponents = new MyPlacesActivityViewModel(this);
         myPlacesActivityUIComponents.setUser(user);
-        if(posting){
+        if (posting) {
             if (myPlacesActivityUIComponents.getActionBar() != null) {
                 myPlacesActivityUIComponents.getActionBar().setTitle("Select a place");
                 myPlacesActivityUIComponents.getActionBar().setDisplayHomeAsUpEnabled(true);
             }
-        }else {
+        } else {
             if (myPlacesActivityUIComponents.getActionBar() != null) {
                 myPlacesActivityUIComponents.getActionBar().setTitle("My Places");
                 myPlacesActivityUIComponents.getActionBar().setDisplayHomeAsUpEnabled(true);
             }
         }
     }
-    private void getDataFromIntent(){
+
+    private void getDataFromIntent() {
         user = (User) getIntent().getSerializableExtra(Constant.INTENT_EXTRA_USER);
-        if(getIntent().hasExtra(Constant.POSTING)) {
+        if (getIntent().hasExtra(Constant.POSTING)) {
             posting = getIntent().getExtras().getBoolean(Constant.POSTING);
-        }else {
+        } else {
             posting = false;
         }
 
-        if(getIntent().hasExtra(Constant.TITLE)) {
+        if (getIntent().hasExtra(Constant.TITLE)) {
             title = getIntent().getExtras().getString(Constant.TITLE);
         }
     }
+
     @Override
     protected void onStart() {
         super.onStart();
@@ -97,15 +116,11 @@ public class MyPlacesActivity extends BaseActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                this.finish();
+                ProfileActivity.startIntent(this, user);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
-    }
-
-    public void setPlaces(ArrayList<Place> places) {
-        this.places = places;
     }
 
     private void getAllPlaces(String uid) {
@@ -131,20 +146,6 @@ public class MyPlacesActivity extends BaseActivity {
             }
         });
 
-    }
-
-    public static void startIntent(Context context, User user) {
-        Intent intent = new Intent(context, MyPlacesActivity.class);
-        intent.putExtra(Constant.INTENT_EXTRA_USER, user);
-        context.startActivity(intent);
-    }
-
-    public static void startIntent(Context context, User user, String title, boolean posting) {
-        Intent intent = new Intent(context, MyPlacesActivity.class);
-        intent.putExtra(Constant.INTENT_EXTRA_USER, user);
-        intent.putExtra(Constant.POSTING, posting);
-        intent.putExtra(Constant.TITLE, title);
-        context.startActivity(intent);
     }
 
 }
