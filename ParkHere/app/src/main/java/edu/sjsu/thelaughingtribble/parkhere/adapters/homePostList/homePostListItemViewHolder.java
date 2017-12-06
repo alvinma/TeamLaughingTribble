@@ -14,12 +14,8 @@ import java.io.Serializable;
 import edu.sjsu.thelaughingtribble.parkhere.R;
 import edu.sjsu.thelaughingtribble.parkhere.Utils.Constant;
 import edu.sjsu.thelaughingtribble.parkhere.controllers.MyProfileActivity;
-<<<<<<< HEAD
 import edu.sjsu.thelaughingtribble.parkhere.controllers.PostDetailActivity;
 import edu.sjsu.thelaughingtribble.parkhere.models.pojo.Post;
-=======
-import edu.sjsu.thelaughingtribble.parkhere.controllers.PostInformationActivity;
->>>>>>> parent of c11a0b3... contains the latest version, calendar view
 import edu.sjsu.thelaughingtribble.parkhere.models.pojo.User;
 
 import static edu.sjsu.thelaughingtribble.parkhere.R.string.post;

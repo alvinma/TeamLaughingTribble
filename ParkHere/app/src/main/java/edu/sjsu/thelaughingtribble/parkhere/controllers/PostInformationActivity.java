@@ -38,6 +38,7 @@ import edu.sjsu.thelaughingtribble.parkhere.models.pojo.User;
 
 //TODO: CRITICAL || extend the PostDetailActivity.java class
 //
+
 public class PostInformationActivity extends PostDetailActivity {
 
     private FirebaseDatabase mDatabase;

@@ -23,10 +23,15 @@ public class PostDetailActivityViewModel extends ActivityCommonViewModel {
     private TextView price;
     private TextView permit;
     private TextView description;
+    private TextView startDate;
+    private TextView endDate;
+    private TextView selectedDate;
+
     private Button postButton;
     private Button bookButton;
     private Button commentsButton;
-
+    private Button startDateButton;
+    private Button endDateButton;
 
     public PostDetailActivityViewModel(Context context) {
         super(context);
@@ -37,11 +42,21 @@ public class PostDetailActivityViewModel extends ActivityCommonViewModel {
         spotNum =  (TextView) ((Activity) context).findViewById(R.id.spot_number_text);
         type = (TextView) ((Activity) context).findViewById(R.id.type_text);
         price = (TextView) ((Activity) context).findViewById(R.id.price_text);
-         permit = (TextView) ((Activity) context).findViewById(R.id.permit_required_text);
-         description = (TextView) ((Activity) context).findViewById(R.id.description_text);
-         postButton = (Button) ((Activity) context).findViewById(R.id.post_button);
-         bookButton = (Button) ((Activity) context).findViewById(R.id.book_button);
+        permit = (TextView) ((Activity) context).findViewById(R.id.permit_required_text);
+        description = (TextView) ((Activity) context).findViewById(R.id.description_text);
+        startDate = (TextView) ((Activity) context).findViewById(R.id.view_startDate);
+        endDate = (TextView) ((Activity) context).findViewById(R.id.view_endDate);
+
+        postButton = (Button) ((Activity) context).findViewById(R.id.post_button);
+        bookButton = (Button) ((Activity) context).findViewById(R.id.book_button);
         commentsButton = (Button) ((Activity) context).findViewById(R.id.comments_button);
+        startDateButton = (Button) ((Activity) context).findViewById(R.id.button_startDate);
+        endDateButton = (Button) ((Activity) context).findViewById(R.id.button_endDate);
+    }
+    public TextView getSelectedDate(){ return this.selectedDate;}
+
+    public void setSelectedDate(TextView selectedDate){
+        this.selectedDate = selectedDate;
     }
 
     public TextView getTitle() {
@@ -135,7 +150,6 @@ public class PostDetailActivityViewModel extends ActivityCommonViewModel {
     public Button getCommentsButton(){ return commentsButton;}
 
     public void setCommentsButton(Button commentsButton){ this.commentsButton = commentsButton;}
-<<<<<<< HEAD
 
     public void setStartDateButton(Button startDateButton){
         this.startDateButton = startDateButton;
@@ -165,6 +179,3 @@ public class PostDetailActivityViewModel extends ActivityCommonViewModel {
         return this.endDate;
     }
 }
-=======
-}
->>>>>>> parent of c11a0b3... contains the latest version, calendar view
