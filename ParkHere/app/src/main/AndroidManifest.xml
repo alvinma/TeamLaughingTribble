@@ -2,6 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="edu.sjsu.thelaughingtribble.parkhere">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,13 +13,45 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".controllers.MainActivity" />
+        <activity android:name=".ParkingSpotList" />
+        <activity android:name=".CreateParkingSpotListing" />
+        <activity android:name=".ViewObjectInfo" />
+        <activity android:name=".controllers.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".controllers.Navigation" />
+        <activity android:name=".controllers.ProfileActivity" />
+        <activity android:name=".controllers.NotificationActivity" />
+        <activity android:name=".controllers.MyProfileActivity" />
+        <activity android:name=".controllers.MyVehiclesActivity" />
+        <activity android:name=".controllers.MyPlacesActivity" />
+        <activity android:name=".controllers.MyRentingSpotsActivity" />
+        <activity android:name=".controllers.AddAVehicle" />
+        <activity android:name=".controllers.MySpotsActivity" />
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyAGXlOk9q9UDaGoGh7_YcHQ-iG4a8_Kkns" />
+
+        <activity android:name=".controllers.AddASpotActivity" />
+        <activity android:name=".controllers.AddAPlace" />
+        <activity
+            android:name=".controllers.PostInformationActivity"
+            android:label="@string/title_activity_post_information"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".controllers.BookingActivity"
+            android:label="@string/title_activity_booking"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+        <activity android:name=".controllers.SpotDetailActivity" />
+        <activity android:name=".controllers.PostDetailActivity" />
+        <activity android:name=".controllers.AddPostActivity"></activity>
     </application>
 
 </manifest>
