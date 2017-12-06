@@ -2,14 +2,9 @@ package edu.sjsu.thelaughingtribble.parkhere;
 
 
 import android.content.Context;
-import android.media.Rating;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.RatingBar;
 import android.widget.TextView;
-
-import edu.sjsu.thelaughingtribble.parkhere.R;
 
 /**
  * Created by Alvin on 12/1/2017.
@@ -17,10 +12,10 @@ import edu.sjsu.thelaughingtribble.parkhere.R;
 
 public class commentViewListItemViewHolder extends RecyclerView.ViewHolder {
 
-    private TextView postTitle;
-    private TextView postOwner;
+    private TextView commentTitle;
+    private TextView renterName;
     private TextView datePosted;
-    private TextView postDescription;
+    private TextView comment;
     private Context context;
 
 
@@ -31,10 +26,10 @@ public class commentViewListItemViewHolder extends RecyclerView.ViewHolder {
     public commentViewListItemViewHolder(View commentItem) {
         super(commentItem);
         this.context = commentItem.getContext();
-        this.postTitle = (TextView) commentItem.findViewById(R.id.title);
-        this.postOwner = (TextView) commentItem.findViewById(R.id.full_name);
+        this.commentTitle = (TextView) commentItem.findViewById(R.id.title);
+        this.renterName = (TextView) commentItem.findViewById(R.id.full_name);
         this.datePosted = (TextView) commentItem.findViewById(R.id.date_posted);
-        this.postDescription = (TextView) commentItem.findViewById(R.id.post_description);
+        this.comment = (TextView) commentItem.findViewById(R.id.post_description);
     }
 
 
@@ -46,20 +41,20 @@ public class commentViewListItemViewHolder extends RecyclerView.ViewHolder {
         this.context = context;
     }
 
-    public TextView getPostTitle() {
-        return postTitle;
+    public TextView getCommentTitle() {
+        return commentTitle;
     }
 
-    public void setPostTitle(TextView postTitle) {
-        this.postTitle = postTitle;
+    public void setCommentTitle(TextView commentTitle) {
+        this.commentTitle = commentTitle;
     }
 
-    public TextView getPostOwner() {
-        return postOwner;
+    public TextView getRenterName() {
+        return renterName;
     }
 
-    public void setPostOwner(TextView postOwner) {
-        this.postOwner = postOwner;
+    public void setRenterName(TextView renterName) {
+        this.renterName = renterName;
     }
 
     public TextView getDatePosted() {
@@ -70,11 +65,11 @@ public class commentViewListItemViewHolder extends RecyclerView.ViewHolder {
         this.datePosted = datePosted;
     }
 
-    public TextView getPostDescription() {
-        return postDescription;
+    public TextView getComment() {
+        return comment;
     }
 
-    public void setPostDescription(TextView postDescription) {
-        this.postDescription = postDescription;
+    public void setComment(TextView comment) {
+        this.comment = comment;
     }
 }
