@@ -16,7 +16,6 @@ public class AddPostActivity extends BaseActivity {
 
     private AddPostActivityViewModel addPostActivityUI;
     private User user;
-<<<<<<< HEAD
 
     private String title = "";
 
@@ -27,9 +26,6 @@ public class AddPostActivity extends BaseActivity {
         context.startActivity(intent);
     }
 
-=======
-    private String title="";
->>>>>>> parent of 0cfc810... Merge pull request #19 from alvinma/users/jennifer_n/main_branch
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,20 +33,16 @@ public class AddPostActivity extends BaseActivity {
         init();
     }
 
-    private void init(){
+    private void init() {
         getDataFromIntent();
         setupUI();
     }
-<<<<<<< HEAD
   
     private void getDataFromIntent() {
-=======
-
-    private void getDataFromIntent(){
->>>>>>> parent of 0cfc810... Merge pull request #19 from alvinma/users/jennifer_n/main_branch
         user = (User) getIntent().getSerializableExtra(Constant.INTENT_EXTRA_USER);
     }
-    private void setupUI(){
+
+    private void setupUI() {
         addPostActivityUI = new AddPostActivityViewModel(this);
         addPostActivityUI.getCancel().setOnClickListener(new View.OnClickListener() {
             @Override
