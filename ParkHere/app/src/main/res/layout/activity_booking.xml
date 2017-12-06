@@ -20,6 +20,6 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/content_post_information" />
+    <include layout="@layout/content_booking" />
 
 </android.support.design.widget.CoordinatorLayout>
