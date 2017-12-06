@@ -29,6 +29,15 @@ public class User implements Serializable {
     public void setFullName(String fullName) {
         this.fullName = fullName;
     }
+	
+	public User(User user){
+        this.userID = user.getUserID();
+        this.firstName = user.getFirstName();
+        this.lastName = user.getLastName();
+        this.email = user.getEmail();
+        this.cellphone = user.getCellphone();
+        this.vehicles = user.getVehicles();
+    }
 
     public User(String userID, String firstName, String lastName, String email, String cellphone) {
         this.userID = userID;
@@ -39,13 +48,13 @@ public class User implements Serializable {
         this.vehicles = new ArrayList<>();
     }
 
-    /*public User(String userID, String firstName, String lastName, String email) {
+    public User(String userID, String firstName, String lastName, String email) {
         this.userID = userID;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.vehicles = new ArrayList<>();
-    }*/
+    }  // marco 
 
     public User(String userID, String firstName, String lastName, String email, String cellphone, ArrayList<Vehicle> vehicles) {
         this.userID = userID;
@@ -85,12 +94,6 @@ public class User implements Serializable {
         this.uid = uid;
         this.userID = userID;
         this.email = email;
-    }
-    public User(String uid, String userID, String email, String fullName) {
-        this.uid = uid;
-        this.userID = userID;
-        this.email = email;
-        this.fullName = fullName;
     }
 
     public String getUid() {

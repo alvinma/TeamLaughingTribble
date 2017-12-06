@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import edu.sjsu.thelaughingtribble.parkhere.Utils.Constant;
 import edu.sjsu.thelaughingtribble.parkhere.Utils.Utilities;
 
 /**
@@ -84,7 +85,15 @@ public class Post implements Serializable {
         this.placeID = placeID;
     }
 
-
+    //new post
+    public Post(String title, Spot spot, Owner owner, String datePosted) {
+        this.title = title;
+        this.spot = spot;
+        this.owner = owner;
+        this.datePosted = datePosted;
+        commentAndRatings = new ArrayList<>();
+        totalGrade = Constant.DEFAULT_RATING_GRADE;
+    }
 
     public String getTitle() {
         return title;

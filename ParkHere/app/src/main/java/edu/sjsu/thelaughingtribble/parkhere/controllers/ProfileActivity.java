@@ -21,12 +21,6 @@ public class ProfileActivity extends AppCompatActivity {
     private NavigationViewModel menuUIComponents;
     private User user;
 
-    public static void startIntent(Context context, User user) {
-        Intent intent = new Intent(context, ProfileActivity.class);
-        intent.putExtra(Constant.INTENT_EXTRA_USER, user);
-        context.startActivity(intent);
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,5 +65,11 @@ public class ProfileActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    public static void startIntent(Context context, User user) {
+        Intent intent = new Intent(context, ProfileActivity.class);
+        intent.putExtra(Constant.INTENT_EXTRA_USER, user);
+        context.startActivity(intent);
     }
 }

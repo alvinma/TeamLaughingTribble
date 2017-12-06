@@ -4,6 +4,8 @@ import com.google.firebase.database.Exclude;
 import com.google.firebase.database.IgnoreExtraProperties;
 
 import java.io.Serializable;
+import java.text.DateFormat;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -30,8 +32,11 @@ public class Spot extends Place implements Serializable {
     private String photo;
     private String renting;
     private String nextAvailable;
+    private String firebaseKey;
+    private ArrayList<DateFormat> bookedTimes;
+
     private String firebasePlaceKey;
-    private String spotId;
+    private String spotId = "DEFAULT";
 
     //Sample Photos:
     //"https://previews.123rf.com/images/mack2happy/mack2happy1106/mack2happy110600045/9809346-parking-lot-Stock-Photo.jpg"
@@ -142,6 +147,14 @@ public class Spot extends Place implements Serializable {
         return permitRequired;
     }
 
+    public void addBookedTime(DateFormat date){
+        bookedTimes.add(date);
+    }
+
+    public Boolean isAvaliable(){
+        return false;
+    }
+
     @Exclude
     public Map<String, Object> toMap() {
         HashMap<String, Object> result = new HashMap<>();
@@ -153,6 +166,7 @@ public class Spot extends Place implements Serializable {
         result.put("photo", photo);
         result.put("renting", renting);
         result.put("nextAvailable", nextAvailable);
+        result.put("firebaseKey", firebaseKey);
 
         return result;
     }

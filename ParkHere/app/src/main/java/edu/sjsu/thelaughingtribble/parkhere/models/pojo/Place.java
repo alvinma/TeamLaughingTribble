@@ -47,6 +47,7 @@ public class Place implements Serializable {
     public Map<String, Object> toMap() {
         HashMap<String, Object> result = new HashMap<>();
         result.put("address", address);
+        result.put("firebaseKey", firebaseKey);
         return result;
     }
 }

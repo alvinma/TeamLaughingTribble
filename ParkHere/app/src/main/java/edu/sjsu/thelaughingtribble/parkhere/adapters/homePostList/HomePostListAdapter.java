@@ -1,17 +1,24 @@
 package edu.sjsu.thelaughingtribble.parkhere.adapters.homePostList;
 
+import android.content.Intent;
+import android.support.design.widget.Snackbar;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 
 import edu.sjsu.thelaughingtribble.parkhere.R;
+import edu.sjsu.thelaughingtribble.parkhere.Utils.Constant;
+import edu.sjsu.thelaughingtribble.parkhere.controllers.PostDetailActivity;
+import edu.sjsu.thelaughingtribble.parkhere.models.pojo.Owner;
 import edu.sjsu.thelaughingtribble.parkhere.models.pojo.Post;
+import edu.sjsu.thelaughingtribble.parkhere.models.pojo.Spot;
 import edu.sjsu.thelaughingtribble.parkhere.models.pojo.User;
 
 /**
@@ -24,11 +31,22 @@ public class HomePostListAdapter extends RecyclerView.Adapter<homePostListItemVi
     private homePostListItemViewHolder homePostListUI;
     private User user;
 
+    public HomePostListAdapter(ArrayList<Post> posts) {
+        this.posts = posts;
+
+    }
 
     public HomePostListAdapter(ArrayList<Post> posts, User user) {
         this.posts = posts;
         this.user = user;
+    }
 
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public User getUser() {
+        return user;
     }
 
     @Override
