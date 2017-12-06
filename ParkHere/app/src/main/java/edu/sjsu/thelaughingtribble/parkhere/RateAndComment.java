@@ -1,5 +1,6 @@
 package edu.sjsu.thelaughingtribble.parkhere;
 
+import android.content.Intent;
 import android.icu.text.SimpleDateFormat;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -8,6 +9,16 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.StorageReference;
+
+import edu.sjsu.thelaughingtribble.parkhere.controllers.LoginActivity;
+import edu.sjsu.thelaughingtribble.parkhere.models.pojo.CommentAndRating;
+import edu.sjsu.thelaughingtribble.parkhere.models.pojo.Spot;
+
 
 /**
  * Created by Alvin on 11/20/2017.
@@ -20,14 +31,26 @@ public class RateAndComment extends AppCompatActivity{
     EditText comment;
     EditText renterName;
     Button submitFeedback;
-    double grade;
 
+    double grade = 0.0;
+    int nextCommentID = 0;
+    int currCommentID = 0;
     long date = System.currentTimeMillis();
+    String spotID = "";
+
+    private DatabaseReference database = FirebaseDatabase.getInstance().getReference();;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.rate_and_comment);
+
+        Bundle extras = getIntent().getExtras();
+        if(extras != null){
+            currCommentID = extras.getInt("CommentCount");
+            spotID = extras.getString("SpotID");
+        }
+        nextCommentID = 1 + currCommentID;
 
         rating = (RatingBar) findViewById(R.id.rateSpot);
         currentTime = (TextView) findViewById(R.id.timeStamp);
@@ -35,7 +58,7 @@ public class RateAndComment extends AppCompatActivity{
         renterName = (EditText) findViewById(R.id.renterName);
         submitFeedback = (Button) findViewById(R.id.submitFeedback);
 
-        SimpleDateFormat dateFormat = new SimpleDateFormat("MMMM dd, yyyy - h:mm a");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("MMM dd, yyyy - h:mm a");
         String dateString = dateFormat.format(date);
         currentTime.setText(dateString);
 
@@ -49,10 +72,20 @@ public class RateAndComment extends AppCompatActivity{
         submitFeedback.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 // put code to process data here
 
-                finish();
+                SimpleDateFormat dateFormat = new SimpleDateFormat("MMM dd, yyyy - h:mm a");
+                String dateString = dateFormat.format(date);
+                currentTime.setText(dateString);
+
+                if (grade > 0 && renterName != null && comment != null) {
+                    CommentAndRating commentAndRating = null;
+                    commentAndRating = new CommentAndRating(grade, renterName.getText().toString(), comment.getText().toString(), currentTime.getText().toString(), nextCommentID);
+                    database.child("rating_comment/" + spotID + "/" + nextCommentID).setValue(commentAndRating);
+                    finish();
+                }
+                else
+                    Toast.makeText(RateAndComment.this, "Please fill out all fields including the rating.. ", Toast.LENGTH_LONG).show();
             }
         });
     }
