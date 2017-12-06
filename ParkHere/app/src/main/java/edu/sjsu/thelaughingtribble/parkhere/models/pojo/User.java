@@ -26,14 +26,6 @@ public class User implements Serializable {
         // Default constructor required for calls to DataSnapshot.getValue(User.class)
     }
 
-    public User(User user){
-        this.userID = user.getUserID();
-        this.firstName = user.getFirstName();
-        this.lastName = user.getLastName();
-        this.email = user.getEmail();
-        this.cellphone = user.getCellphone();
-        this.vehicles = user.getVehicles();
-
     public void setFullName(String fullName) {
         this.fullName = fullName;
     }
