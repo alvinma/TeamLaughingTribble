@@ -25,6 +25,12 @@ public class AddAPlace extends AppCompatActivity {
     private DatabaseReference database;
     private FirebaseAuth mAuth;
 
+    public static void startIntent(Context context, User user) {
+        Intent intent = new Intent(context, AddAPlace.class);
+        intent.putExtra(Constant.INTENT_EXTRA_USER, user);
+        context.startActivity(intent);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,7 +64,7 @@ public class AddAPlace extends AppCompatActivity {
         addAPlaceUI.getCancel().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                MyPlacesActivity.startIntent(v.getContext(), user);
             }
         });
     }
@@ -75,17 +81,15 @@ public class AddAPlace extends AppCompatActivity {
         addAPlaceUI.getActionBar().setTitle("Add A Place");
     }
 
-    public static void startIntent(Context context, User user) {
-        Intent intent = new Intent(context, AddAPlace.class);
-        intent.putExtra(Constant.INTENT_EXTRA_USER, user);
-        context.startActivity(intent);
-    }
+    @Override
+    public void onBackPressed() {
 
+    }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                this.finish();
+                MyPlacesActivity.startIntent(this, user);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

@@ -32,22 +32,24 @@ import edu.sjsu.thelaughingtribble.parkhere.models.viewModels.NavigationViewMode
 
 public class MainActivity extends AppCompatActivity {
 
+    private static final String TAG = "MAINACTIVITY|___|";
     public static ArrayList<Integer> tempDB = new ArrayList<Integer>();
     public static List<ParkingPostObject> tempObjectDB = new ArrayList<ParkingPostObject>();
-    private NavigationViewModel menuUIComponents;
-    private MainActivityViewModel mainActivityUiComponets;
-
-    private RecyclerView.Adapter mAdapter;
-    private RecyclerView.LayoutManager mLayoutManager;
-
-
-    private FirebaseDatabase mDatabase;
-    private DatabaseReference mReference;
-
-    private static final String TAG = "MAINACTIVITY|___|";
-    private User user;
     //post list
     ArrayList<Post> posts = new ArrayList<>();
+    private NavigationViewModel menuUIComponents;
+    private MainActivityViewModel mainActivityUiComponets;
+    private RecyclerView.Adapter mAdapter;
+    private RecyclerView.LayoutManager mLayoutManager;
+    private FirebaseDatabase mDatabase;
+    private DatabaseReference mReference;
+    private User user;
+
+    public static void startIntent(Context context, User user) {
+        Intent intent = new Intent(context, MainActivity.class);
+        intent.putExtra(Constant.INTENT_EXTRA_USER, user);
+        context.startActivity(intent);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,16 +95,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void getSpot(final String title, String spotId, final Owner owner, String placeId, final String datePosted, final double totalGrade) {
-        mReference = FirebaseDatabase.getInstance().getReference("spots/" + owner.getUid() +"/" + placeId+"/"+spotId);
+        mReference = FirebaseDatabase.getInstance().getReference("spots/" + owner.getUid() + "/" + placeId + "/" + spotId);
 
         // Attach a listener to read the data at our posts reference
         mReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Log.i("getSpot snapshot", dataSnapshot.toString());
-                Spot spot =  dataSnapshot.getValue(Spot.class);
+                Spot spot = dataSnapshot.getValue(Spot.class);
                 Post post = new Post(title, spot, owner, datePosted, totalGrade);
-
 
 
                 posts.add(post);
@@ -151,6 +152,10 @@ public class MainActivity extends AppCompatActivity {
         this.posts = posts;
     }
 
+    /*public void parkingList(View v){
+        Intent intent = new Intent(this, ParkingSpotList.class);
+        this.startActivity(intent);
+    }*/
 
     public void getParkingList() {
         posts.clear();
@@ -164,7 +169,7 @@ public class MainActivity extends AppCompatActivity {
                 for (DataSnapshot item : dataSnapshot.getChildren()) {
                     Post post = item.getValue(Post.class);
 
-                    getOwner(post.getTitle(), post.getAuthorId(), post.getPlaceID(),post.getSpotId(), post.getDatePosted(), post.getTotalGrade());
+                    getOwner(post.getTitle(), post.getAuthorId(), post.getPlaceID(), post.getSpotId(), post.getDatePosted(), post.getTotalGrade());
                 }
             }
 
@@ -177,11 +182,6 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    /*public void parkingList(View v){
-        Intent intent = new Intent(this, ParkingSpotList.class);
-        this.startActivity(intent);
-    }*/
-
     public void registerParking() {
         Intent intent = new Intent(this, CreateParkingSpotListing.class);
         this.startActivity(intent);
@@ -191,16 +191,10 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                this.finish();
+
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
-    }
-
-    public static void startIntent(Context context, User user) {
-        Intent intent = new Intent(context, MainActivity.class);
-        intent.putExtra(Constant.INTENT_EXTRA_USER, user);
-        context.startActivity(intent);
     }
 }
